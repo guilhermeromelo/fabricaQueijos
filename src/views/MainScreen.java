@@ -9,13 +9,14 @@ import javax.swing.table.DefaultTableModel;
 
 public class MainScreen extends javax.swing.JFrame {
 
+    boolean isClientUpdate = false;
+
     public MainScreen() {
         initComponents();
         jlb_totalClientes.setText("30");
         jpn_clientsList.setVisible(true);
         jpn_clientRegistration.setVisible(false);
         clientTableBuilder(jTable1, ClientDAO.read(false, ""));
-        
 
     }
 
@@ -23,43 +24,51 @@ public class MainScreen extends javax.swing.JFrame {
         DefaultTableModel tableRows;
         tableRows = new DefaultTableModel(new String[]{"Nº", "CPF", "Nome", "Telefone",
             "Endereço", "Cartão Crédito", "Facebook", "Instagram"}, 0);
-        for(int i=0;i<clientList.size();i++){
+        for (int i = 0; i < clientList.size(); i++) {
             Client c = clientList.get(i);
-            tableRows.addRow(new Object[]{(i+1), c.getCPF(), c.getClientName(), c.getPhone(),
-            c.getAddress(), c.getCreditCard(), c.getFacebookURL(), c.getInstagramURL()});
+            tableRows.addRow(new Object[]{(i + 1), c.getCPF(), c.getClientName(), c.getPhone(),
+                c.getAddress(), c.getCreditCard(), c.getFacebookURL(), c.getInstagramURL()});
         }
         jtable.setModel(tableRows);
+        jlb_totalClientes.setText(""+clientList.size());
     }
 
-    /*
-    private void atualizarTabela()
-    {
-        dtm_tabela = new DefaultTableModel(null, new String[]{"CPF","Nome","Endereço","Email"});
-        JTB_dados.setModel(dtm_tabela);
-        dtm_tabela.setNumRows(0);
-        al_listaPessoas = PessoaDAO.buscarTodosElementos();
-        for (Pessoa p : al_listaPessoas) 
-        {
-            dtm_tabela.addRow(new Object[]{p.getCpf(), p.getNome(), p.getEndereco(), p.getEmail()});
-	}
+    public boolean NewClientverification() {
+        boolean valido = true;
+        String erro = "";
+        if (jtf_client_CPF.getText().isEmpty()) {
+            valido = false;
+            erro = erro + "\nCampo CPF Vazio";
+        }
+        if (jtf_client_Name.getText().isEmpty()) {
+            valido = false;
+            erro = erro + "\nCampo Nome Vazio";
+        }
+        if (jtf_client_Phone.getText().isEmpty()) {
+            valido = false;
+            erro = erro + "\nCampo Telefone Vazio";
+        }
+        if (jtf_client_Address.getText().isEmpty()) {
+            valido = false;
+            erro = erro + "\nCampo Endereço Vazio";
+        }
+        if (jtf_client_CreditCard.getText().isEmpty()) {
+            valido = false;
+            erro = erro + "\nCampo Cartão Crédito Vazio";
+        }
+        if (jtf_client_Face.getText().isEmpty()) {
+            valido = false;
+            erro = erro + "\nCampo Facebook Vazio";
+        }
+        if (jtf_client_Insta.getText().isEmpty()) {
+            valido = false;
+            erro = erro + "\nCampo Instagram Vazio";
+        }
+        if (valido == false) {
+            JOptionPane.showMessageDialog(null, "Erro(s) Encontrados: " + erro);
+        }
+        return valido;
     }
-    public void montaTabela(JTable j, ArrayList<Carro> listaCarros) {
-        DefaultTableModel tabela;
-        tabela = new DefaultTableModel(new String[]{"Codigo", "Chassi", "Ano", "Modelo", "Fabricante", "Potência", "Ar Condicionado"}, 0);
-
-        listaCarros.forEach(p -> {
-            Vector linha = new Vector();
-            linha.add(p.getCodigo());
-            linha.add(p.getChassi());
-            linha.add(p.getAno());
-            linha.add(p.getModelo());
-            linha.add(p.getFabricante());
-            linha.add(p.getPotencia());
-            linha.add(p.isArCondicionado());
-            tabela.addRow(linha);
-        });
-        j.setModel(tabela);
-    }*/
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -85,7 +94,7 @@ public class MainScreen extends javax.swing.JFrame {
         jpn_clientRegistration = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jL_Cadastrar_cliente = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -99,6 +108,7 @@ public class MainScreen extends javax.swing.JFrame {
         jtf_client_Insta = new javax.swing.JTextField();
         jtf_client_Face = new javax.swing.JTextField();
         jb_finalizarCadastro = new javax.swing.JButton();
+        jb_backClientPage = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -124,7 +134,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jpanel_DashboardLayout.setVerticalGroup(
             jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
+            .addGap(0, 631, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Dashboard", jpanel_Dashboard);
@@ -137,7 +147,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
+            .addGap(0, 631, Short.MAX_VALUE)
         );
 
         jLayeredPane1.setLayer(jPanel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -174,7 +184,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel_MostrarPedidosLayout.setVerticalGroup(
             jPanel_MostrarPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
+            .addGap(0, 631, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Mostrar Pedidos", jPanel_MostrarPedidos);
@@ -276,8 +286,8 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Nome:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("CADASTRAR NOVO CLIENTE");
+        jL_Cadastrar_cliente.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jL_Cadastrar_cliente.setText("CADASTRAR NOVO CLIENTE");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("CPF:");
@@ -302,6 +312,13 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        jb_backClientPage.setText("Voltar");
+        jb_backClientPage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_backClientPageActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpn_clientRegistrationLayout = new javax.swing.GroupLayout(jpn_clientRegistration);
         jpn_clientRegistration.setLayout(jpn_clientRegistrationLayout);
         jpn_clientRegistrationLayout.setHorizontalGroup(
@@ -310,10 +327,10 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
                         .addGap(487, 487, 487)
-                        .addComponent(jLabel4))
+                        .addComponent(jL_Cadastrar_cliente))
                     .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
                         .addGap(409, 409, 409)
-                        .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
                                 .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
@@ -337,14 +354,17 @@ public class MainScreen extends javax.swing.JFrame {
                                             .addComponent(jtf_client_CPF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jtf_client_Name, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jtf_client_Phone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addComponent(jb_finalizarCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jb_finalizarCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(jb_backClientPage, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(440, Short.MAX_VALUE))
         );
         jpn_clientRegistrationLayout.setVerticalGroup(
             jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jLabel4)
+                .addComponent(jL_Cadastrar_cliente)
                 .addGap(127, 127, 127)
                 .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
@@ -377,7 +397,9 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(jtf_client_Face, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
                 .addComponent(jb_finalizarCadastro)
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addComponent(jb_backClientPage)
+                .addGap(45, 45, 45))
         );
 
         jLayeredPane2.add(jpn_clientRegistration);
@@ -455,7 +477,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel_CadastrarQueijoLayout.setVerticalGroup(
             jPanel_CadastrarQueijoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
+            .addGap(0, 631, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Cadastrar Queijo", jPanel_CadastrarQueijo);
@@ -514,34 +536,107 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jButton_modificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_modificarClienteActionPerformed
         // TODO add your handling code here:
-        String idUpdate = JOptionPane.showInputDialog("Por favor digite o CPF do Cliente para modificar: ");
+        String cpfUpdate = JOptionPane.showInputDialog("Por favor digite o CPF do Cliente para modificar: ");
+        if (cpfUpdate != null) {
+            ArrayList<Client> clientsList = ClientDAO.read(false, "");
+            Client clientModify = new Client();
+            boolean achou = false;
+            for (int i = 0; i < clientsList.size() && achou == false; i++) {
+                clientModify = clientsList.get(i);
+                if (cpfUpdate.equals(clientModify.getCPF())) {
+                    achou = true;
+                }
+            }
+            if (achou == true) {
+                jtf_client_CPF.setText(clientModify.getCPF());
+                jtf_client_CPF.setEditable(false);
+                jtf_client_Address.setText(clientModify.getAddress());
+                jtf_client_CreditCard.setText(clientModify.getCreditCard());
+                jtf_client_Face.setText(clientModify.getFacebookURL());
+                jtf_client_Insta.setText(clientModify.getInstagramURL());
+                jtf_client_Name.setText(clientModify.getClientName());
+                jtf_client_Phone.setText(clientModify.getPhone());
+                jL_Cadastrar_cliente.setText("Alterar Dados do Cliente");
+                jb_finalizarCadastro.setText("Salvar Alteração de Dados");
+                isClientUpdate = true;
+                jpn_clientsList.setVisible(false);
+                jpn_clientRegistration.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "CPF não Encontrado");
+            }
+        }
     }//GEN-LAST:event_jButton_modificarClienteActionPerformed
 
     private void jButton_removerClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_removerClienteActionPerformed
         // TODO add your handling code here:
-        String idDelete = JOptionPane.showInputDialog("Por favor digite o CPF do Cliente para remover: ");
+        String cpfDelete = JOptionPane.showInputDialog("Por favor digite o CPF do Cliente para remover: ");
+        if (cpfDelete != null) {
+            ArrayList<Client> clientsList = ClientDAO.read(false, "");
+            Client clientDelete = new Client();
+            boolean achou = false;
+            for (int i = 0; i < clientsList.size() && achou == false; i++) {
+                clientDelete = clientsList.get(i);
+                if (cpfDelete.equals(clientDelete.getCPF())) {
+                    achou = true;
+                }
+            }
+            if (achou == true) {
+                String erro = ClientDAO.delete(clientDelete);
+                JOptionPane.showMessageDialog(null, (erro == null) ? "Cliente Removido com Sucesso!" : "Erro Encontado: \n" + erro);
+            } else {
+                JOptionPane.showMessageDialog(null, "CPF não Encontrado");
+            }
+            clientTableBuilder(jTable1, ClientDAO.read(false, ""));
+        }
     }//GEN-LAST:event_jButton_removerClienteActionPerformed
 
     private void jb_finalizarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_finalizarCadastroActionPerformed
         // TODO add your handling code here:
-        Client newClient = new Client();
-        newClient.setCPF(jtf_client_CPF.getText());
-        newClient.setClientName(jtf_client_Name.getText());
-        newClient.setAddress(jtf_client_Address.getText());
-        newClient.setCreditCard(jtf_client_CreditCard.getText());
-        newClient.setPhone(jtf_client_Phone.getText());
-        newClient.setFacebookURL(jtf_client_Face.getText());
-        newClient.setInstagramURL(jtf_client_Insta.getText());
-        ClientDAO.create(newClient);
-        jpn_clientRegistration.setVisible(false);
-        jpn_clientsList.setVisible(true);
+        if (NewClientverification()) {
+            Client newClient = new Client();
+            newClient.setCPF(jtf_client_CPF.getText());
+            newClient.setClientName(jtf_client_Name.getText());
+            newClient.setAddress(jtf_client_Address.getText());
+            newClient.setCreditCard(jtf_client_CreditCard.getText());
+            newClient.setPhone(jtf_client_Phone.getText());
+            newClient.setFacebookURL(jtf_client_Face.getText());
+            newClient.setInstagramURL(jtf_client_Insta.getText());
+            String erro;
+            if (isClientUpdate == true) {
+                erro = ClientDAO.update(newClient);
+            } else {
+                erro = ClientDAO.create(newClient);
+            }
+            JOptionPane.showMessageDialog(null, (erro == null) ? "Dados do Cliente salvos com sucesso!" : "Erro Encontado: \n" + erro);
+            clientTableBuilder(jTable1, ClientDAO.read(false, ""));
+            jpn_clientRegistration.setVisible(false);
+            jpn_clientsList.setVisible(true);
+        }
     }//GEN-LAST:event_jb_finalizarCadastroActionPerformed
 
     private void jButton_inserirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_inserirClienteActionPerformed
         // TODO add your handling code here:
+        jtf_client_CPF.setText("");
+        jtf_client_CPF.setEditable(true);
+        jtf_client_Address.setText("");
+        jtf_client_CreditCard.setText("");
+        jtf_client_Face.setText("");
+        jtf_client_Insta.setText("");
+        jtf_client_Name.setText("");
+        jtf_client_Phone.setText("");
+        jL_Cadastrar_cliente.setText("Cadastrar um novo Cliente");
+        jb_finalizarCadastro.setText("Salvar e Finalizar Cadastro");
+        isClientUpdate = false;
         jpn_clientsList.setVisible(false);
         jpn_clientRegistration.setVisible(true);
     }//GEN-LAST:event_jButton_inserirClienteActionPerformed
+
+    private void jb_backClientPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_backClientPageActionPerformed
+        // TODO add your handling code here:
+        clientTableBuilder(jTable1, ClientDAO.read(false, ""));
+        jpn_clientRegistration.setVisible(false);
+        jpn_clientsList.setVisible(true);
+    }//GEN-LAST:event_jb_backClientPageActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -579,12 +674,12 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton jButton_inserirCliente;
     private javax.swing.JButton jButton_modificarCliente;
     private javax.swing.JButton jButton_removerCliente;
+    private javax.swing.JLabel jL_Cadastrar_cliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -611,6 +706,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton jb_backClientPage;
     private javax.swing.JButton jb_finalizarCadastro;
     private javax.swing.JLabel jlb_totalClientes;
     private javax.swing.JPanel jpanel_Dashboard;
