@@ -7,6 +7,14 @@ import models.*;
 import controllers.*;
 import javax.swing.table.DefaultTableModel;
 
+// ÍNDICE
+// Client Functions - linha 30 a 80
+
+
+
+
+
+
 public class MainScreen extends javax.swing.JFrame {
 
     boolean isClientUpdate = false;
@@ -20,6 +28,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     }
 
+    // Client Functions Begin ----------------------------------------------------------------------------------------------
     void clientTableBuilder(JTable jtable, ArrayList<Client> clientList) {
         DefaultTableModel tableRows;
         tableRows = new DefaultTableModel(new String[]{"Nº", "CPF", "Nome", "Telefone",
@@ -30,7 +39,7 @@ public class MainScreen extends javax.swing.JFrame {
                 c.getAddress(), c.getCreditCard(), c.getFacebookURL(), c.getInstagramURL()});
         }
         jtable.setModel(tableRows);
-        jlb_totalClientes.setText(""+clientList.size());
+        jlb_totalClientes.setText("" + clientList.size());
     }
 
     public boolean NewClientverification() {
@@ -69,18 +78,21 @@ public class MainScreen extends javax.swing.JFrame {
         }
         return valido;
     }
+    // Client Functions End ----------------------------------------------------------------------------------------------
 
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jpanel_Dashboard = new javax.swing.JPanel();
-        jPanel_RealizarPedido = new javax.swing.JPanel();
+        jPanel_OrderPedido = new javax.swing.JPanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel4 = new javax.swing.JPanel();
-        jPanel_MostrarPedidos = new javax.swing.JPanel();
-        jPanel_CadastrarCliente = new javax.swing.JPanel();
+        jPanel_PedidosList = new javax.swing.JPanel();
+        jPanel_ClientList = new javax.swing.JPanel();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jpn_clientsList = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -113,7 +125,9 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel_CadastrarQueijo = new javax.swing.JPanel();
+        jPanel_QueijoList = new javax.swing.JPanel();
+        jLayeredPane3 = new javax.swing.JLayeredPane();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -134,7 +148,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jpanel_DashboardLayout.setVerticalGroup(
             jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 631, Short.MAX_VALUE)
+            .addGap(0, 625, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Dashboard", jpanel_Dashboard);
@@ -147,7 +161,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 631, Short.MAX_VALUE)
+            .addGap(0, 625, Short.MAX_VALUE)
         );
 
         jLayeredPane1.setLayer(jPanel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -163,31 +177,31 @@ public class MainScreen extends javax.swing.JFrame {
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel_RealizarPedidoLayout = new javax.swing.GroupLayout(jPanel_RealizarPedido);
-        jPanel_RealizarPedido.setLayout(jPanel_RealizarPedidoLayout);
-        jPanel_RealizarPedidoLayout.setHorizontalGroup(
-            jPanel_RealizarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel_OrderPedidoLayout = new javax.swing.GroupLayout(jPanel_OrderPedido);
+        jPanel_OrderPedido.setLayout(jPanel_OrderPedidoLayout);
+        jPanel_OrderPedidoLayout.setHorizontalGroup(
+            jPanel_OrderPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLayeredPane1)
         );
-        jPanel_RealizarPedidoLayout.setVerticalGroup(
-            jPanel_RealizarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel_OrderPedidoLayout.setVerticalGroup(
+            jPanel_OrderPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLayeredPane1)
         );
 
-        jTabbedPane1.addTab("Realizar Pedido", jPanel_RealizarPedido);
+        jTabbedPane1.addTab("Realizar Pedido", jPanel_OrderPedido);
 
-        javax.swing.GroupLayout jPanel_MostrarPedidosLayout = new javax.swing.GroupLayout(jPanel_MostrarPedidos);
-        jPanel_MostrarPedidos.setLayout(jPanel_MostrarPedidosLayout);
-        jPanel_MostrarPedidosLayout.setHorizontalGroup(
-            jPanel_MostrarPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel_PedidosListLayout = new javax.swing.GroupLayout(jPanel_PedidosList);
+        jPanel_PedidosList.setLayout(jPanel_PedidosListLayout);
+        jPanel_PedidosListLayout.setHorizontalGroup(
+            jPanel_PedidosListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1255, Short.MAX_VALUE)
         );
-        jPanel_MostrarPedidosLayout.setVerticalGroup(
-            jPanel_MostrarPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 631, Short.MAX_VALUE)
+        jPanel_PedidosListLayout.setVerticalGroup(
+            jPanel_PedidosListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 625, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Mostrar Pedidos", jPanel_MostrarPedidos);
+        jTabbedPane1.addTab("Mostrar Pedidos", jPanel_PedidosList);
 
         jLayeredPane2.setLayout(new javax.swing.OverlayLayout(jLayeredPane2));
 
@@ -268,9 +282,11 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jlb_totalClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(jpn_clientsListLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlb_totalClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton_inserirCliente)
                         .addComponent(jButton_modificarCliente)
@@ -456,31 +472,53 @@ public class MainScreen extends javax.swing.JFrame {
 
         jLayeredPane2.add(jPanel1);
 
-        javax.swing.GroupLayout jPanel_CadastrarClienteLayout = new javax.swing.GroupLayout(jPanel_CadastrarCliente);
-        jPanel_CadastrarCliente.setLayout(jPanel_CadastrarClienteLayout);
-        jPanel_CadastrarClienteLayout.setHorizontalGroup(
-            jPanel_CadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel_ClientListLayout = new javax.swing.GroupLayout(jPanel_ClientList);
+        jPanel_ClientList.setLayout(jPanel_ClientListLayout);
+        jPanel_ClientListLayout.setHorizontalGroup(
+            jPanel_ClientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLayeredPane2)
         );
-        jPanel_CadastrarClienteLayout.setVerticalGroup(
-            jPanel_CadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel_ClientListLayout.setVerticalGroup(
+            jPanel_ClientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLayeredPane2)
         );
 
-        jTabbedPane1.addTab("Mostrar Clientes", jPanel_CadastrarCliente);
+        jTabbedPane1.addTab("Mostrar Clientes", jPanel_ClientList);
 
-        javax.swing.GroupLayout jPanel_CadastrarQueijoLayout = new javax.swing.GroupLayout(jPanel_CadastrarQueijo);
-        jPanel_CadastrarQueijo.setLayout(jPanel_CadastrarQueijoLayout);
-        jPanel_CadastrarQueijoLayout.setHorizontalGroup(
-            jPanel_CadastrarQueijoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1255, Short.MAX_VALUE)
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel4.setText("QUEIJOS CADASTRADOS");
+
+        jLayeredPane3.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
+        jLayeredPane3.setLayout(jLayeredPane3Layout);
+        jLayeredPane3Layout.setHorizontalGroup(
+            jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                .addGap(495, 495, 495)
+                .addComponent(jLabel4)
+                .addContainerGap(538, Short.MAX_VALUE))
         );
-        jPanel_CadastrarQueijoLayout.setVerticalGroup(
-            jPanel_CadastrarQueijoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 631, Short.MAX_VALUE)
+        jLayeredPane3Layout.setVerticalGroup(
+            jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addContainerGap(592, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Cadastrar Queijo", jPanel_CadastrarQueijo);
+        javax.swing.GroupLayout jPanel_QueijoListLayout = new javax.swing.GroupLayout(jPanel_QueijoList);
+        jPanel_QueijoList.setLayout(jPanel_QueijoListLayout);
+        jPanel_QueijoListLayout.setHorizontalGroup(
+            jPanel_QueijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLayeredPane3)
+        );
+        jPanel_QueijoListLayout.setVerticalGroup(
+            jPanel_QueijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLayeredPane3)
+        );
+
+        jTabbedPane1.addTab("Mostrar Queijos", jPanel_QueijoList);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Fábrica de Queijos Uai Sô");
@@ -527,7 +565,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(5, 5, 5)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -556,7 +594,7 @@ public class MainScreen extends javax.swing.JFrame {
                 jtf_client_Insta.setText(clientModify.getInstagramURL());
                 jtf_client_Name.setText(clientModify.getClientName());
                 jtf_client_Phone.setText(clientModify.getPhone());
-                jL_Cadastrar_cliente.setText("Alterar Dados do Cliente");
+                jL_Cadastrar_cliente.setText("ALTERAR DADOS DO CLIENTE");
                 jb_finalizarCadastro.setText("Salvar Alteração de Dados");
                 isClientUpdate = true;
                 jpn_clientsList.setVisible(false);
@@ -624,7 +662,7 @@ public class MainScreen extends javax.swing.JFrame {
         jtf_client_Insta.setText("");
         jtf_client_Name.setText("");
         jtf_client_Phone.setText("");
-        jL_Cadastrar_cliente.setText("Cadastrar um novo Cliente");
+        jL_Cadastrar_cliente.setText("CADASTRAR UM NOVO CLIENTE");
         jb_finalizarCadastro.setText("Salvar e Finalizar Cadastro");
         isClientUpdate = false;
         jpn_clientsList.setVisible(false);
@@ -680,6 +718,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -687,6 +726,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
+    private javax.swing.JLayeredPane jLayeredPane3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -699,10 +739,10 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel_CadastrarCliente;
-    private javax.swing.JPanel jPanel_CadastrarQueijo;
-    private javax.swing.JPanel jPanel_MostrarPedidos;
-    private javax.swing.JPanel jPanel_RealizarPedido;
+    private javax.swing.JPanel jPanel_ClientList;
+    private javax.swing.JPanel jPanel_OrderPedido;
+    private javax.swing.JPanel jPanel_PedidosList;
+    private javax.swing.JPanel jPanel_QueijoList;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
