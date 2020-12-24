@@ -13,7 +13,9 @@ public class MainScreen extends javax.swing.JFrame {
         initComponents();
         jlb_totalClientes.setText("30");
         jpn_clientsList.setVisible(true);
-        clientTableBuilder(jTable1, new ArrayList());
+        jpn_clientRegistration.setVisible(false);
+        clientTableBuilder(jTable1, ClientDAO.read(false, ""));
+        
 
     }
 
@@ -80,6 +82,27 @@ public class MainScreen extends javax.swing.JFrame {
         jButton_inserirCliente = new javax.swing.JButton();
         jButton_modificarCliente = new javax.swing.JButton();
         jButton_removerCliente = new javax.swing.JButton();
+        jpn_clientRegistration = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jtf_client_CreditCard = new javax.swing.JTextField();
+        jtf_client_Address = new javax.swing.JTextField();
+        jtf_client_Phone = new javax.swing.JTextField();
+        jtf_client_Name = new javax.swing.JTextField();
+        jtf_client_CPF = new javax.swing.JTextField();
+        jtf_client_Insta = new javax.swing.JTextField();
+        jtf_client_Face = new javax.swing.JTextField();
+        jb_finalizarCadastro = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jPanel_CadastrarQueijo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -101,7 +124,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jpanel_DashboardLayout.setVerticalGroup(
             jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 631, Short.MAX_VALUE)
+            .addGap(0, 620, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Dashboard", jpanel_Dashboard);
@@ -114,7 +137,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 631, Short.MAX_VALUE)
+            .addGap(0, 620, Short.MAX_VALUE)
         );
 
         jLayeredPane1.setLayer(jPanel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -151,10 +174,12 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel_MostrarPedidosLayout.setVerticalGroup(
             jPanel_MostrarPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 631, Short.MAX_VALUE)
+            .addGap(0, 620, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Mostrar Pedidos", jPanel_MostrarPedidos);
+
+        jLayeredPane2.setLayout(new javax.swing.OverlayLayout(jLayeredPane2));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("CLIENTES CADASTRADOS");
@@ -178,6 +203,11 @@ public class MainScreen extends javax.swing.JFrame {
         jlb_totalClientes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jButton_inserirCliente.setText("Inserir Cliente");
+        jButton_inserirCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_inserirClienteActionPerformed(evt);
+            }
+        });
 
         jButton_modificarCliente.setText("Modificar Cliente");
         jButton_modificarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -238,18 +268,171 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
-        jLayeredPane2.setLayer(jpn_clientsList, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.add(jpn_clientsList);
 
-        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
-        jLayeredPane2.setLayout(jLayeredPane2Layout);
-        jLayeredPane2Layout.setHorizontalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpn_clientsList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("Telefone:");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Nome:");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel4.setText("CADASTRAR NOVO CLIENTE");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("CPF:");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("Endereço:");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("Instagram:");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("Facebook:");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("Cartão Crédito:");
+
+        jb_finalizarCadastro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jb_finalizarCadastro.setText("FINALIZAR O CADASTRO");
+        jb_finalizarCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_finalizarCadastroActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpn_clientRegistrationLayout = new javax.swing.GroupLayout(jpn_clientRegistration);
+        jpn_clientRegistration.setLayout(jpn_clientRegistrationLayout);
+        jpn_clientRegistrationLayout.setHorizontalGroup(
+            jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
+                .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
+                        .addGap(487, 487, 487)
+                        .addComponent(jLabel4))
+                    .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
+                        .addGap(409, 409, 409)
+                        .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
+                                .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel10))
+                                .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jtf_client_Address)
+                                            .addComponent(jtf_client_CreditCard)
+                                            .addComponent(jtf_client_Insta)
+                                            .addComponent(jtf_client_Face, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_clientRegistrationLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jtf_client_CPF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jtf_client_Name, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jtf_client_Phone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jb_finalizarCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(440, Short.MAX_VALUE))
         );
-        jLayeredPane2Layout.setVerticalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpn_clientsList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jpn_clientRegistrationLayout.setVerticalGroup(
+            jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel4)
+                .addGap(127, 127, 127)
+                .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(jtf_client_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7)
+                    .addComponent(jtf_client_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(jtf_client_Phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8)
+                    .addComponent(jtf_client_Address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel9))
+                    .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
+                        .addComponent(jtf_client_CreditCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtf_client_Insta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10)
+                    .addComponent(jtf_client_Face, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54)
+                .addComponent(jb_finalizarCadastro)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
+
+        jLayeredPane2.add(jpn_clientRegistration);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1255, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 631, Short.MAX_VALUE)
+        );
+
+        jLayeredPane2.add(jPanel3);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1255, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 631, Short.MAX_VALUE)
+        );
+
+        jLayeredPane2.add(jPanel5);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1255, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 631, Short.MAX_VALUE)
+        );
+
+        jLayeredPane2.add(jPanel6);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1255, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 631, Short.MAX_VALUE)
+        );
+
+        jLayeredPane2.add(jPanel1);
 
         javax.swing.GroupLayout jPanel_CadastrarClienteLayout = new javax.swing.GroupLayout(jPanel_CadastrarCliente);
         jPanel_CadastrarCliente.setLayout(jPanel_CadastrarClienteLayout);
@@ -272,7 +455,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel_CadastrarQueijoLayout.setVerticalGroup(
             jPanel_CadastrarQueijoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 631, Short.MAX_VALUE)
+            .addGap(0, 620, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Cadastrar Queijo", jPanel_CadastrarQueijo);
@@ -322,7 +505,8 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(5, 5, 5)
-                .addComponent(jTabbedPane1))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -337,6 +521,27 @@ public class MainScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         String idDelete = JOptionPane.showInputDialog("Por favor digite o CPF do Cliente para remover: ");
     }//GEN-LAST:event_jButton_removerClienteActionPerformed
+
+    private void jb_finalizarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_finalizarCadastroActionPerformed
+        // TODO add your handling code here:
+        Client newClient = new Client();
+        newClient.setCPF(jtf_client_CPF.getText());
+        newClient.setClientName(jtf_client_Name.getText());
+        newClient.setAddress(jtf_client_Address.getText());
+        newClient.setCreditCard(jtf_client_CreditCard.getText());
+        newClient.setPhone(jtf_client_Phone.getText());
+        newClient.setFacebookURL(jtf_client_Face.getText());
+        newClient.setInstagramURL(jtf_client_Insta.getText());
+        ClientDAO.create(newClient);
+        jpn_clientRegistration.setVisible(false);
+        jpn_clientsList.setVisible(true);
+    }//GEN-LAST:event_jb_finalizarCadastroActionPerformed
+
+    private void jButton_inserirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_inserirClienteActionPerformed
+        // TODO add your handling code here:
+        jpn_clientsList.setVisible(false);
+        jpn_clientRegistration.setVisible(true);
+    }//GEN-LAST:event_jButton_inserirClienteActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -375,8 +580,16 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton jButton_modificarCliente;
     private javax.swing.JButton jButton_removerCliente;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JMenu jMenu1;
@@ -386,7 +599,11 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem_ExportarTXT;
     private javax.swing.JMenuItem jMenuItem_ExportarXLS;
     private javax.swing.JMenuItem jMenuItem_Sobre;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel_CadastrarCliente;
     private javax.swing.JPanel jPanel_CadastrarQueijo;
     private javax.swing.JPanel jPanel_MostrarPedidos;
@@ -394,8 +611,17 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton jb_finalizarCadastro;
     private javax.swing.JLabel jlb_totalClientes;
     private javax.swing.JPanel jpanel_Dashboard;
+    private javax.swing.JPanel jpn_clientRegistration;
     private javax.swing.JPanel jpn_clientsList;
+    private javax.swing.JTextField jtf_client_Address;
+    private javax.swing.JTextField jtf_client_CPF;
+    private javax.swing.JTextField jtf_client_CreditCard;
+    private javax.swing.JTextField jtf_client_Face;
+    private javax.swing.JTextField jtf_client_Insta;
+    private javax.swing.JTextField jtf_client_Name;
+    private javax.swing.JTextField jtf_client_Phone;
     // End of variables declaration//GEN-END:variables
 }
