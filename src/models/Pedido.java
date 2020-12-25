@@ -8,18 +8,21 @@ public class Pedido {
     private String fk_client_cpf;
     private LocalDateTime pedidoDate;
     private double deliveryDeadLine;
+    private String note;
     
     //RETIREI O ID DOS CONSTRUTORES POIS NO BANCO USEI O TIPO SERIAL QUE JÁ FAZ O AUTOINCREMENTO
     public Pedido() {
         this.fk_client_cpf = "N/C";
         this.pedidoDate = null;
         this.deliveryDeadLine = 0;
+        this.note = "Sem observações";
     }
     //RETIREI O ID DOS CONSTRUTORES POIS NO BANCO USEI O TIPO SERIAL QUE JÁ FAZ O AUTOINCREMENTO
-    public Pedido(String fk_client_cpf, LocalDateTime pedidoDate, double deliveryDeadLine) {
+    public Pedido(String fk_client_cpf, LocalDateTime pedidoDate, double deliveryDeadLine, String note) {
         this.fk_client_cpf = fk_client_cpf;
         this.pedidoDate = pedidoDate;
         this.deliveryDeadLine = deliveryDeadLine;
+        this.note = note;
     }
 
     public int getPedidoID() {
@@ -54,9 +57,16 @@ public class Pedido {
         this.deliveryDeadLine = deliveryDeadLine;
     }
 
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     @Override
     public String toString() {
-        return "Pedido{" + "id=" + pedidoID + ", fk_cpf=" + fk_client_cpf + ", date=" + pedidoDate + ", deliveryDeadLine=" + deliveryDeadLine + '}';
+        return "Pedido{" + "pedidoID=" + pedidoID + ", fk_client_cpf=" + fk_client_cpf + ", pedidoDate=" + pedidoDate + ", deliveryDeadLine=" + deliveryDeadLine + ", note=" + note + '}';
     }
-    
 }

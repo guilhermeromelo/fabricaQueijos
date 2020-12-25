@@ -12,14 +12,15 @@ public class PedidoDAO {
     public static String create(Pedido newpedido) {
         String erro = null;
         PreparedStatement state;
-        String msgSQL = "insert into pedido (fk_client_cpf, pedidoDate, deliveryDeadLine)"
-                + "values (?,?,?)";
+        String msgSQL = "insert into pedido (fk_client_cpf, pedidoDate, deliveryDeadLine, note)"
+                + "values (?,?,?,?)";
         try {
             state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
             state.setString(1, newpedido.getFk_client_cpf());
             Timestamp timestamp = Timestamp.valueOf(newpedido.getPedidoDate());
             state.setTimestamp(2, timestamp);
             state.setDouble(3, newpedido.getDeliveryDeadLine());
+            state.setString(4, newpedido.getNote());
             state.execute();
             state.close();
         } catch (SQLException e) {
@@ -58,6 +59,7 @@ public class PedidoDAO {
                 Timestamp date = res.getTimestamp("pedidoDate");
                 newpedido.setPedidoDate(date.toLocalDateTime());
                 newpedido.setDeliveryDeadLine(res.getDouble("deliveryDeadLine"));
+                newpedido.setNote(res.getString("note"));
                 pedidoList.add(newpedido);
             }
             res.close();
@@ -71,14 +73,15 @@ public class PedidoDAO {
         String erro = null;
         PreparedStatement state;
         String msgSQL = "update pedido set fk_client_cpf=?, pedidoDate=?,"
-                + "deliveryDeadLine=? where pedidoID=?";
+                + "deliveryDeadLine=?, note=? where pedidoID=?";
         try {
             state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
             state.setString(1, pedido.getFk_client_cpf());
             Timestamp timestamp = Timestamp.valueOf(pedido.getPedidoDate());
             state.setTimestamp(2, timestamp);
             state.setDouble(3, pedido.getDeliveryDeadLine());
-            state.setInt(4, pedido.getPedidoID());
+            state.setString(4, pedido.getNote());
+            state.setInt(5, pedido.getPedidoID());
             state.execute();
             state.close();
         } catch (SQLException e) {
