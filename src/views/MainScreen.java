@@ -30,7 +30,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         try {
 
-            jtf_client_Phone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+            jtf_client_Phone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)########*")));
             jtf_client_CPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             System.out.print("Erro: " + ex.toString());
@@ -63,9 +63,16 @@ public class MainScreen extends javax.swing.JFrame {
             valido = false;
             erro = erro + "\nCampo Nome Vazio";
         }
-        if (jtf_client_Phone.getText().equals("(  )     -    ")) {
+        if (jtf_client_Phone.getText().equals("(  )         ")) {
             valido = false;
             erro = erro + "\nCampo Telefone Vazio ou Incompleto";
+        } else {
+            for (int i = 0; i < jtf_client_Phone.getText().length() - 1; i++) {
+                if (jtf_client_Phone.getText().charAt(i) == ' ') {
+                    valido = false;
+                    erro = erro + "\nCampo Telefone Vazio ou Incompleto";
+                }
+            }
         }
         if (jtf_client_Address.getText().isEmpty()) {
             valido = false;
@@ -84,7 +91,8 @@ public class MainScreen extends javax.swing.JFrame {
             erro = erro + "\nCampo Facebook Vazio";
         }
         if (valido == false) {
-            JOptionPane.showMessageDialog(null, "Erro(s) Encontrados: " + erro);
+            JOptionPane.showMessageDialog(null, "Erro(s) Encontrados: " + erro,
+                    "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
         }
         return valido;
     }
@@ -124,7 +132,8 @@ public class MainScreen extends javax.swing.JFrame {
             erro = erro + "\nCampo Temperatura Ideal Vazio";
         }
         if (valido == false) {
-            JOptionPane.showMessageDialog(null, "Erro(s) Encontrados: " + erro);
+            JOptionPane.showMessageDialog(null, "Erro(s) Encontrados: " + erro,
+                    "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
         }
         return valido;
     }
@@ -182,10 +191,10 @@ public class MainScreen extends javax.swing.JFrame {
         jlb_totalQueijos = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jButton_inserirQueijo = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButton_modificarQueijo = new javax.swing.JButton();
+        jButton_removerQueijo = new javax.swing.JButton();
         jpn_queijoRegistration = new javax.swing.JPanel();
-        jL_Cadastrar_cliente1 = new javax.swing.JLabel();
+        jL_Cadastrar_queijo = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jtf_queijo_id = new javax.swing.JFormattedTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -584,9 +593,19 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Modificar Queijo");
+        jButton_modificarQueijo.setText("Modificar Queijo");
+        jButton_modificarQueijo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_modificarQueijoActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Remover Queijo");
+        jButton_removerQueijo.setText("Remover Queijo");
+        jButton_removerQueijo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_removerQueijoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpn_queijoListLayout = new javax.swing.GroupLayout(jpn_queijoList);
         jpn_queijoList.setLayout(jpn_queijoListLayout);
@@ -607,9 +626,9 @@ public class MainScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlb_totalQueijos, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(jButton_removerQueijo)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(jButton_modificarQueijo)
                         .addGap(18, 18, 18)
                         .addComponent(jButton_inserirQueijo)))
                 .addContainerGap())
@@ -623,19 +642,19 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jButton_modificarQueijo)
                     .addComponent(jButton_inserirQueijo)
                     .addGroup(jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jlb_totalQueijos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel12))
-                    .addComponent(jButton2))
+                    .addComponent(jButton_removerQueijo))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jLayeredPane3.add(jpn_queijoList);
 
-        jL_Cadastrar_cliente1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jL_Cadastrar_cliente1.setText("CADASTRAR NOVO QUEIJO");
+        jL_Cadastrar_queijo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jL_Cadastrar_queijo.setText("CADASTRAR NOVO QUEIJO");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("ID:");
@@ -675,7 +694,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpn_queijoRegistrationLayout.createSequentialGroup()
                         .addGap(491, 491, 491)
-                        .addComponent(jL_Cadastrar_cliente1))
+                        .addComponent(jL_Cadastrar_queijo))
                     .addGroup(jpn_queijoRegistrationLayout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addGroup(jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -704,7 +723,7 @@ public class MainScreen extends javax.swing.JFrame {
             jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpn_queijoRegistrationLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jL_Cadastrar_cliente1)
+                .addComponent(jL_Cadastrar_queijo)
                 .addGap(127, 127, 127)
                 .addGroup(jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel13)
@@ -876,7 +895,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+// Client Functions Begin ----------------------------------------------------------------------------------------------
     private void jButton_modificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_modificarClienteActionPerformed
         // TODO add your handling code here:
         //PERGUNTAR QUAL OBJETO A MODIFICAR
@@ -888,7 +907,7 @@ public class MainScreen extends javax.swing.JFrame {
             boolean achou = false;
             for (int i = 0; i < clientsList.size() && achou == false; i++) {
                 clientModify = clientsList.get(i);
-                if (cpfUpdate.equals(clientModify.getCPF())) {
+                if (cpfUpdate.replace(".", "").replace("-", "").equals(clientModify.getCPF().replace(".", "").replace("-", ""))) {
                     achou = true;
                 }
             }
@@ -910,7 +929,7 @@ public class MainScreen extends javax.swing.JFrame {
                 jpn_clientsList.setVisible(false);
                 jpn_clientRegistration.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(null, "CPF não Encontrado");
+                JOptionPane.showMessageDialog(null, "CPF não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButton_modificarClienteActionPerformed
@@ -925,16 +944,27 @@ public class MainScreen extends javax.swing.JFrame {
             boolean achou = false;
             for (int i = 0; i < clientsList.size() && achou == false; i++) {
                 clientDelete = clientsList.get(i);
-                if (cpfDelete.equals(clientDelete.getCPF())) {
+                if (cpfDelete.replace(".", "").replace("-", "").equals(clientDelete.getCPF().replace(".", "").replace("-", ""))) {
                     achou = true;
                 }
             }
             //FAZER OPERAÇÃO E PEGAR E MOSTRAR O RESULTADO OU ERROS
             if (achou == true) {
-                String erro = ClientDAO.delete(clientDelete);
-                JOptionPane.showMessageDialog(null, (erro == null) ? "Cliente Removido com Sucesso!" : "Erro Encontado: \n" + erro);
+                int delete = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir "
+                        + "o Cliente\nNome: " + clientDelete.getClientName() + ", CPF: " + clientDelete.getCPF(),
+                        "Confirmar Exclusão", JOptionPane.YES_NO_OPTION);
+
+                if (delete == 0) {
+                    String erro = ClientDAO.delete(clientDelete);
+                    JOptionPane.showMessageDialog(null, (erro == null)
+                            ? "Cliente Removido com Sucesso!"
+                            : "Erro Encontado: \n" + erro, "Resultado da operação",
+                            (erro == null) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Operação Cancelada!");
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "CPF não Encontrado");
+                JOptionPane.showMessageDialog(null, "CPF não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
             }
             //ATUALIZAR A TABELA
             clientTableBuilder(jTableClient, ClientDAO.read(false, ""));
@@ -962,11 +992,16 @@ public class MainScreen extends javax.swing.JFrame {
                 erro = ClientDAO.create(newClient);
             }
             //MOSTRAR RESULTADO DA OPERAÇÃO
-            JOptionPane.showMessageDialog(null, (erro == null) ? "Dados do Cliente salvos com sucesso!" : "Erro Encontado: \n" + erro);
-            //ATUALIZAR TABELA E TROCAR AS TELAS
-            clientTableBuilder(jTableClient, ClientDAO.read(false, ""));
-            jpn_clientRegistration.setVisible(false);
-            jpn_clientsList.setVisible(true);
+            JOptionPane.showMessageDialog(null, (erro == null)
+                    ? "Dados do Cliente salvos com sucesso!"
+                    : "Erro Encontado: \n" + erro, "Resultado da operação",
+                    (erro == null) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
+            if (erro == null) {
+                //ATUALIZAR TABELA E TROCAR AS TELAS
+                clientTableBuilder(jTableClient, ClientDAO.read(false, ""));
+                jpn_clientRegistration.setVisible(false);
+                jpn_clientsList.setVisible(true);
+            }
         }
     }//GEN-LAST:event_jb_finalizarCadastroActionPerformed
 
@@ -997,7 +1032,9 @@ public class MainScreen extends javax.swing.JFrame {
         jpn_clientRegistration.setVisible(false);
         jpn_clientsList.setVisible(true);
     }//GEN-LAST:event_jb_backClientPageActionPerformed
+// Client Functions End ----------------------------------------------------------------------------------------------
 
+// Queijo Functions Begin ----------------------------------------------------------------------------------------------    
     private void jButton_inserirQueijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_inserirQueijoActionPerformed
         // TODO add your handling code here:
         jtf_queijo_id.setEditable(false);
@@ -1009,6 +1046,8 @@ public class MainScreen extends javax.swing.JFrame {
         jtf_queijo_valorKg.setText("");
         //TROCAR A TELA
         isQueijoUpdate = false;
+        jL_Cadastrar_queijo.setText("CADASTRAR NOVO QUEIJO");
+        jb_finalizarCadastroQueijo.setText("Finalizar e Salvar Dados");
         jpn_queijoRegistration.setVisible(true);
         jpn_queijoList.setVisible(false);
     }//GEN-LAST:event_jButton_inserirQueijoActionPerformed
@@ -1029,7 +1068,8 @@ public class MainScreen extends javax.swing.JFrame {
                 newQueijo.setRecommendedTemperature(Double.parseDouble(jtf_queijo_Temperatura.getText().replace(',', '.')));
             } catch (NumberFormatException e) {
                 System.out.println("\n Erro Encontrado: " + e.toString());
-                JOptionPane.showMessageDialog(null, "Erro Encontrado: \n" + e.toString());
+                JOptionPane.showMessageDialog(null, "Erro Encontrado: \n" + e.toString(),
+                        "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
                 hasError = true;
             }
             newQueijo.setQueijoType(jtf_queijo_tipo.getText());
@@ -1042,9 +1082,18 @@ public class MainScreen extends javax.swing.JFrame {
                     erro = QueijoDAO.create(newQueijo);
                 }
                 //MOSTRAR RESULTADO DA OPERAÇÃO
-                JOptionPane.showMessageDialog(null, (erro == null) ? "Dados do Queijo salvos com sucesso!" : "Erro Encontado: \n" + erro);
-                //ATUALIZAR TABELA E TROCAR AS TELAS
-                queijoTableBuilder(jTableQueijo, QueijoDAO.read(false, ""));
+                JOptionPane.showMessageDialog(null, (erro == null)
+                        ? "Dados do Queijo salvos com sucesso!"
+                        : "Erro Encontado: \n" + erro, "Resultado da operação",
+                        (erro == null) ? JOptionPane.INFORMATION_MESSAGE
+                                : JOptionPane.ERROR_MESSAGE);
+                if (erro == null) {
+                    //ATUALIZAR TABELA E TROCAR AS TELAS
+                    queijoTableBuilder(jTableQueijo, QueijoDAO.read(false, ""));
+                    //TROCAR TELAS
+                    jpn_queijoList.setVisible(true);
+                    jpn_queijoRegistration.setVisible(false);
+                }
             }
         }
     }//GEN-LAST:event_jb_finalizarCadastroQueijoActionPerformed
@@ -1055,6 +1104,48 @@ public class MainScreen extends javax.swing.JFrame {
         jpn_queijoList.setVisible(true);
         jpn_queijoRegistration.setVisible(false);
     }//GEN-LAST:event_jb_backQueijoPageActionPerformed
+
+    private void jButton_modificarQueijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_modificarQueijoActionPerformed
+        // TODO add your handling code here:
+        //PERGUNTAR QUAL OBJETO A MODIFICAR
+        String idUpdate = JOptionPane.showInputDialog("Por favor digite o ID do Queijo para modificar: ");
+        //PROCURAR QUAL OBJETO A SER MODIFICADO
+        if (idUpdate != null) {
+            ArrayList<Queijo> queijoList = QueijoDAO.read(false, "");
+            Queijo queijoModify = new Queijo();
+            boolean achou = false;
+            for (int i = 0; i < queijoList.size() && achou == false; i++) {
+                queijoModify = queijoList.get(i);
+                if (idUpdate.equals("" + queijoModify.getQueijoID())) {
+                    achou = true;
+                }
+            }
+            //PASSAR OS DADOS DO OBJETO PARA TELA DE UPDADE OU MOSTRAR ERRO DE NÃO ENCONTRADO
+            if (achou == true) {
+                jtf_queijo_id.setText("" + queijoModify.getQueijoID());
+                jtf_queijo_id.setEditable(false);
+                jtf_queijo_peso.setText("" + queijoModify.getWeight());
+                jtf_queijo_tipo.setText(queijoModify.getQueijoType());
+                jtf_queijo_valorKg.setText("" + queijoModify.getPricePerKg());
+                jtf_queijo_Temperatura.setText("" + queijoModify.getRecommendedTemperature());
+
+                //TROCAR AS TELAS
+                jL_Cadastrar_queijo.setText("ALTERAR DADOS DO QUEIJO");
+                jb_finalizarCadastroQueijo.setText("Salvar Alteração de Dados");
+                isQueijoUpdate = true;
+                jpn_queijoList.setVisible(false);
+                jpn_queijoRegistration.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "ID do Queijo não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jButton_modificarQueijoActionPerformed
+
+    private void jButton_removerQueijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_removerQueijoActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jButton_removerQueijoActionPerformed
+// Queijo Functions End ----------------------------------------------------------------------------------------------
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1089,14 +1180,14 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_inserirCliente;
     private javax.swing.JButton jButton_inserirQueijo;
     private javax.swing.JButton jButton_modificarCliente;
+    private javax.swing.JButton jButton_modificarQueijo;
     private javax.swing.JButton jButton_removerCliente;
+    private javax.swing.JButton jButton_removerQueijo;
     private javax.swing.JLabel jL_Cadastrar_cliente;
-    private javax.swing.JLabel jL_Cadastrar_cliente1;
+    private javax.swing.JLabel jL_Cadastrar_queijo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

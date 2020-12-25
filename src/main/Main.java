@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import models.*;
 import views.*;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 public class Main {
 
@@ -48,7 +49,6 @@ public class Main {
         }catch(SQLException e){
             System.out.println("\n Erro Encontrado: "+e.toString());
         }
-        
         
         MainScreen tela = new MainScreen();
         tela.setVisible(true);
