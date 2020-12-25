@@ -16,6 +16,8 @@ public class MainScreen extends javax.swing.JFrame {
     boolean isQueijoUpdate = false;
     String clientOrder = "";
     String queijoOrder = "";
+    boolean clientOrderDecreasing = false;
+    boolean queijoOrderDecreasing = false;
 
     public MainScreen() {
         initComponents();
@@ -29,8 +31,8 @@ public class MainScreen extends javax.swing.JFrame {
         jpn_queijoRegistration.setVisible(false);
 
         //Tables Initialization
-        clientTableBuilder(jTableClient, ClientDAO.read(false, ""));
-        queijoTableBuilder(jTableQueijo, QueijoDAO.read(false, ""));
+        clientTableBuilder(jTableClient, ClientDAO.read(false, "", false));
+        queijoTableBuilder(jTableQueijo, QueijoDAO.read(false, "", false));
         
         //Masks Initialization
         try {
@@ -185,6 +187,10 @@ public class MainScreen extends javax.swing.JFrame {
         jButton_removerCliente = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
         jComboBox_ordenar_clientes = new javax.swing.JComboBox<>();
+        jButton_busca_cliente_cpf = new javax.swing.JButton();
+        jButton_busca_cliente_nome = new javax.swing.JButton();
+        jButton_client_order_dec = new javax.swing.JButton();
+        jButton_client_order_cres = new javax.swing.JButton();
         jpn_clientRegistration = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -223,6 +229,8 @@ public class MainScreen extends javax.swing.JFrame {
         jButton_busca_queijo_ID = new javax.swing.JButton();
         jButton_queijo_menor_temp = new javax.swing.JButton();
         jButton_queijo_mais_caro = new javax.swing.JButton();
+        jButton_queijo_order_dec1 = new javax.swing.JButton();
+        jButton_queijo_order_cres1 = new javax.swing.JButton();
         jpn_queijoRegistration = new javax.swing.JPanel();
         jL_Cadastrar_queijo = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -259,11 +267,11 @@ public class MainScreen extends javax.swing.JFrame {
         jpanel_Dashboard.setLayout(jpanel_DashboardLayout);
         jpanel_DashboardLayout.setHorizontalGroup(
             jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1255, Short.MAX_VALUE)
+            .addGap(0, 1256, Short.MAX_VALUE)
         );
         jpanel_DashboardLayout.setVerticalGroup(
             jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
+            .addGap(0, 636, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Dashboard", jpanel_Dashboard);
@@ -272,11 +280,11 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1255, Short.MAX_VALUE)
+            .addGap(0, 1256, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
+            .addGap(0, 636, Short.MAX_VALUE)
         );
 
         jLayeredPane1.setLayer(jPanel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -309,11 +317,11 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel_PedidosList.setLayout(jPanel_PedidosListLayout);
         jPanel_PedidosListLayout.setHorizontalGroup(
             jPanel_PedidosListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1255, Short.MAX_VALUE)
+            .addGap(0, 1256, Short.MAX_VALUE)
         );
         jPanel_PedidosListLayout.setVerticalGroup(
             jPanel_PedidosListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
+            .addGap(0, 636, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Mostrar Pedidos", jPanel_PedidosList);
@@ -341,6 +349,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jlb_totalClientes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        jButton_inserirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_add_black_18dp.png"))); // NOI18N
         jButton_inserirCliente.setText("Inserir Cliente");
         jButton_inserirCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -348,6 +357,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        jButton_modificarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_edit_black_18dp.png"))); // NOI18N
         jButton_modificarCliente.setText("Modificar Cliente");
         jButton_modificarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -355,6 +365,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        jButton_removerCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_delete_black_18dp.png"))); // NOI18N
         jButton_removerCliente.setText("Remover Cliente");
         jButton_removerCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -372,6 +383,36 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        jButton_busca_cliente_cpf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
+        jButton_busca_cliente_cpf.setText("Buscar Por CPF");
+        jButton_busca_cliente_cpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_busca_cliente_cpfActionPerformed(evt);
+            }
+        });
+
+        jButton_busca_cliente_nome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
+        jButton_busca_cliente_nome.setText("Buscar Por Nome");
+        jButton_busca_cliente_nome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_busca_cliente_nomeActionPerformed(evt);
+            }
+        });
+
+        jButton_client_order_dec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_down_black_18dp.png"))); // NOI18N
+        jButton_client_order_dec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_client_order_decActionPerformed(evt);
+            }
+        });
+
+        jButton_client_order_cres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_up_black_18dp.png"))); // NOI18N
+        jButton_client_order_cres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_client_order_cresActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpn_clientsListLayout = new javax.swing.GroupLayout(jpn_clientsList);
         jpn_clientsList.setLayout(jpn_clientsListLayout);
         jpn_clientsListLayout.setHorizontalGroup(
@@ -384,14 +425,22 @@ public class MainScreen extends javax.swing.JFrame {
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox_ordenar_clientes, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(272, 272, 272)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_client_order_dec)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_client_order_cres)
+                        .addGap(144, 144, 144)
                         .addComponent(jLabel2)
-                        .addGap(0, 503, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jpn_clientsListLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlb_totalClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(132, 132, 132)
+                        .addComponent(jButton_busca_cliente_cpf)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_busca_cliente_nome)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
                         .addComponent(jButton_removerCliente)
                         .addGap(18, 18, 18)
                         .addComponent(jButton_modificarCliente)
@@ -406,19 +455,27 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel19)
-                    .addComponent(jComboBox_ordenar_clientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox_ordenar_clientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_client_order_dec)
+                    .addComponent(jButton_client_order_cres))
+                .addGap(9, 9, 9)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton_inserirCliente)
                         .addComponent(jButton_modificarCliente)
                         .addComponent(jButton_removerCliente))
                     .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jlb_totalClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)))
-                .addGap(14, 14, 14))
+                        .addGroup(jpn_clientsListLayout.createSequentialGroup()
+                            .addGap(7, 7, 7)
+                            .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jlb_totalClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton_busca_cliente_cpf)
+                            .addComponent(jButton_busca_cliente_nome))))
+                .addGap(13, 13, 13))
         );
 
         jLayeredPane2.add(jpn_clientsList);
@@ -448,6 +505,7 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel11.setText("Cartão Crédito:");
 
         jb_finalizarCadastro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jb_finalizarCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_save_black_18dp.png"))); // NOI18N
         jb_finalizarCadastro.setText("FINALIZAR O CADASTRO");
         jb_finalizarCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -455,6 +513,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        jb_backClientPage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_arrow_back_black_18dp.png"))); // NOI18N
         jb_backClientPage.setText("Voltar");
         jb_backClientPage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -496,7 +555,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(jb_backClientPage, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(440, Short.MAX_VALUE))
+                .addContainerGap(441, Short.MAX_VALUE))
         );
         jpn_clientRegistrationLayout.setVerticalGroup(
             jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -535,7 +594,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(jtf_client_Face, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
                 .addComponent(jb_finalizarCadastro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(jb_backClientPage)
                 .addGap(45, 45, 45))
         );
@@ -546,11 +605,11 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1255, Short.MAX_VALUE)
+            .addGap(0, 1256, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 631, Short.MAX_VALUE)
+            .addGap(0, 636, Short.MAX_VALUE)
         );
 
         jLayeredPane2.add(jPanel3);
@@ -559,11 +618,11 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1255, Short.MAX_VALUE)
+            .addGap(0, 1256, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 631, Short.MAX_VALUE)
+            .addGap(0, 636, Short.MAX_VALUE)
         );
 
         jLayeredPane2.add(jPanel5);
@@ -572,11 +631,11 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1255, Short.MAX_VALUE)
+            .addGap(0, 1256, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 631, Short.MAX_VALUE)
+            .addGap(0, 636, Short.MAX_VALUE)
         );
 
         jLayeredPane2.add(jPanel6);
@@ -585,11 +644,11 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1255, Short.MAX_VALUE)
+            .addGap(0, 1256, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 631, Short.MAX_VALUE)
+            .addGap(0, 636, Short.MAX_VALUE)
         );
 
         jLayeredPane2.add(jPanel1);
@@ -630,6 +689,7 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Total de Queijos Cadastrados: ");
 
+        jButton_inserirQueijo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_add_black_18dp.png"))); // NOI18N
         jButton_inserirQueijo.setText("Inserir Queijo");
         jButton_inserirQueijo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -637,6 +697,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        jButton_modificarQueijo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_edit_black_18dp.png"))); // NOI18N
         jButton_modificarQueijo.setText("Modificar Queijo");
         jButton_modificarQueijo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -644,6 +705,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        jButton_removerQueijo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_delete_black_18dp.png"))); // NOI18N
         jButton_removerQueijo.setText("Remover Queijo");
         jButton_removerQueijo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -661,6 +723,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        jButton_busca_queijo_ID.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
         jButton_busca_queijo_ID.setText("Busca por ID");
         jButton_busca_queijo_ID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -668,6 +731,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        jButton_queijo_menor_temp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
         jButton_queijo_menor_temp.setText("Queijo Menor Temperatura");
         jButton_queijo_menor_temp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -675,10 +739,25 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        jButton_queijo_mais_caro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
         jButton_queijo_mais_caro.setText("Queijo Mais Caro");
         jButton_queijo_mais_caro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_queijo_mais_caroActionPerformed(evt);
+            }
+        });
+
+        jButton_queijo_order_dec1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_down_black_18dp.png"))); // NOI18N
+        jButton_queijo_order_dec1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_queijo_order_dec1ActionPerformed(evt);
+            }
+        });
+
+        jButton_queijo_order_cres1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_up_black_18dp.png"))); // NOI18N
+        jButton_queijo_order_cres1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_queijo_order_cres1ActionPerformed(evt);
             }
         });
 
@@ -694,14 +773,18 @@ public class MainScreen extends javax.swing.JFrame {
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox_ordenar_queijos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(273, 273, 273)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_queijo_order_dec1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_queijo_order_cres1)
+                        .addGap(151, 151, 151)
                         .addComponent(jLabel4)
-                        .addGap(0, 508, Short.MAX_VALUE))
+                        .addGap(0, 509, Short.MAX_VALUE))
                     .addGroup(jpn_queijoListLayout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlb_totalQueijos, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(117, 117, 117)
+                        .addGap(48, 48, 48)
                         .addComponent(jButton_busca_queijo_ID)
                         .addGap(18, 18, 18)
                         .addComponent(jButton_queijo_menor_temp)
@@ -719,13 +802,17 @@ public class MainScreen extends javax.swing.JFrame {
             jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpn_queijoListLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel18)
-                    .addComponent(jComboBox_ordenar_queijos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                .addGroup(jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel18)
+                        .addComponent(jComboBox_ordenar_queijos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton_queijo_order_dec1)
+                        .addComponent(jButton_queijo_order_cres1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jlb_totalQueijos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -761,6 +848,7 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel17.setText("Temperatura Ideal (ºC):");
 
         jb_finalizarCadastroQueijo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jb_finalizarCadastroQueijo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_save_black_18dp.png"))); // NOI18N
         jb_finalizarCadastroQueijo.setText("FINALIZAR O CADASTRO");
         jb_finalizarCadastroQueijo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -768,6 +856,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        jb_backQueijoPage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_arrow_back_black_18dp.png"))); // NOI18N
         jb_backQueijoPage.setText("Voltar");
         jb_backQueijoPage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -806,7 +895,7 @@ public class MainScreen extends javax.swing.JFrame {
                                         .addComponent(jtf_queijo_peso)
                                         .addComponent(jtf_queijo_id)
                                         .addComponent(jtf_queijo_valorKg, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(443, Short.MAX_VALUE))
+                .addContainerGap(444, Short.MAX_VALUE))
         );
         jpn_queijoRegistrationLayout.setVerticalGroup(
             jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -835,7 +924,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(jtf_queijo_Temperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(jb_finalizarCadastroQueijo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                 .addComponent(jb_backQueijoPage)
                 .addGap(46, 46, 46))
         );
@@ -846,11 +935,11 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1255, Short.MAX_VALUE)
+            .addGap(0, 1256, Short.MAX_VALUE)
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
+            .addGap(0, 636, Short.MAX_VALUE)
         );
 
         jLayeredPane3.add(jPanel13);
@@ -859,11 +948,11 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1255, Short.MAX_VALUE)
+            .addGap(0, 1256, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
+            .addGap(0, 636, Short.MAX_VALUE)
         );
 
         jLayeredPane3.add(jPanel12);
@@ -872,11 +961,11 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1255, Short.MAX_VALUE)
+            .addGap(0, 1256, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
+            .addGap(0, 636, Short.MAX_VALUE)
         );
 
         jLayeredPane3.add(jPanel11);
@@ -885,11 +974,11 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1255, Short.MAX_VALUE)
+            .addGap(0, 1256, Short.MAX_VALUE)
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
+            .addGap(0, 636, Short.MAX_VALUE)
         );
 
         jLayeredPane3.add(jPanel10);
@@ -898,11 +987,11 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1255, Short.MAX_VALUE)
+            .addGap(0, 1256, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
+            .addGap(0, 636, Short.MAX_VALUE)
         );
 
         jLayeredPane3.add(jPanel9);
@@ -911,11 +1000,11 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1255, Short.MAX_VALUE)
+            .addGap(0, 1256, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
+            .addGap(0, 636, Short.MAX_VALUE)
         );
 
         jLayeredPane3.add(jPanel7);
@@ -991,7 +1080,7 @@ public class MainScreen extends javax.swing.JFrame {
         String cpfUpdate = JOptionPane.showInputDialog("Por favor digite o CPF do Cliente para modificar: ");
         //PROCURAR QUAL OBJETO A SER MODIFICADO
         if (cpfUpdate != null) {
-            ArrayList<Client> clientsList = ClientDAO.read(false, "");
+            ArrayList<Client> clientsList = ClientDAO.read(false, "", false);
             Client clientModify = new Client();
             boolean achou = false;
             for (int i = 0; i < clientsList.size() && achou == false; i++) {
@@ -1028,7 +1117,7 @@ public class MainScreen extends javax.swing.JFrame {
         //PERGUNTAR E ACHAR QUAL O OBJETO A SER EXCLUIDO
         String cpfDelete = JOptionPane.showInputDialog("Por favor digite o CPF do Cliente para remover: ");
         if (cpfDelete != null) {
-            ArrayList<Client> clientsList = ClientDAO.read(false, "");
+            ArrayList<Client> clientsList = ClientDAO.read(false, "", false);
             Client clientDelete = new Client();
             boolean achou = false;
             for (int i = 0; i < clientsList.size() && achou == false; i++) {
@@ -1056,7 +1145,7 @@ public class MainScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "CPF não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
             }
             //ATUALIZAR A TABELA
-            clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder));
+            clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder,(clientOrder.isEmpty() ? false : clientOrderDecreasing)));
         }
     }//GEN-LAST:event_jButton_removerClienteActionPerformed
 
@@ -1087,7 +1176,7 @@ public class MainScreen extends javax.swing.JFrame {
                     (erro == null) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
             if (erro == null) {
                 //ATUALIZAR TABELA E TROCAR AS TELAS
-                clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder));
+                clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder,(clientOrder.isEmpty() ? false : clientOrderDecreasing)));
                 jpn_clientRegistration.setVisible(false);
                 jpn_clientsList.setVisible(true);
             }
@@ -1117,7 +1206,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void jb_backClientPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_backClientPageActionPerformed
         // TODO add your handling code here:
         //TROCAR TELAS
-        clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder));
+        clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder,(clientOrder.isEmpty() ? false : clientOrderDecreasing)));
         jpn_clientRegistration.setVisible(false);
         jpn_clientsList.setVisible(true);
     }//GEN-LAST:event_jb_backClientPageActionPerformed
@@ -1178,7 +1267,7 @@ public class MainScreen extends javax.swing.JFrame {
                                 : JOptionPane.ERROR_MESSAGE);
                 if (erro == null) {
                     //ATUALIZAR TABELA E TROCAR AS TELAS
-                    queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder));
+                    queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder,(queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
                     //TROCAR TELAS
                     jpn_queijoList.setVisible(true);
                     jpn_queijoRegistration.setVisible(false);
@@ -1189,7 +1278,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jb_backQueijoPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_backQueijoPageActionPerformed
         // TODO add your handling code here:
-        queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder));
+        queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder,(queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
         //TROCAR TELAS
         jpn_queijoList.setVisible(true);
         jpn_queijoRegistration.setVisible(false);
@@ -1201,7 +1290,7 @@ public class MainScreen extends javax.swing.JFrame {
         String idUpdate = JOptionPane.showInputDialog("Por favor digite o ID do Queijo para modificar: ");
         //PROCURAR QUAL OBJETO A SER MODIFICADO
         if (idUpdate != null) {
-            ArrayList<Queijo> queijoList = QueijoDAO.read(false, "");
+            ArrayList<Queijo> queijoList = QueijoDAO.read(false, "", false);
             Queijo queijoModify = new Queijo();
             boolean achou = false;
             for (int i = 0; i < queijoList.size() && achou == false; i++) {
@@ -1236,7 +1325,7 @@ public class MainScreen extends javax.swing.JFrame {
         //PERGUNTAR E ACHAR QUAL O OBJETO A SER EXCLUIDO
         String idUpdate = JOptionPane.showInputDialog("Por favor digite o ID do Queijo para modificar: ");
         if (idUpdate != null) {
-            ArrayList<Queijo> queijoList = QueijoDAO.read(false, "");
+            ArrayList<Queijo> queijoList = QueijoDAO.read(false, "", false);
             Queijo queijoModify = new Queijo();
             boolean achou = false;
             for (int i = 0; i < queijoList.size() && achou == false; i++) {
@@ -1264,7 +1353,7 @@ public class MainScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "ID do Queijo não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
             }
             //ATUALIZAR A TABELA
-            queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder));
+            queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder,(queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
         }
     }//GEN-LAST:event_jButton_removerQueijoActionPerformed
 
@@ -1298,20 +1387,90 @@ public class MainScreen extends javax.swing.JFrame {
                     break;
                 }
             }
-            queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder));
+            queijoOrderDecreasing = false;
+            queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder,(queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
         }
     }//GEN-LAST:event_jComboBox_ordenar_queijosItemStateChanged
 
     private void jButton_busca_queijo_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_busca_queijo_IDActionPerformed
         // TODO add your handling code here:
+        //PERGUNTAR QUAL ID DO OBJETO A BUSCAR
+        String idBusca = JOptionPane.showInputDialog("Por favor digite o ID do Queijo que deseja buscar: ");
+        boolean achou = false;
+        Queijo queijoSeek = new Queijo();
+        //PROCURAR QUAL OBJETO A SER MODIFICADO
+        if (idBusca != null) {
+            ArrayList<Queijo> queijoList = QueijoDAO.read(false, "", false);
+            for (int i = 0; i < queijoList.size() && achou == false; i++) {
+                queijoSeek = queijoList.get(i);
+                if (idBusca.equals("" + queijoSeek.getQueijoID())) {
+                    achou = true;
+                }
+            }
+        }
+       
+        if(achou == true){
+            JOptionPane.showMessageDialog(null, "Queijo Encontrado:\n ID: "+queijoSeek.getQueijoID()+
+                    ", \nTipo: "+queijoSeek.getQueijoType()+
+                    ", \nPeso: "+queijoSeek.getWeight()+
+                    " Kg, \nPreço Por Kg: R$ "+queijoSeek.getPricePerKg()+
+                    ", \nTemperatura Recomendada: "+queijoSeek.getRecommendedTemperature()+" ºC");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "ID do Queijo não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jButton_busca_queijo_IDActionPerformed
 
     private void jButton_queijo_menor_tempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_queijo_menor_tempActionPerformed
         // TODO add your handling code here:
+        ArrayList<Queijo> queijoList = QueijoDAO.read(false, "", false);
+        if(!queijoList.isEmpty()){
+            
+            Queijo lowerTemperatureQueijo = null;
+            for(int i=0;i<queijoList.size();i++){
+                Queijo queijoAux = queijoList.get(i);
+                if(i == 0){
+                    lowerTemperatureQueijo = queijoAux;
+                }
+                else if(queijoAux.getRecommendedTemperature()<lowerTemperatureQueijo.getRecommendedTemperature()){
+                    lowerTemperatureQueijo = queijoAux;
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Queijo de Menor Temperatura Encontrado:\n ID: "+lowerTemperatureQueijo.getQueijoID()+
+                    ", \nTipo: "+lowerTemperatureQueijo.getQueijoType()+
+                    ", \nPeso: "+lowerTemperatureQueijo.getWeight()+
+                    " Kg, \nPreço Por Kg: R$ "+lowerTemperatureQueijo.getPricePerKg()+
+                    ", \nTemperatura Recomendada: "+lowerTemperatureQueijo.getRecommendedTemperature()+" ºC");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Nenhum Queijo Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton_queijo_menor_tempActionPerformed
 
     private void jButton_queijo_mais_caroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_queijo_mais_caroActionPerformed
         // TODO add your handling code here:
+        ArrayList<Queijo> queijoList = QueijoDAO.read(false, "", false);
+        if(!queijoList.isEmpty()){
+            Queijo mostExpensiveQueijo = null;
+            for(int i=0;i<queijoList.size();i++){
+                Queijo queijoAux = queijoList.get(i);
+                if(i == 0){
+                    mostExpensiveQueijo = queijoAux;
+                }
+                else if(queijoAux.getPricePerKg()>mostExpensiveQueijo.getPricePerKg()){
+                    mostExpensiveQueijo = queijoAux;
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Queijo Mais Caro Encontrado:\n ID: "+mostExpensiveQueijo.getQueijoID()+
+                    ", \nTipo: "+mostExpensiveQueijo.getQueijoType()+
+                    ", \nPeso: "+mostExpensiveQueijo.getWeight()+
+                    " Kg, \nPreço Por Kg: R$ "+mostExpensiveQueijo.getPricePerKg()+
+                    ", \nTemperatura Recomendada: "+mostExpensiveQueijo.getRecommendedTemperature()+" ºC");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Nenhum Queijo Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton_queijo_mais_caroActionPerformed
 // Queijo Functions End ----------------------------------------------------------------------------------------------
     
@@ -1350,10 +1509,50 @@ public class MainScreen extends javax.swing.JFrame {
                     break;
                 }
             }
-            clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder));
+            clientOrderDecreasing = false;
+            clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder,(clientOrder.isEmpty() ? false : clientOrderDecreasing)));
         }
     }//GEN-LAST:event_jComboBox_ordenar_clientesItemStateChanged
 
+    private void jButton_busca_cliente_nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_busca_cliente_nomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_busca_cliente_nomeActionPerformed
+
+    private void jButton_busca_cliente_cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_busca_cliente_cpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_busca_cliente_cpfActionPerformed
+
+    private void jButton_client_order_decActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_client_order_decActionPerformed
+        // TODO add your handling code here:
+        clientOrderDecreasing = true;
+        if(jComboBox_ordenar_clientes.getSelectedItem() == "-------"){
+            jComboBox_ordenar_clientes.setSelectedItem("CPF");
+            clientOrder = "cpf";
+        }
+        clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder,(clientOrder.isEmpty() ? false : clientOrderDecreasing)));
+    }//GEN-LAST:event_jButton_client_order_decActionPerformed
+
+    private void jButton_client_order_cresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_client_order_cresActionPerformed
+        // TODO add your handling code here:
+        clientOrderDecreasing = false;
+        clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder,(clientOrder.isEmpty() ? false : clientOrderDecreasing)));
+    }//GEN-LAST:event_jButton_client_order_cresActionPerformed
+
+    private void jButton_queijo_order_dec1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_queijo_order_dec1ActionPerformed
+        // TODO add your handling code here:
+        queijoOrderDecreasing = true;
+        if(jComboBox_ordenar_queijos.getSelectedItem() == "-------"){
+            jComboBox_ordenar_queijos.setSelectedItem("Id");
+            queijoOrder = "queijoid";
+        }
+        queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder,(queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
+    }//GEN-LAST:event_jButton_queijo_order_dec1ActionPerformed
+
+    private void jButton_queijo_order_cres1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_queijo_order_cres1ActionPerformed
+        // TODO add your handling code here:
+        queijoOrderDecreasing = false;
+        queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder,(queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
+    }//GEN-LAST:event_jButton_queijo_order_cres1ActionPerformed
 // Client 2nd part Functions End ----------------------------------------------------------------------------------------------    
 
     
@@ -1392,13 +1591,19 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_busca_cliente_cpf;
+    private javax.swing.JButton jButton_busca_cliente_nome;
     private javax.swing.JButton jButton_busca_queijo_ID;
+    private javax.swing.JButton jButton_client_order_cres;
+    private javax.swing.JButton jButton_client_order_dec;
     private javax.swing.JButton jButton_inserirCliente;
     private javax.swing.JButton jButton_inserirQueijo;
     private javax.swing.JButton jButton_modificarCliente;
     private javax.swing.JButton jButton_modificarQueijo;
     private javax.swing.JButton jButton_queijo_mais_caro;
     private javax.swing.JButton jButton_queijo_menor_temp;
+    private javax.swing.JButton jButton_queijo_order_cres1;
+    private javax.swing.JButton jButton_queijo_order_dec1;
     private javax.swing.JButton jButton_removerCliente;
     private javax.swing.JButton jButton_removerQueijo;
     private javax.swing.JComboBox<String> jComboBox_ordenar_clientes;

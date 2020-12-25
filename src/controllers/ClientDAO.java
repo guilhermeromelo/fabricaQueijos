@@ -33,13 +33,13 @@ public class ClientDAO {
         return erro;
     }
 
-    public static ArrayList<Client> read(boolean ordered, String orderParameter) {
+    public static ArrayList<Client> read(boolean ordered, String orderParameter, boolean desc) {
         ArrayList<Client> clientList = new ArrayList();
         PreparedStatement state;
         ResultSet res;
         String msgSQL;
         if (ordered == true) {
-            msgSQL = "Select * from client order by (" + orderParameter + ")";
+            msgSQL = "Select * from client order by " + orderParameter + (desc==true ? " desc": "");
         } else {
             msgSQL = "Select * from client";
         }

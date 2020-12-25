@@ -33,12 +33,12 @@ public class QueijoDAO {
         return erro;
     }
 
-    public static ArrayList<Queijo> read(boolean order, String orderParameter) {
+    public static ArrayList<Queijo> read(boolean order, String orderParameter, boolean desc) {
         PreparedStatement state;
         ArrayList<Queijo> queijoList = new ArrayList();
         String msgSQL;
         if (order == true) {
-            msgSQL = "Select * from queijo order by " + orderParameter;
+            msgSQL = "Select * from queijo order by " + orderParameter+ (desc == true ? " desc" : "" );
         } else {
             msgSQL = "Select * from queijo";
         }

@@ -106,12 +106,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1255" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1256" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="625" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="636" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -158,12 +158,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="1255" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="1256" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="625" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="636" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -184,12 +184,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1255" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1256" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="625" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="636" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -231,15 +231,23 @@
                                       <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jComboBox_ordenar_clientes" min="-2" pref="160" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="272" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jButton_client_order_dec" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jButton_client_order_cres" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="503" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jlb_totalClientes" min="-2" pref="34" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
+                                      <Component id="jButton_busca_cliente_cpf" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jButton_busca_cliente_nome" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="173" max="32767" attributes="0"/>
                                       <Component id="jButton_removerCliente" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jButton_modificarCliente" min="-2" max="-2" attributes="0"/>
@@ -259,22 +267,33 @@
                                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jComboBox_ordenar_clientes" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton_client_order_dec" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton_client_order_cres" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" pref="530" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
+                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" min="-2" pref="537" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                                       <Component id="jButton_inserirCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jButton_modificarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jButton_removerCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jlb_totalClientes" alignment="1" min="-2" pref="17" max="-2" attributes="0"/>
-                                      <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jlb_totalClientes" alignment="1" min="-2" pref="17" max="-2" attributes="0"/>
+                                              <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                          <Component id="jButton_busca_cliente_cpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButton_busca_cliente_nome" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -326,6 +345,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton_inserirCliente">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_add_black_18dp.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Inserir Cliente"/>
                       </Properties>
                       <Events>
@@ -334,6 +356,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton_modificarCliente">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_edit_black_18dp.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Modificar Cliente"/>
                       </Properties>
                       <Events>
@@ -342,6 +367,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton_removerCliente">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_delete_black_18dp.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Remover Cliente"/>
                       </Properties>
                       <Events>
@@ -373,6 +401,48 @@
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton_busca_cliente_cpf">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_search_black_18dp.png"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Buscar Por CPF"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_busca_cliente_cpfActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton_busca_cliente_nome">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_search_black_18dp.png"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Buscar Por Nome"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_busca_cliente_nomeActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton_client_order_dec">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_keyboard_arrow_down_black_18dp.png"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_client_order_decActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton_client_order_cres">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_keyboard_arrow_up_black_18dp.png"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_client_order_cresActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -419,7 +489,7 @@
                                       <Component id="jb_backClientPage" min="-2" pref="129" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="440" max="32767" attributes="0"/>
+                              <EmptySpace pref="441" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -468,7 +538,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                               <Component id="jb_finalizarCadastro" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="64" max="32767" attributes="0"/>
+                              <EmptySpace pref="63" max="32767" attributes="0"/>
                               <Component id="jb_backClientPage" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                           </Group>
@@ -555,6 +625,9 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="14" style="0"/>
                         </Property>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_save_black_18dp.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="FINALIZAR O CADASTRO"/>
                       </Properties>
                       <Events>
@@ -563,6 +636,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jb_backClientPage">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_arrow_back_black_18dp.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Voltar"/>
                       </Properties>
                       <Events>
@@ -580,12 +656,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="1255" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="1256" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="631" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="636" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -595,12 +671,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="1255" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="1256" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="631" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="636" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -610,12 +686,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="1255" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="1256" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="631" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="636" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -625,12 +701,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="1255" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="1256" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="631" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="636" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -703,15 +779,19 @@
                                       <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="jComboBox_ordenar_queijos" min="-2" pref="160" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="273" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jButton_queijo_order_dec1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jButton_queijo_order_cres1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
                                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="508" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="509" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jlb_totalQueijos" min="-2" pref="34" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                                       <Component id="jButton_busca_queijo_ID" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jButton_queijo_menor_temp" min="-2" max="-2" attributes="0"/>
@@ -733,14 +813,20 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jComboBox_ordenar_queijos" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jComboBox_ordenar_queijos" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jButton_queijo_order_dec1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jButton_queijo_order_cres1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="532" max="-2" attributes="0"/>
-                              <EmptySpace pref="15" max="32767" attributes="0"/>
+                              <EmptySpace pref="14" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                       <Component id="jlb_totalQueijos" alignment="1" min="-2" pref="17" max="-2" attributes="0"/>
@@ -807,6 +893,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton_inserirQueijo">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_add_black_18dp.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Inserir Queijo"/>
                       </Properties>
                       <Events>
@@ -815,6 +904,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton_modificarQueijo">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_edit_black_18dp.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Modificar Queijo"/>
                       </Properties>
                       <Events>
@@ -823,6 +915,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton_removerQueijo">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_delete_black_18dp.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Remover Queijo"/>
                       </Properties>
                       <Events>
@@ -857,6 +952,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton_busca_queijo_ID">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_search_black_18dp.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Busca por ID"/>
                       </Properties>
                       <Events>
@@ -865,6 +963,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton_queijo_menor_temp">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_search_black_18dp.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Queijo Menor Temperatura"/>
                       </Properties>
                       <Events>
@@ -873,10 +974,33 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton_queijo_mais_caro">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_search_black_18dp.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Queijo Mais Caro"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_queijo_mais_caroActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton_queijo_order_dec1">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_keyboard_arrow_down_black_18dp.png"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_queijo_order_dec1ActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton_queijo_order_cres1">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_keyboard_arrow_up_black_18dp.png"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_queijo_order_cres1ActionPerformed"/>
                       </Events>
                     </Component>
                   </SubComponents>
@@ -922,7 +1046,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="443" max="32767" attributes="0"/>
+                              <EmptySpace pref="444" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -958,7 +1082,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               <Component id="jb_finalizarCadastroQueijo" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="157" max="32767" attributes="0"/>
+                              <EmptySpace pref="162" max="32767" attributes="0"/>
                               <Component id="jb_backQueijoPage" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                           </Group>
@@ -1029,6 +1153,9 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="14" style="0"/>
                         </Property>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_save_black_18dp.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="FINALIZAR O CADASTRO"/>
                       </Properties>
                       <Events>
@@ -1037,6 +1164,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jb_backQueijoPage">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/views/Icons/baseline_arrow_back_black_18dp.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Voltar"/>
                       </Properties>
                       <Events>
@@ -1050,12 +1180,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="1255" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="1256" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="625" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="636" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -1065,12 +1195,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="1255" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="1256" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="625" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="636" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -1080,12 +1210,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="1255" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="1256" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="625" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="636" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -1095,12 +1225,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="1255" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="1256" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="625" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="636" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -1110,12 +1240,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="1255" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="1256" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="625" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="636" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -1125,12 +1255,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="1255" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="1256" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="625" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="636" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
