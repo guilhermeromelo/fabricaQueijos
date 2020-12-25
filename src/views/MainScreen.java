@@ -951,7 +951,7 @@ public class MainScreen extends javax.swing.JFrame {
             //FAZER OPERAÇÃO E PEGAR E MOSTRAR O RESULTADO OU ERROS
             if (achou == true) {
                 int delete = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir "
-                        + "o Cliente\nNome: " + clientDelete.getClientName() + ", CPF: " + clientDelete.getCPF(),
+                        + "o Cliente:\nNome: " + clientDelete.getClientName() + ", CPF: " + clientDelete.getCPF(),
                         "Confirmar Exclusão", JOptionPane.YES_NO_OPTION);
 
                 if (delete == 0) {
@@ -1143,7 +1143,39 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jButton_removerQueijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_removerQueijoActionPerformed
         // TODO add your handling code here:
+        //PERGUNTAR E ACHAR QUAL O OBJETO A SER EXCLUIDO
+        String idUpdate = JOptionPane.showInputDialog("Por favor digite o ID do Queijo para modificar: ");
+        if (idUpdate != null) {
+            ArrayList<Queijo> queijoList = QueijoDAO.read(false, "");
+            Queijo queijoModify = new Queijo();
+            boolean achou = false;
+            for (int i = 0; i < queijoList.size() && achou == false; i++) {
+                queijoModify = queijoList.get(i);
+                if (idUpdate.equals("" + queijoModify.getQueijoID())) {
+                    achou = true;
+                }
+            }
+            //FAZER OPERAÇÃO E PEGAR E MOSTRAR O RESULTADO OU ERROS
+            if (achou == true) {
+                int delete = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir "
+                        + "o Queijo:\nID: " + queijoModify.getQueijoID() + ", Tipo: " + queijoModify.getQueijoType(),
+                        "Confirmar Exclusão", JOptionPane.YES_NO_OPTION);
 
+                if (delete == 0) {
+                    String erro = QueijoDAO.delete(queijoModify);
+                    JOptionPane.showMessageDialog(null, (erro == null)
+                            ? "Queijo Removido com Sucesso!"
+                            : "Erro Encontado: \n" + erro, "Resultado da operação",
+                            (erro == null) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Operação Cancelada!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "ID do Queijo não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
+            }
+            //ATUALIZAR A TABELA
+            queijoTableBuilder(jTableQueijo, QueijoDAO.read(false, ""));
+        }
     }//GEN-LAST:event_jButton_removerQueijoActionPerformed
 // Queijo Functions End ----------------------------------------------------------------------------------------------
 
