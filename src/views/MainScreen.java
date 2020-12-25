@@ -9,22 +9,31 @@ import javax.swing.table.DefaultTableModel;
 
 // ÍNDICE
 // Client Functions - linha 30 a 80
-
-
-
-
-
-
 public class MainScreen extends javax.swing.JFrame {
 
     boolean isClientUpdate = false;
 
     public MainScreen() {
         initComponents();
+        //JTabbed Panel
         jlb_totalClientes.setText("30");
         jpn_clientsList.setVisible(true);
+        jpn_queijoList.setVisible(true);
+        
+        //Second panel
         jpn_clientRegistration.setVisible(false);
-        clientTableBuilder(jTable1, ClientDAO.read(false, ""));
+        jpn_queijoRegistration.setVisible(false);
+        
+        clientTableBuilder(jTableClient, ClientDAO.read(false, ""));
+        queijoTableBuilder(jTableQueijo, QueijoDAO.read(false, ""));
+
+        try {
+
+            jtf_client_Phone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+            jtf_client_CPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            System.out.print("Erro: " + ex.toString());
+        }
 
     }
 
@@ -42,20 +51,23 @@ public class MainScreen extends javax.swing.JFrame {
         jlb_totalClientes.setText("" + clientList.size());
     }
 
-    public boolean NewClientverification() {
+    public boolean NewClientVerification() {
         boolean valido = true;
         String erro = "";
-        if (jtf_client_CPF.getText().isEmpty()) {
+        if (jtf_client_CPF.getText().isEmpty() || jtf_client_CPF.getText().length() != 14) {
             valido = false;
-            erro = erro + "\nCampo CPF Vazio";
+            erro = erro + "\nCampo CPF Vazio ou Incompleto";
         }
         if (jtf_client_Name.getText().isEmpty()) {
             valido = false;
             erro = erro + "\nCampo Nome Vazio";
         }
-        if (jtf_client_Phone.getText().isEmpty()) {
+        if (jtf_client_Phone.getText().isEmpty() || 
+                (jtf_client_Phone.getText().length() != 15 && 
+                jtf_client_Phone.getText().length() != 14)) {
             valido = false;
-            erro = erro + "\nCampo Telefone Vazio";
+            System.out.println(jtf_client_Phone.getText().length());
+            erro = erro + "\nCampo Telefone Vazio ou Incompleto";
         }
         if (jtf_client_Address.getText().isEmpty()) {
             valido = false;
@@ -80,7 +92,60 @@ public class MainScreen extends javax.swing.JFrame {
     }
     // Client Functions End ----------------------------------------------------------------------------------------------
 
-    
+    // Queijo Functions Begin ----------------------------------------------------------------------------------------------
+    void queijoTableBuilder(JTable jtable, ArrayList<Queijo> queijoList) {
+        DefaultTableModel tableRows1;
+        tableRows1 = new DefaultTableModel(new String[]{"Nº", "ID", "Peso", "Valor Por Kg",
+            "Tipo", "Temperatura Ideal"}, 0);
+        for (int i = 0; i < queijoList.size(); i++) {
+            Queijo q = queijoList.get(i);
+            tableRows1.addRow(new Object[]{(i + 1), q.getQueijoID(), q.getWeight(),
+                q.getPricePerKg(), q.getQueijoType(), q.getRecommendedTemperature()});
+        }
+        jtable.setModel(tableRows1);
+        jlb_totalQueijos.setText("" + queijoList.size());
+    }
+
+    public boolean NewQueijoVerification() {
+        boolean valido = true;
+        String erro = "";
+        if (jtf_client_CPF.getText().isEmpty() || jtf_client_CPF.getText().length() != 14) {
+            valido = false;
+            erro = erro + "\nCampo CPF Vazio ou Incompleto";
+        }
+        if (jtf_client_Name.getText().isEmpty()) {
+            valido = false;
+            erro = erro + "\nCampo Nome Vazio";
+        }
+        if (jtf_client_Phone.getText().isEmpty() || 
+                (jtf_client_Phone.getText().length() != 15 && 
+                jtf_client_Phone.getText().length() != 14)) {
+            valido = false;
+            System.out.println(jtf_client_Phone.getText().length());
+            erro = erro + "\nCampo Telefone Vazio ou Incompleto";
+        }
+        if (jtf_client_Address.getText().isEmpty()) {
+            valido = false;
+            erro = erro + "\nCampo Endereço Vazio";
+        }
+        if (jtf_client_CreditCard.getText().isEmpty()) {
+            valido = false;
+            erro = erro + "\nCampo Cartão Crédito Vazio";
+        }
+        if (jtf_client_Face.getText().isEmpty()) {
+            valido = false;
+            erro = erro + "\nCampo Facebook Vazio";
+        }
+        if (jtf_client_Insta.getText().isEmpty()) {
+            valido = false;
+            erro = erro + "\nCampo Instagram Vazio";
+        }
+        if (valido == false) {
+            JOptionPane.showMessageDialog(null, "Erro(s) Encontrados: " + erro);
+        }
+        return valido;
+    }
+    // Queijo Functions End ----------------------------------------------------------------------------------------------
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -97,7 +162,7 @@ public class MainScreen extends javax.swing.JFrame {
         jpn_clientsList = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableClient = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jlb_totalClientes = new javax.swing.JLabel();
         jButton_inserirCliente = new javax.swing.JButton();
@@ -114,20 +179,48 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jtf_client_CreditCard = new javax.swing.JTextField();
         jtf_client_Address = new javax.swing.JTextField();
-        jtf_client_Phone = new javax.swing.JTextField();
         jtf_client_Name = new javax.swing.JTextField();
-        jtf_client_CPF = new javax.swing.JTextField();
         jtf_client_Insta = new javax.swing.JTextField();
         jtf_client_Face = new javax.swing.JTextField();
         jb_finalizarCadastro = new javax.swing.JButton();
         jb_backClientPage = new javax.swing.JButton();
+        jtf_client_CPF = new javax.swing.JFormattedTextField();
+        jtf_client_Phone = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel_QueijoList = new javax.swing.JPanel();
         jLayeredPane3 = new javax.swing.JLayeredPane();
+        jpn_queijoList = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableQueijo = new javax.swing.JTable();
+        jlb_totalQueijos = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jButton_inserirQueijo = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jpn_queijoRegistration = new javax.swing.JPanel();
+        jL_Cadastrar_cliente1 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jtf_queijo_id = new javax.swing.JFormattedTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jtf_queijo_peso = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jtf_queijo_valorKg = new javax.swing.JFormattedTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jtf_queijo_tipo = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jtf_queijo_Temperatura = new javax.swing.JTextField();
+        jb_finalizarCadastroQueijo = new javax.swing.JButton();
+        jb_backQueijoPage = new javax.swing.JButton();
+        jPanel13 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -148,7 +241,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jpanel_DashboardLayout.setVerticalGroup(
             jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
+            .addGap(0, 631, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Dashboard", jpanel_Dashboard);
@@ -161,7 +254,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
+            .addGap(0, 631, Short.MAX_VALUE)
         );
 
         jLayeredPane1.setLayer(jPanel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -198,7 +291,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel_PedidosListLayout.setVerticalGroup(
             jPanel_PedidosListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
+            .addGap(0, 631, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Mostrar Pedidos", jPanel_PedidosList);
@@ -208,7 +301,7 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("CLIENTES CADASTRADOS");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableClient.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -219,7 +312,7 @@ public class MainScreen extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableClient);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Total de Clientes Cadastrados: ");
@@ -282,15 +375,13 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpn_clientsListLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlb_totalClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton_inserirCliente)
                         .addComponent(jButton_modificarCliente)
-                        .addComponent(jButton_removerCliente)))
+                        .addComponent(jButton_removerCliente))
+                    .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jlb_totalClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)))
                 .addGap(14, 14, 14))
         );
 
@@ -356,21 +447,16 @@ public class MainScreen extends javax.swing.JFrame {
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel11)
                                     .addComponent(jLabel10))
-                                .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jtf_client_Address)
-                                            .addComponent(jtf_client_CreditCard)
-                                            .addComponent(jtf_client_Insta)
-                                            .addComponent(jtf_client_Face, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_clientRegistrationLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jtf_client_CPF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jtf_client_Name, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jtf_client_Phone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addComponent(jb_finalizarCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtf_client_Address)
+                                    .addComponent(jtf_client_CreditCard)
+                                    .addComponent(jtf_client_Insta)
+                                    .addComponent(jtf_client_Face)
+                                    .addComponent(jtf_client_Name)
+                                    .addComponent(jtf_client_CPF)
+                                    .addComponent(jtf_client_Phone, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)))
+                            .addComponent(jb_finalizarCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)))
                     .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(jb_backClientPage, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -485,27 +571,263 @@ public class MainScreen extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Mostrar Clientes", jPanel_ClientList);
 
+        jLayeredPane3.setLayout(new javax.swing.OverlayLayout(jLayeredPane3));
+
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("QUEIJOS CADASTRADOS");
 
-        jLayeredPane3.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jTableQueijo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTableQueijo);
 
-        javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
-        jLayeredPane3.setLayout(jLayeredPane3Layout);
-        jLayeredPane3Layout.setHorizontalGroup(
-            jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                .addGap(495, 495, 495)
-                .addComponent(jLabel4)
-                .addContainerGap(538, Short.MAX_VALUE))
+        jlb_totalQueijos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("Total de Queijos Cadastrados: ");
+
+        jButton_inserirQueijo.setText("Inserir Queijo");
+        jButton_inserirQueijo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_inserirQueijoActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Modificar Queijo");
+
+        jButton2.setText("Remover Queijo");
+
+        javax.swing.GroupLayout jpn_queijoListLayout = new javax.swing.GroupLayout(jpn_queijoList);
+        jpn_queijoList.setLayout(jpn_queijoListLayout);
+        jpn_queijoListLayout.setHorizontalGroup(
+            jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpn_queijoListLayout.createSequentialGroup()
+                .addGroup(jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpn_queijoListLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2))
+                    .addGroup(jpn_queijoListLayout.createSequentialGroup()
+                        .addGap(493, 493, 493)
+                        .addComponent(jLabel4)
+                        .addGap(0, 530, Short.MAX_VALUE))
+                    .addGroup(jpn_queijoListLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlb_totalQueijos, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_inserirQueijo)))
+                .addContainerGap())
         );
-        jLayeredPane3Layout.setVerticalGroup(
-            jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                .addContainerGap()
+        jpn_queijoListLayout.setVerticalGroup(
+            jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpn_queijoListLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addContainerGap(592, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton_inserirQueijo)
+                    .addGroup(jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jlb_totalQueijos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel12))
+                    .addComponent(jButton2))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
+
+        jLayeredPane3.add(jpn_queijoList);
+
+        jL_Cadastrar_cliente1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jL_Cadastrar_cliente1.setText("CADASTRAR NOVO QUEIJO");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setText("ID:");
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setText("Peso:");
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setText("Valor Por Kg:");
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setText("Tipo do Queijo:");
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel17.setText("Temperatura Ideal:");
+
+        jb_finalizarCadastroQueijo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jb_finalizarCadastroQueijo.setText("FINALIZAR O CADASTRO");
+        jb_finalizarCadastroQueijo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_finalizarCadastroQueijoActionPerformed(evt);
+            }
+        });
+
+        jb_backQueijoPage.setText("Voltar");
+        jb_backQueijoPage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_backQueijoPageActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpn_queijoRegistrationLayout = new javax.swing.GroupLayout(jpn_queijoRegistration);
+        jpn_queijoRegistration.setLayout(jpn_queijoRegistrationLayout);
+        jpn_queijoRegistrationLayout.setHorizontalGroup(
+            jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpn_queijoRegistrationLayout.createSequentialGroup()
+                .addGroup(jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpn_queijoRegistrationLayout.createSequentialGroup()
+                        .addGap(491, 491, 491)
+                        .addComponent(jL_Cadastrar_cliente1))
+                    .addGroup(jpn_queijoRegistrationLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jpn_queijoRegistrationLayout.createSequentialGroup()
+                                .addComponent(jb_backQueijoPage, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(633, 633, 633))
+                            .addGroup(jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jb_finalizarCadastroQueijo, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jpn_queijoRegistrationLayout.createSequentialGroup()
+                                    .addGroup(jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel15)
+                                        .addComponent(jLabel16)
+                                        .addComponent(jLabel14)
+                                        .addComponent(jLabel13)
+                                        .addComponent(jLabel17))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jtf_queijo_tipo)
+                                        .addComponent(jtf_queijo_Temperatura)
+                                        .addComponent(jtf_queijo_peso)
+                                        .addComponent(jtf_queijo_id)
+                                        .addComponent(jtf_queijo_valorKg, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addContainerGap(443, Short.MAX_VALUE))
+        );
+        jpn_queijoRegistrationLayout.setVerticalGroup(
+            jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpn_queijoRegistrationLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jL_Cadastrar_cliente1)
+                .addGap(127, 127, 127)
+                .addGroup(jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel13)
+                    .addComponent(jtf_queijo_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel14)
+                    .addComponent(jtf_queijo_peso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel15)
+                    .addComponent(jtf_queijo_valorKg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel16)
+                    .addComponent(jtf_queijo_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel17)
+                    .addComponent(jtf_queijo_Temperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(jb_finalizarCadastroQueijo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                .addComponent(jb_backQueijoPage)
+                .addGap(46, 46, 46))
+        );
+
+        jLayeredPane3.add(jpn_queijoRegistration);
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1255, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 631, Short.MAX_VALUE)
+        );
+
+        jLayeredPane3.add(jPanel13);
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1255, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 631, Short.MAX_VALUE)
+        );
+
+        jLayeredPane3.add(jPanel12);
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1255, Short.MAX_VALUE)
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 631, Short.MAX_VALUE)
+        );
+
+        jLayeredPane3.add(jPanel11);
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1255, Short.MAX_VALUE)
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 631, Short.MAX_VALUE)
+        );
+
+        jLayeredPane3.add(jPanel10);
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1255, Short.MAX_VALUE)
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 631, Short.MAX_VALUE)
+        );
+
+        jLayeredPane3.add(jPanel9);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1255, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 631, Short.MAX_VALUE)
+        );
+
+        jLayeredPane3.add(jPanel7);
 
         javax.swing.GroupLayout jPanel_QueijoListLayout = new javax.swing.GroupLayout(jPanel_QueijoList);
         jPanel_QueijoList.setLayout(jPanel_QueijoListLayout);
@@ -624,13 +946,13 @@ public class MainScreen extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "CPF não Encontrado");
             }
-            clientTableBuilder(jTable1, ClientDAO.read(false, ""));
+            clientTableBuilder(jTableClient, ClientDAO.read(false, ""));
         }
     }//GEN-LAST:event_jButton_removerClienteActionPerformed
 
     private void jb_finalizarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_finalizarCadastroActionPerformed
         // TODO add your handling code here:
-        if (NewClientverification()) {
+        if (NewClientVerification()) {
             Client newClient = new Client();
             newClient.setCPF(jtf_client_CPF.getText());
             newClient.setClientName(jtf_client_Name.getText());
@@ -646,7 +968,7 @@ public class MainScreen extends javax.swing.JFrame {
                 erro = ClientDAO.create(newClient);
             }
             JOptionPane.showMessageDialog(null, (erro == null) ? "Dados do Cliente salvos com sucesso!" : "Erro Encontado: \n" + erro);
-            clientTableBuilder(jTable1, ClientDAO.read(false, ""));
+            clientTableBuilder(jTableClient, ClientDAO.read(false, ""));
             jpn_clientRegistration.setVisible(false);
             jpn_clientsList.setVisible(true);
         }
@@ -671,10 +993,29 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jb_backClientPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_backClientPageActionPerformed
         // TODO add your handling code here:
-        clientTableBuilder(jTable1, ClientDAO.read(false, ""));
+        clientTableBuilder(jTableClient, ClientDAO.read(false, ""));
         jpn_clientRegistration.setVisible(false);
         jpn_clientsList.setVisible(true);
     }//GEN-LAST:event_jb_backClientPageActionPerformed
+
+    private void jButton_inserirQueijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_inserirQueijoActionPerformed
+        // TODO add your handling code here:
+        jtf_queijo_id.setEditable(false);
+        jtf_queijo_id.setText("Gerado pelo Sistema");
+        jpn_queijoRegistration.setVisible(true);
+        jpn_queijoList.setVisible(false);
+    }//GEN-LAST:event_jButton_inserirQueijoActionPerformed
+
+    private void jb_finalizarCadastroQueijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_finalizarCadastroQueijoActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jb_finalizarCadastroQueijoActionPerformed
+
+    private void jb_backQueijoPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_backQueijoPageActionPerformed
+        // TODO add your handling code here:
+        jpn_queijoList.setVisible(true);
+        jpn_queijoRegistration.setVisible(false);
+    }//GEN-LAST:event_jb_backQueijoPageActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -709,13 +1050,23 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_inserirCliente;
+    private javax.swing.JButton jButton_inserirQueijo;
     private javax.swing.JButton jButton_modificarCliente;
     private javax.swing.JButton jButton_removerCliente;
     private javax.swing.JLabel jL_Cadastrar_cliente;
+    private javax.swing.JLabel jL_Cadastrar_cliente1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -735,29 +1086,47 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem_ExportarXLS;
     private javax.swing.JMenuItem jMenuItem_Sobre;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanel_ClientList;
     private javax.swing.JPanel jPanel_OrderPedido;
     private javax.swing.JPanel jPanel_PedidosList;
     private javax.swing.JPanel jPanel_QueijoList;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableClient;
+    private javax.swing.JTable jTableQueijo;
     private javax.swing.JButton jb_backClientPage;
+    private javax.swing.JButton jb_backQueijoPage;
     private javax.swing.JButton jb_finalizarCadastro;
+    private javax.swing.JButton jb_finalizarCadastroQueijo;
     private javax.swing.JLabel jlb_totalClientes;
+    private javax.swing.JLabel jlb_totalQueijos;
     private javax.swing.JPanel jpanel_Dashboard;
     private javax.swing.JPanel jpn_clientRegistration;
     private javax.swing.JPanel jpn_clientsList;
+    private javax.swing.JPanel jpn_queijoList;
+    private javax.swing.JPanel jpn_queijoRegistration;
     private javax.swing.JTextField jtf_client_Address;
-    private javax.swing.JTextField jtf_client_CPF;
+    private javax.swing.JFormattedTextField jtf_client_CPF;
     private javax.swing.JTextField jtf_client_CreditCard;
     private javax.swing.JTextField jtf_client_Face;
     private javax.swing.JTextField jtf_client_Insta;
     private javax.swing.JTextField jtf_client_Name;
-    private javax.swing.JTextField jtf_client_Phone;
+    private javax.swing.JFormattedTextField jtf_client_Phone;
+    private javax.swing.JTextField jtf_queijo_Temperatura;
+    private javax.swing.JFormattedTextField jtf_queijo_id;
+    private javax.swing.JTextField jtf_queijo_peso;
+    private javax.swing.JTextField jtf_queijo_tipo;
+    private javax.swing.JFormattedTextField jtf_queijo_valorKg;
     // End of variables declaration//GEN-END:variables
 }
