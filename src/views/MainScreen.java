@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 public class MainScreen extends javax.swing.JFrame {
 
     boolean isClientUpdate = false;
+    boolean isQueijoUpdate = false;
 
     public MainScreen() {
         initComponents();
@@ -19,17 +20,17 @@ public class MainScreen extends javax.swing.JFrame {
         jlb_totalClientes.setText("30");
         jpn_clientsList.setVisible(true);
         jpn_queijoList.setVisible(true);
-        
+
         //Second panel
         jpn_clientRegistration.setVisible(false);
         jpn_queijoRegistration.setVisible(false);
-        
+
         clientTableBuilder(jTableClient, ClientDAO.read(false, ""));
         queijoTableBuilder(jTableQueijo, QueijoDAO.read(false, ""));
 
         try {
 
-            jtf_client_Phone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+            jtf_client_Phone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
             jtf_client_CPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             System.out.print("Erro: " + ex.toString());
@@ -54,7 +55,7 @@ public class MainScreen extends javax.swing.JFrame {
     public boolean NewClientVerification() {
         boolean valido = true;
         String erro = "";
-        if (jtf_client_CPF.getText().isEmpty() || jtf_client_CPF.getText().length() != 14) {
+        if (jtf_client_CPF.getText().equals("   .   .   -  ") || jtf_client_CPF.getText().contains(" ")) {
             valido = false;
             erro = erro + "\nCampo CPF Vazio ou Incompleto";
         }
@@ -62,11 +63,8 @@ public class MainScreen extends javax.swing.JFrame {
             valido = false;
             erro = erro + "\nCampo Nome Vazio";
         }
-        if (jtf_client_Phone.getText().isEmpty() || 
-                (jtf_client_Phone.getText().length() != 15 && 
-                jtf_client_Phone.getText().length() != 14)) {
+        if (jtf_client_Phone.getText().equals("(  )     -    ")) {
             valido = false;
-            System.out.println(jtf_client_Phone.getText().length());
             erro = erro + "\nCampo Telefone Vazio ou Incompleto";
         }
         if (jtf_client_Address.getText().isEmpty()) {
@@ -77,13 +75,13 @@ public class MainScreen extends javax.swing.JFrame {
             valido = false;
             erro = erro + "\nCampo Cartão Crédito Vazio";
         }
-        if (jtf_client_Face.getText().isEmpty()) {
-            valido = false;
-            erro = erro + "\nCampo Facebook Vazio";
-        }
         if (jtf_client_Insta.getText().isEmpty()) {
             valido = false;
             erro = erro + "\nCampo Instagram Vazio";
+        }
+        if (jtf_client_Face.getText().isEmpty()) {
+            valido = false;
+            erro = erro + "\nCampo Facebook Vazio";
         }
         if (valido == false) {
             JOptionPane.showMessageDialog(null, "Erro(s) Encontrados: " + erro);
@@ -109,36 +107,21 @@ public class MainScreen extends javax.swing.JFrame {
     public boolean NewQueijoVerification() {
         boolean valido = true;
         String erro = "";
-        if (jtf_client_CPF.getText().isEmpty() || jtf_client_CPF.getText().length() != 14) {
+        if (jtf_queijo_peso.getText().isEmpty()) {
             valido = false;
-            erro = erro + "\nCampo CPF Vazio ou Incompleto";
+            erro = erro + "\nCampo Peso Vazio";
         }
-        if (jtf_client_Name.getText().isEmpty()) {
+        if (jtf_queijo_valorKg.getText().isEmpty()) {
             valido = false;
-            erro = erro + "\nCampo Nome Vazio";
+            erro = erro + "\nCampo Valor por Kg Vazio";
         }
-        if (jtf_client_Phone.getText().isEmpty() || 
-                (jtf_client_Phone.getText().length() != 15 && 
-                jtf_client_Phone.getText().length() != 14)) {
+        if (jtf_queijo_tipo.getText().isEmpty()) {
             valido = false;
-            System.out.println(jtf_client_Phone.getText().length());
-            erro = erro + "\nCampo Telefone Vazio ou Incompleto";
+            erro = erro + "\nCampo Tipo do Queijo Vazio";
         }
-        if (jtf_client_Address.getText().isEmpty()) {
+        if (jtf_queijo_Temperatura.getText().isEmpty()) {
             valido = false;
-            erro = erro + "\nCampo Endereço Vazio";
-        }
-        if (jtf_client_CreditCard.getText().isEmpty()) {
-            valido = false;
-            erro = erro + "\nCampo Cartão Crédito Vazio";
-        }
-        if (jtf_client_Face.getText().isEmpty()) {
-            valido = false;
-            erro = erro + "\nCampo Facebook Vazio";
-        }
-        if (jtf_client_Insta.getText().isEmpty()) {
-            valido = false;
-            erro = erro + "\nCampo Instagram Vazio";
+            erro = erro + "\nCampo Temperatura Ideal Vazio";
         }
         if (valido == false) {
             JOptionPane.showMessageDialog(null, "Erro(s) Encontrados: " + erro);
@@ -146,7 +129,7 @@ public class MainScreen extends javax.swing.JFrame {
         return valido;
     }
     // Queijo Functions End ----------------------------------------------------------------------------------------------
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -658,16 +641,16 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel13.setText("ID:");
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel14.setText("Peso:");
+        jLabel14.setText("Peso (Kg):");
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel15.setText("Valor Por Kg:");
+        jLabel15.setText("Valor Por Kg (R$):");
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("Tipo do Queijo:");
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel17.setText("Temperatura Ideal:");
+        jLabel17.setText("Temperatura Ideal (ºC):");
 
         jb_finalizarCadastroQueijo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jb_finalizarCadastroQueijo.setText("FINALIZAR O CADASTRO");
@@ -700,7 +683,7 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addComponent(jb_backQueijoPage, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(633, 633, 633))
                             .addGroup(jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jb_finalizarCadastroQueijo, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jb_finalizarCadastroQueijo, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jpn_queijoRegistrationLayout.createSequentialGroup()
                                     .addGroup(jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel15)
@@ -896,7 +879,9 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jButton_modificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_modificarClienteActionPerformed
         // TODO add your handling code here:
+        //PERGUNTAR QUAL OBJETO A MODIFICAR
         String cpfUpdate = JOptionPane.showInputDialog("Por favor digite o CPF do Cliente para modificar: ");
+        //PROCURAR QUAL OBJETO A SER MODIFICADO
         if (cpfUpdate != null) {
             ArrayList<Client> clientsList = ClientDAO.read(false, "");
             Client clientModify = new Client();
@@ -907,6 +892,7 @@ public class MainScreen extends javax.swing.JFrame {
                     achou = true;
                 }
             }
+            //PASSAR OS DADOS DO OBJETO PARA TELA DE UPDADE OU MOSTRAR ERRO DE NÃO ENCONTRADO
             if (achou == true) {
                 jtf_client_CPF.setText(clientModify.getCPF());
                 jtf_client_CPF.setEditable(false);
@@ -916,6 +902,8 @@ public class MainScreen extends javax.swing.JFrame {
                 jtf_client_Insta.setText(clientModify.getInstagramURL());
                 jtf_client_Name.setText(clientModify.getClientName());
                 jtf_client_Phone.setText(clientModify.getPhone());
+
+                //TROCAR AS TELAS
                 jL_Cadastrar_cliente.setText("ALTERAR DADOS DO CLIENTE");
                 jb_finalizarCadastro.setText("Salvar Alteração de Dados");
                 isClientUpdate = true;
@@ -929,6 +917,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jButton_removerClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_removerClienteActionPerformed
         // TODO add your handling code here:
+        //PERGUNTAR E ACHAR QUAL O OBJETO A SER EXCLUIDO
         String cpfDelete = JOptionPane.showInputDialog("Por favor digite o CPF do Cliente para remover: ");
         if (cpfDelete != null) {
             ArrayList<Client> clientsList = ClientDAO.read(false, "");
@@ -940,19 +929,23 @@ public class MainScreen extends javax.swing.JFrame {
                     achou = true;
                 }
             }
+            //FAZER OPERAÇÃO E PEGAR E MOSTRAR O RESULTADO OU ERROS
             if (achou == true) {
                 String erro = ClientDAO.delete(clientDelete);
                 JOptionPane.showMessageDialog(null, (erro == null) ? "Cliente Removido com Sucesso!" : "Erro Encontado: \n" + erro);
             } else {
                 JOptionPane.showMessageDialog(null, "CPF não Encontrado");
             }
+            //ATUALIZAR A TABELA
             clientTableBuilder(jTableClient, ClientDAO.read(false, ""));
         }
     }//GEN-LAST:event_jButton_removerClienteActionPerformed
 
     private void jb_finalizarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_finalizarCadastroActionPerformed
         // TODO add your handling code here:
+        //VERIFICAR VALIDADE DOS CAMPOS
         if (NewClientVerification()) {
+            //RECUPERAR INFORMAÇÕES E ADICIONAR AO OBJETO
             Client newClient = new Client();
             newClient.setCPF(jtf_client_CPF.getText());
             newClient.setClientName(jtf_client_Name.getText());
@@ -961,13 +954,16 @@ public class MainScreen extends javax.swing.JFrame {
             newClient.setPhone(jtf_client_Phone.getText());
             newClient.setFacebookURL(jtf_client_Face.getText());
             newClient.setInstagramURL(jtf_client_Insta.getText());
+            //ADICIONAR OU DAR UPDATE E PEGAR SE TEVE ERRO OU NÃO
             String erro;
             if (isClientUpdate == true) {
                 erro = ClientDAO.update(newClient);
             } else {
                 erro = ClientDAO.create(newClient);
             }
+            //MOSTRAR RESULTADO DA OPERAÇÃO
             JOptionPane.showMessageDialog(null, (erro == null) ? "Dados do Cliente salvos com sucesso!" : "Erro Encontado: \n" + erro);
+            //ATUALIZAR TABELA E TROCAR AS TELAS
             clientTableBuilder(jTableClient, ClientDAO.read(false, ""));
             jpn_clientRegistration.setVisible(false);
             jpn_clientsList.setVisible(true);
@@ -976,6 +972,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jButton_inserirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_inserirClienteActionPerformed
         // TODO add your handling code here:
+        //PREPARAR OS CAMPOS DA NOVA TELA
         jtf_client_CPF.setText("");
         jtf_client_CPF.setEditable(true);
         jtf_client_Address.setText("");
@@ -984,6 +981,8 @@ public class MainScreen extends javax.swing.JFrame {
         jtf_client_Insta.setText("");
         jtf_client_Name.setText("");
         jtf_client_Phone.setText("");
+
+        //TROCAR TELAS
         jL_Cadastrar_cliente.setText("CADASTRAR UM NOVO CLIENTE");
         jb_finalizarCadastro.setText("Salvar e Finalizar Cadastro");
         isClientUpdate = false;
@@ -993,6 +992,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jb_backClientPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_backClientPageActionPerformed
         // TODO add your handling code here:
+        //TROCAR TELAS
         clientTableBuilder(jTableClient, ClientDAO.read(false, ""));
         jpn_clientRegistration.setVisible(false);
         jpn_clientsList.setVisible(true);
@@ -1001,18 +1001,57 @@ public class MainScreen extends javax.swing.JFrame {
     private void jButton_inserirQueijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_inserirQueijoActionPerformed
         // TODO add your handling code here:
         jtf_queijo_id.setEditable(false);
+        //INICIAR TEXTFIELDS
         jtf_queijo_id.setText("Gerado pelo Sistema");
+        jtf_queijo_Temperatura.setText("");
+        jtf_queijo_peso.setText("");
+        jtf_queijo_tipo.setText("");
+        jtf_queijo_valorKg.setText("");
+        //TROCAR A TELA
+        isQueijoUpdate = false;
         jpn_queijoRegistration.setVisible(true);
         jpn_queijoList.setVisible(false);
     }//GEN-LAST:event_jButton_inserirQueijoActionPerformed
 
     private void jb_finalizarCadastroQueijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_finalizarCadastroQueijoActionPerformed
         // TODO add your handling code here:
-        
+        //VERIFICAR VALIDADE DOS DADOS DIGITADOS
+        if (NewQueijoVerification()) {
+            boolean hasError = false;
+            //ADICIONAR OS DADOS A UM OBJETO
+            Queijo newQueijo = new Queijo();
+            try {
+                if (isQueijoUpdate == true) {
+                    newQueijo.setQueijoID(Integer.parseInt(jtf_queijo_id.getText()));
+                }
+                newQueijo.setWeight(Double.parseDouble(jtf_queijo_peso.getText().replace(',', '.')));
+                newQueijo.setPricePerKg(Double.parseDouble(jtf_queijo_valorKg.getText().replace(',', '.')));
+                newQueijo.setRecommendedTemperature(Double.parseDouble(jtf_queijo_Temperatura.getText().replace(',', '.')));
+            } catch (NumberFormatException e) {
+                System.out.println("\n Erro Encontrado: " + e.toString());
+                JOptionPane.showMessageDialog(null, "Erro Encontrado: \n" + e.toString());
+                hasError = true;
+            }
+            newQueijo.setQueijoType(jtf_queijo_tipo.getText());
+            //ADICIONAR OU DAR UPDATE E PEGAR SE TEVE ERRO OU NÃO
+            if (hasError == false) {
+                String erro;
+                if (isQueijoUpdate == true) {
+                    erro = QueijoDAO.update(newQueijo);
+                } else {
+                    erro = QueijoDAO.create(newQueijo);
+                }
+                //MOSTRAR RESULTADO DA OPERAÇÃO
+                JOptionPane.showMessageDialog(null, (erro == null) ? "Dados do Queijo salvos com sucesso!" : "Erro Encontado: \n" + erro);
+                //ATUALIZAR TABELA E TROCAR AS TELAS
+                queijoTableBuilder(jTableQueijo, QueijoDAO.read(false, ""));
+            }
+        }
     }//GEN-LAST:event_jb_finalizarCadastroQueijoActionPerformed
 
     private void jb_backQueijoPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_backQueijoPageActionPerformed
         // TODO add your handling code here:
+        //TROCAR TELAS
         jpn_queijoList.setVisible(true);
         jpn_queijoRegistration.setVisible(false);
     }//GEN-LAST:event_jb_backQueijoPageActionPerformed
