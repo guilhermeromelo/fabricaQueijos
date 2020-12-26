@@ -28,8 +28,9 @@ public class MainScreen extends javax.swing.JFrame {
     
     public MainScreen() {
         initComponents();
-        player = new AlertSounds();
         
+        //SOUNDS
+        player = new AlertSounds();
         
         //JTabbed Panel
         jlb_totalClientes.setText("30");
@@ -71,8 +72,6 @@ public class MainScreen extends javax.swing.JFrame {
         jComboBox_ordenar_clientes.addItem("Cartão Crédito");
         jComboBox_ordenar_clientes.addItem("Facebook");
         jComboBox_ordenar_clientes.addItem("Instagram");
-        
-        //SOUNDS
         
     }
 
@@ -1839,7 +1838,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jButton_client_order_decActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_client_order_decActionPerformed
         // TODO add your handling code here:
-        player.alertSong.play();
+        player.effectSong.play();
         clientOrderDecreasing = true;
         if(jComboBox_ordenar_clientes.getSelectedItem() == "-------"){
             jComboBox_ordenar_clientes.setSelectedItem("CPF");
@@ -1850,7 +1849,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jButton_client_order_cresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_client_order_cresActionPerformed
         // TODO add your handling code here:
-        player.alertSong.play();
+        player.effectSong.play();
         clientOrderDecreasing = false;
         clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder,(clientOrder.isEmpty() ? false : clientOrderDecreasing)));
     }//GEN-LAST:event_jButton_client_order_cresActionPerformed
@@ -1859,7 +1858,7 @@ public class MainScreen extends javax.swing.JFrame {
 // Queijo Functions Begin ----------------------------------------------------------------------------------------------    
     private void jButton_queijo_order_dec1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_queijo_order_dec1ActionPerformed
         // TODO add your handling code here:
-        player.alertSong.play();
+        player.effectSong.play();
         queijoOrderDecreasing = true;
         if(jComboBox_ordenar_queijos.getSelectedItem() == "-------"){
             jComboBox_ordenar_queijos.setSelectedItem("Id");
@@ -1870,7 +1869,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jButton_queijo_order_cres1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_queijo_order_cres1ActionPerformed
         // TODO add your handling code here:
-        player.alertSong.play();
+        player.effectSong.play();
         queijoOrderDecreasing = false;
         queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder,(queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
     }//GEN-LAST:event_jButton_queijo_order_cres1ActionPerformed
