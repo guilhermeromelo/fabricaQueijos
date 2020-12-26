@@ -73,7 +73,7 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" pref="1351" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -129,7 +129,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLayeredPane1" alignment="0" pref="1346" max="32767" attributes="0"/>
+                  <Component id="jLayeredPane1" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -432,6 +432,9 @@
                               </StringArray>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="jList_pedido_queijosValueChanged"/>
+                          </Events>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                           </AuxValues>
@@ -468,6 +471,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtf_pedido_nomeProduto">
+                      <Properties>
+                        <Property name="columns" type="int" value="1"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel25">
                       <Properties>
@@ -623,7 +629,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLayeredPane4" alignment="0" pref="1346" max="32767" attributes="0"/>
+                  <Component id="jLayeredPane4" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">

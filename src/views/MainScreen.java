@@ -50,6 +50,8 @@ public class MainScreen extends javax.swing.JFrame {
         
         //Lists Initialization
         queijoListBuilder();
+        jtf_pedido_nomeProduto.setEditable(false);
+        
         
         //Masks Initialization
         try {
@@ -408,6 +410,11 @@ public class MainScreen extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        jList_pedido_queijos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList_pedido_queijosValueChanged(evt);
+            }
+        });
         jScrollPane4.setViewportView(jList_pedido_queijos);
 
         jtb_resumo_produtos_pedido.setModel(new javax.swing.table.DefaultTableModel(
@@ -425,6 +432,8 @@ public class MainScreen extends javax.swing.JFrame {
 
         jL_Cadastrar_cliente4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jL_Cadastrar_cliente4.setText("Resumo dos Produtos:");
+
+        jtf_pedido_nomeProduto.setColumns(1);
 
         jLabel25.setText("Produto:");
 
@@ -625,7 +634,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel_OrderPedido.setLayout(jPanel_OrderPedidoLayout);
         jPanel_OrderPedidoLayout.setHorizontalGroup(
             jPanel_OrderPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1346, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1)
         );
         jPanel_OrderPedidoLayout.setVerticalGroup(
             jPanel_OrderPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -804,7 +813,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel_PedidosList.setLayout(jPanel_PedidosListLayout);
         jPanel_PedidosListLayout.setHorizontalGroup(
             jPanel_PedidosListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1346, Short.MAX_VALUE)
+            .addComponent(jLayeredPane4)
         );
         jPanel_PedidosListLayout.setVerticalGroup(
             jPanel_PedidosListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1560,7 +1569,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1351, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -2107,6 +2116,11 @@ public class MainScreen extends javax.swing.JFrame {
     private void jb_pedido_newQueijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedido_newQueijoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_pedido_newQueijoActionPerformed
+
+    private void jList_pedido_queijosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList_pedido_queijosValueChanged
+        // TODO add your handling code here:
+        jtf_pedido_nomeProduto.setText(jList_pedido_queijos.getSelectedValue());
+    }//GEN-LAST:event_jList_pedido_queijosValueChanged
 // Pedido Functions End ----------------------------------------------------------------------------------------------
 
     
