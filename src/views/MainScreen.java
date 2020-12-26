@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import javax.swing.*;
 import models.*;
 import controllers.*;
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.event.ItemEvent;
 import javax.swing.table.DefaultTableModel;
+import views.sounds.AlertSounds;
 
 // ÍNDICE
 // Client Functions - linha 30 a 80
@@ -18,9 +21,16 @@ public class MainScreen extends javax.swing.JFrame {
     String queijoOrder = "";
     boolean clientOrderDecreasing = false;
     boolean queijoOrderDecreasing = false;
-
+    
+    //SOUNDS
+    AlertSounds player;
+    
+    
     public MainScreen() {
         initComponents();
+        player = new AlertSounds();
+        
+        
         //JTabbed Panel
         jlb_totalClientes.setText("30");
         jpn_clientsList.setVisible(true);
@@ -61,6 +71,9 @@ public class MainScreen extends javax.swing.JFrame {
         jComboBox_ordenar_clientes.addItem("Cartão Crédito");
         jComboBox_ordenar_clientes.addItem("Facebook");
         jComboBox_ordenar_clientes.addItem("Instagram");
+        
+        //SOUNDS
+        
     }
 
     // Client Functions Begin ----------------------------------------------------------------------------------------------
@@ -116,6 +129,7 @@ public class MainScreen extends javax.swing.JFrame {
             erro = erro + "\nCampo Facebook Vazio";
         }
         if (valido == false) {
+            player.erroSong.play();
             JOptionPane.showMessageDialog(null, "Erro(s) Encontrados: " + erro,
                     "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
         }
@@ -157,6 +171,7 @@ public class MainScreen extends javax.swing.JFrame {
             erro = erro + "\nCampo Temperatura Ideal Vazio";
         }
         if (valido == false) {
+            player.erroSong.play();
             JOptionPane.showMessageDialog(null, "Erro(s) Encontrados: " + erro,
                     "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
         }
@@ -178,29 +193,29 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jtf_pedido_deliveryDeadLine = new javax.swing.JTextField();
+        jtf_pedido_id = new javax.swing.JTextField();
+        jcb_pedido_client = new javax.swing.JComboBox<>();
+        jb_pedido_newClient = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jta_pedido_note = new javax.swing.JTextArea();
         jL_Cadastrar_cliente1 = new javax.swing.JLabel();
         jL_Cadastrar_cliente2 = new javax.swing.JLabel();
         jL_Cadastrar_cliente3 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jList_pedido_queijos = new javax.swing.JList<>();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtb_resumo_produtos_pedido = new javax.swing.JTable();
         jL_Cadastrar_cliente4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        jtf_pedido_nomeProduto = new javax.swing.JTextField();
+        jtf_pedido_quantProduto = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jb_pedido_addProduto = new javax.swing.JButton();
+        jb_pedido_finalizar = new javax.swing.JButton();
+        jb_back_pedidoRegistration = new javax.swing.JButton();
+        jb_pedido_newQueijo = new javax.swing.JButton();
+        jtf_pedido_data = new javax.swing.JFormattedTextField();
         jPanel14 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -325,21 +340,21 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel24.setText("Observações:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcb_pedido_client.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_add_black_18dp.png"))); // NOI18N
-        jButton1.setIconTextGap(2);
-        jButton1.setMargin(new java.awt.Insets(0, 4, 0, 4));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jb_pedido_newClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_add_black_18dp.png"))); // NOI18N
+        jb_pedido_newClient.setIconTextGap(2);
+        jb_pedido_newClient.setMargin(new java.awt.Insets(0, 4, 0, 4));
+        jb_pedido_newClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jb_pedido_newClientActionPerformed(evt);
             }
         });
 
-        jTextArea1.setColumns(17);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        jta_pedido_note.setColumns(17);
+        jta_pedido_note.setLineWrap(true);
+        jta_pedido_note.setRows(5);
+        jScrollPane3.setViewportView(jta_pedido_note);
 
         jL_Cadastrar_cliente1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jL_Cadastrar_cliente1.setText("Dados Do Pedido:");
@@ -350,14 +365,14 @@ public class MainScreen extends javax.swing.JFrame {
         jL_Cadastrar_cliente3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jL_Cadastrar_cliente3.setText("Adicionar Produto:");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        jList_pedido_queijos.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane4.setViewportView(jList1);
+        jScrollPane4.setViewportView(jList_pedido_queijos);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtb_resumo_produtos_pedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -368,7 +383,7 @@ public class MainScreen extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane5.setViewportView(jTable1);
+        jScrollPane5.setViewportView(jtb_resumo_produtos_pedido);
 
         jL_Cadastrar_cliente4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jL_Cadastrar_cliente4.setText("Resumo dos Produtos:");
@@ -377,20 +392,20 @@ public class MainScreen extends javax.swing.JFrame {
 
         jLabel26.setText("Quantidade:");
 
-        jButton2.setText("Adicionar");
+        jb_pedido_addProduto.setText("Adicionar");
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_add_black_18dp.png"))); // NOI18N
-        jButton3.setText("FINALIZAR E SALVAR O PEDIDO");
+        jb_pedido_finalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_add_black_18dp.png"))); // NOI18N
+        jb_pedido_finalizar.setText("FINALIZAR E SALVAR O PEDIDO");
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_arrow_back_black_18dp.png"))); // NOI18N
-        jButton4.setText("Cancelar e Descartar");
+        jb_back_pedidoRegistration.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_arrow_back_black_18dp.png"))); // NOI18N
+        jb_back_pedidoRegistration.setText("Cancelar e Descartar");
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_add_black_18dp.png"))); // NOI18N
-        jButton5.setIconTextGap(2);
-        jButton5.setMargin(new java.awt.Insets(0, 4, 0, 4));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jb_pedido_newQueijo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_add_black_18dp.png"))); // NOI18N
+        jb_pedido_newQueijo.setIconTextGap(2);
+        jb_pedido_newQueijo.setMargin(new java.awt.Insets(0, 4, 0, 4));
+        jb_pedido_newQueijo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jb_pedido_newQueijoActionPerformed(evt);
             }
         });
 
@@ -413,37 +428,37 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jcb_pedido_client, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton1))
-                                    .addComponent(jTextField3)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField5)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jb_pedido_newClient))
+                                    .addComponent(jtf_pedido_deliveryDeadLine)
+                                    .addComponent(jtf_pedido_id)
+                                    .addComponent(jScrollPane3)
+                                    .addComponent(jtf_pedido_data)))
                             .addComponent(jL_Cadastrar_cliente1)
-                            .addComponent(jButton4))
+                            .addComponent(jb_back_pedidoRegistration))
                         .addGap(47, 47, 47)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jL_Cadastrar_cliente3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton5))
+                                .addComponent(jb_pedido_newQueijo))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel25)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jtf_pedido_nomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(13, 13, 13)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField4)
+                                    .addComponent(jtf_pedido_quantProduto)
                                     .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2)))
+                                .addComponent(jb_pedido_addProduto)))
                         .addGap(47, 47, 47)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
                             .addComponent(jL_Cadastrar_cliente4)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jb_pedido_finalizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(502, 502, 502)
                         .addComponent(jL_Cadastrar_cliente2)))
@@ -461,20 +476,20 @@ public class MainScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel20)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtf_pedido_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(17, 17, 17)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel21)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))
+                            .addComponent(jcb_pedido_client, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jb_pedido_newClient))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel22)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtf_pedido_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel23)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtf_pedido_deliveryDeadLine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel24)
@@ -490,7 +505,7 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addGap(65, 65, 65)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jL_Cadastrar_cliente3)
-                                    .addComponent(jButton5))
+                                    .addComponent(jb_pedido_newQueijo))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane4)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -501,12 +516,12 @@ public class MainScreen extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(13, 13, 13)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton2)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton3))))))
+                                    .addComponent(jb_pedido_addProduto)
+                                    .addComponent(jtf_pedido_nomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtf_pedido_quantProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jb_pedido_finalizar))))))
                 .addGap(130, 130, 130)
-                .addComponent(jButton4)
+                .addComponent(jb_back_pedidoRegistration)
                 .addGap(33, 33, 33))
         );
 
@@ -1341,6 +1356,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void jButton_modificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_modificarClienteActionPerformed
         // TODO add your handling code here:
         //PERGUNTAR QUAL OBJETO A MODIFICAR
+        player.alertSong.play();
         String cpfUpdate = JOptionPane.showInputDialog("Por favor digite o CPF do Cliente para modificar: ");
         //PROCURAR QUAL OBJETO A SER MODIFICADO
         if (cpfUpdate != null) {
@@ -1371,6 +1387,7 @@ public class MainScreen extends javax.swing.JFrame {
                 jpn_clientsList.setVisible(false);
                 jpn_clientRegistration.setVisible(true);
             } else {
+                player.erroSong.play();
                 JOptionPane.showMessageDialog(null, "CPF não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1379,6 +1396,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void jButton_removerClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_removerClienteActionPerformed
         // TODO add your handling code here:
         //PERGUNTAR E ACHAR QUAL O OBJETO A SER EXCLUIDO
+        player.alertSong.play();
         String cpfDelete = JOptionPane.showInputDialog("Por favor digite o CPF do Cliente para remover: ");
         if (cpfDelete != null) {
             ArrayList<Client> clientsList = ClientDAO.read(false, "", false);
@@ -1392,20 +1410,27 @@ public class MainScreen extends javax.swing.JFrame {
             }
             //FAZER OPERAÇÃO E PEGAR E MOSTRAR O RESULTADO OU ERROS
             if (achou == true) {
+                player.alertSong.play();
                 int delete = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir "
                         + "o Cliente:\nNome: " + clientDelete.getClientName() + ", CPF: " + clientDelete.getCPF(),
                         "Confirmar Exclusão", JOptionPane.YES_NO_OPTION);
 
                 if (delete == 0) {
                     String erro = ClientDAO.delete(clientDelete);
+                    if(erro==null)
+                        player.sucessSong.play();
+                    else
+                        player.erroSong.play();
                     JOptionPane.showMessageDialog(null, (erro == null)
                             ? "Cliente Removido com Sucesso!"
                             : "Erro Encontado: \n" + erro, "Resultado da operação",
                             (erro == null) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
                 } else {
+                    player.sucessSong.play();
                     JOptionPane.showMessageDialog(null, "Operação Cancelada!");
                 }
             } else {
+                player.erroSong.play();
                 JOptionPane.showMessageDialog(null, "CPF não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
             }
             //ATUALIZAR A TABELA
@@ -1434,6 +1459,10 @@ public class MainScreen extends javax.swing.JFrame {
                 erro = ClientDAO.create(newClient);
             }
             //MOSTRAR RESULTADO DA OPERAÇÃO
+            if(erro==null)
+                        player.sucessSong.play();
+                    else
+                        player.erroSong.play();
             JOptionPane.showMessageDialog(null, (erro == null)
                     ? "Dados do Cliente salvos com sucesso!"
                     : "Erro Encontado: \n" + erro, "Resultado da operação",
@@ -1510,6 +1539,7 @@ public class MainScreen extends javax.swing.JFrame {
                 newQueijo.setRecommendedTemperature(Double.parseDouble(jtf_queijo_Temperatura.getText().replace(',', '.')));
             } catch (NumberFormatException e) {
                 System.out.println("\n Erro Encontrado: " + e.toString());
+                player.erroSong.play();
                 JOptionPane.showMessageDialog(null, "Erro Encontrado: \n" + e.toString(),
                         "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
                 hasError = true;
@@ -1524,6 +1554,10 @@ public class MainScreen extends javax.swing.JFrame {
                     erro = QueijoDAO.create(newQueijo);
                 }
                 //MOSTRAR RESULTADO DA OPERAÇÃO
+                if(erro==null)
+                        player.sucessSong.play();
+                    else
+                        player.erroSong.play();
                 JOptionPane.showMessageDialog(null, (erro == null)
                         ? "Dados do Queijo salvos com sucesso!"
                         : "Erro Encontado: \n" + erro, "Resultado da operação",
@@ -1551,6 +1585,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void jButton_modificarQueijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_modificarQueijoActionPerformed
         // TODO add your handling code here:
         //PERGUNTAR QUAL OBJETO A MODIFICAR
+        player.alertSong.play();
         String idUpdate = JOptionPane.showInputDialog("Por favor digite o ID do Queijo para modificar: ");
         //PROCURAR QUAL OBJETO A SER MODIFICADO
         if (idUpdate != null) {
@@ -1579,6 +1614,7 @@ public class MainScreen extends javax.swing.JFrame {
                 jpn_queijoList.setVisible(false);
                 jpn_queijoRegistration.setVisible(true);
             } else {
+                player.erroSong.play();
                 JOptionPane.showMessageDialog(null, "ID do Queijo não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1587,7 +1623,8 @@ public class MainScreen extends javax.swing.JFrame {
     private void jButton_removerQueijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_removerQueijoActionPerformed
         // TODO add your handling code here:
         //PERGUNTAR E ACHAR QUAL O OBJETO A SER EXCLUIDO
-        String idUpdate = JOptionPane.showInputDialog("Por favor digite o ID do Queijo para modificar: ");
+        player.alertSong.play();
+        String idUpdate = JOptionPane.showInputDialog("Por favor digite o ID do Queijo para remover: ");
         if (idUpdate != null) {
             ArrayList<Queijo> queijoList = QueijoDAO.read(false, "", false);
             Queijo queijoModify = new Queijo();
@@ -1600,20 +1637,27 @@ public class MainScreen extends javax.swing.JFrame {
             }
             //FAZER OPERAÇÃO E PEGAR E MOSTRAR O RESULTADO OU ERROS
             if (achou == true) {
+                player.alertSong.play();
                 int delete = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir "
                         + "o Queijo:\nID: " + queijoModify.getQueijoID() + ", Tipo: " + queijoModify.getQueijoType(),
                         "Confirmar Exclusão", JOptionPane.YES_NO_OPTION);
 
                 if (delete == 0) {
                     String erro = QueijoDAO.delete(queijoModify);
+                    if(erro==null)
+                        player.sucessSong.play();
+                    else
+                        player.erroSong.play();
                     JOptionPane.showMessageDialog(null, (erro == null)
                             ? "Queijo Removido com Sucesso!"
                             : "Erro Encontado: \n" + erro, "Resultado da operação",
                             (erro == null) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
                 } else {
+                    player.sucessSong.play();
                     JOptionPane.showMessageDialog(null, "Operação Cancelada!");
                 }
             } else {
+                player.erroSong.play();
                 JOptionPane.showMessageDialog(null, "ID do Queijo não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
             }
             //ATUALIZAR A TABELA
@@ -1659,6 +1703,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void jButton_busca_queijo_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_busca_queijo_IDActionPerformed
         // TODO add your handling code here:
         //PERGUNTAR QUAL ID DO OBJETO A BUSCAR
+        player.alertSong.play();
         String idBusca = JOptionPane.showInputDialog("Por favor digite o ID do Queijo que deseja buscar: ");
         boolean achou = false;
         Queijo queijoSeek = new Queijo();
@@ -1674,6 +1719,7 @@ public class MainScreen extends javax.swing.JFrame {
         }
        
         if(achou == true){
+            player.sucessSong.play();
             JOptionPane.showMessageDialog(null, "Queijo Encontrado:\n ID: "+queijoSeek.getQueijoID()+
                     ", \nTipo: "+queijoSeek.getQueijoType()+
                     ", \nPeso: "+queijoSeek.getWeight()+
@@ -1681,6 +1727,7 @@ public class MainScreen extends javax.swing.JFrame {
                     ", \nTemperatura Recomendada: "+queijoSeek.getRecommendedTemperature()+" ºC");
         }
         else{
+            player.erroSong.play();
             JOptionPane.showMessageDialog(null, "ID do Queijo não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
         }
 
@@ -1701,6 +1748,7 @@ public class MainScreen extends javax.swing.JFrame {
                     lowerTemperatureQueijo = queijoAux;
                 }
             }
+            player.sucessSong.play();
             JOptionPane.showMessageDialog(null, "Queijo de Menor Temperatura Encontrado:\n ID: "+lowerTemperatureQueijo.getQueijoID()+
                     ", \nTipo: "+lowerTemperatureQueijo.getQueijoType()+
                     ", \nPeso: "+lowerTemperatureQueijo.getWeight()+
@@ -1708,6 +1756,7 @@ public class MainScreen extends javax.swing.JFrame {
                     ", \nTemperatura Recomendada: "+lowerTemperatureQueijo.getRecommendedTemperature()+" ºC");
         }
         else{
+            player.erroSong.play();
             JOptionPane.showMessageDialog(null, "Nenhum Queijo Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton_queijo_menor_tempActionPerformed
@@ -1726,6 +1775,7 @@ public class MainScreen extends javax.swing.JFrame {
                     mostExpensiveQueijo = queijoAux;
                 }
             }
+            player.sucessSong.play();
             JOptionPane.showMessageDialog(null, "Queijo Mais Caro Encontrado:\n ID: "+mostExpensiveQueijo.getQueijoID()+
                     ", \nTipo: "+mostExpensiveQueijo.getQueijoType()+
                     ", \nPeso: "+mostExpensiveQueijo.getWeight()+
@@ -1733,6 +1783,7 @@ public class MainScreen extends javax.swing.JFrame {
                     ", \nTemperatura Recomendada: "+mostExpensiveQueijo.getRecommendedTemperature()+" ºC");
         }
         else{
+            player.erroSong.play();
             JOptionPane.showMessageDialog(null, "Nenhum Queijo Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton_queijo_mais_caroActionPerformed
@@ -1788,6 +1839,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jButton_client_order_decActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_client_order_decActionPerformed
         // TODO add your handling code here:
+        player.alertSong.play();
         clientOrderDecreasing = true;
         if(jComboBox_ordenar_clientes.getSelectedItem() == "-------"){
             jComboBox_ordenar_clientes.setSelectedItem("CPF");
@@ -1798,12 +1850,16 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jButton_client_order_cresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_client_order_cresActionPerformed
         // TODO add your handling code here:
+        player.alertSong.play();
         clientOrderDecreasing = false;
         clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder,(clientOrder.isEmpty() ? false : clientOrderDecreasing)));
     }//GEN-LAST:event_jButton_client_order_cresActionPerformed
-
+//Client 2nd part Functions End ----------------------------------------------------------------------------------------------    
+    
+// Queijo Functions Begin ----------------------------------------------------------------------------------------------    
     private void jButton_queijo_order_dec1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_queijo_order_dec1ActionPerformed
         // TODO add your handling code here:
+        player.alertSong.play();
         queijoOrderDecreasing = true;
         if(jComboBox_ordenar_queijos.getSelectedItem() == "-------"){
             jComboBox_ordenar_queijos.setSelectedItem("Id");
@@ -1814,18 +1870,21 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jButton_queijo_order_cres1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_queijo_order_cres1ActionPerformed
         // TODO add your handling code here:
+        player.alertSong.play();
         queijoOrderDecreasing = false;
         queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder,(queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
     }//GEN-LAST:event_jButton_queijo_order_cres1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+// Queijo Functions End ----------------------------------------------------------------------------------------------
+    
+// Pedido Functions Begin ----------------------------------------------------------------------------------------------    
+    private void jb_pedido_newClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedido_newClientActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jb_pedido_newClientActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jb_pedido_newQueijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedido_newQueijoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-// Client 2nd part Functions End ----------------------------------------------------------------------------------------------    
+    }//GEN-LAST:event_jb_pedido_newQueijoActionPerformed
+// Pedido Functions End ----------------------------------------------------------------------------------------------
 
     
     
@@ -1863,11 +1922,6 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton_busca_cliente_cpf;
     private javax.swing.JButton jButton_busca_cliente_nome;
     private javax.swing.JButton jButton_busca_queijo_ID;
@@ -1883,7 +1937,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton jButton_queijo_order_dec1;
     private javax.swing.JButton jButton_removerCliente;
     private javax.swing.JButton jButton_removerQueijo;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox_ordenar_clientes;
     private javax.swing.JComboBox<String> jComboBox_ordenar_queijos;
     private javax.swing.JLabel jL_Cadastrar_cliente;
@@ -1921,7 +1974,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList_pedido_queijos;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -1954,19 +2007,18 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableClient;
     private javax.swing.JTable jTableQueijo;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JButton jb_backClientPage;
     private javax.swing.JButton jb_backQueijoPage;
+    private javax.swing.JButton jb_back_pedidoRegistration;
     private javax.swing.JButton jb_finalizarCadastro;
     private javax.swing.JButton jb_finalizarCadastroQueijo;
+    private javax.swing.JButton jb_pedido_addProduto;
+    private javax.swing.JButton jb_pedido_finalizar;
+    private javax.swing.JButton jb_pedido_newClient;
+    private javax.swing.JButton jb_pedido_newQueijo;
+    private javax.swing.JComboBox<String> jcb_pedido_client;
     private javax.swing.JLabel jlb_totalClientes;
     private javax.swing.JLabel jlb_totalQueijos;
     private javax.swing.JPanel jpanel_Dashboard;
@@ -1974,6 +2026,8 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jpn_clientsList;
     private javax.swing.JPanel jpn_queijoList;
     private javax.swing.JPanel jpn_queijoRegistration;
+    private javax.swing.JTextArea jta_pedido_note;
+    private javax.swing.JTable jtb_resumo_produtos_pedido;
     private javax.swing.JTextField jtf_client_Address;
     private javax.swing.JFormattedTextField jtf_client_CPF;
     private javax.swing.JTextField jtf_client_CreditCard;
@@ -1981,6 +2035,11 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_client_Insta;
     private javax.swing.JTextField jtf_client_Name;
     private javax.swing.JFormattedTextField jtf_client_Phone;
+    private javax.swing.JFormattedTextField jtf_pedido_data;
+    private javax.swing.JTextField jtf_pedido_deliveryDeadLine;
+    private javax.swing.JTextField jtf_pedido_id;
+    private javax.swing.JTextField jtf_pedido_nomeProduto;
+    private javax.swing.JTextField jtf_pedido_quantProduto;
     private javax.swing.JTextField jtf_queijo_Temperatura;
     private javax.swing.JFormattedTextField jtf_queijo_id;
     private javax.swing.JTextField jtf_queijo_peso;

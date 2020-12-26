@@ -161,18 +161,18 @@
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                   <Group type="102" alignment="1" attributes="0">
-                                                      <Component id="jComboBox1" min="-2" pref="169" max="-2" attributes="0"/>
+                                                      <Component id="jcb_pedido_client" min="-2" pref="169" max="-2" attributes="0"/>
                                                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jb_pedido_newClient" min="-2" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Component id="jTextField3" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jTextField5" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jScrollPane3" min="-2" pref="210" max="-2" attributes="0"/>
+                                                  <Component id="jtf_pedido_deliveryDeadLine" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jtf_pedido_id" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jScrollPane3" max="32767" attributes="0"/>
+                                                  <Component id="jtf_pedido_data" alignment="0" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Component id="jL_Cadastrar_cliente1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jButton4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jb_back_pedidoRegistration" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -180,27 +180,27 @@
                                           <Group type="102" attributes="0">
                                               <Component id="jL_Cadastrar_cliente3" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jb_pedido_newQueijo" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jTextField2" min="-2" pref="201" max="-2" attributes="0"/>
+                                                  <Component id="jtf_pedido_nomeProduto" min="-2" pref="201" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="jTextField4" max="32767" attributes="0"/>
+                                                  <Component id="jtf_pedido_quantProduto" max="32767" attributes="0"/>
                                                   <Component id="jLabel26" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jb_pedido_addProduto" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="jScrollPane5" pref="470" max="32767" attributes="0"/>
                                           <Component id="jL_Cadastrar_cliente4" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jButton3" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jb_pedido_finalizar" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -224,23 +224,23 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jTextField5" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jtf_pedido_id" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jcb_pedido_client" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jb_pedido_newClient" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jTextField3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jtf_pedido_data" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jtf_pedido_deliveryDeadLine" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -260,7 +260,7 @@
                                               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jL_Cadastrar_cliente3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jb_pedido_newQueijo" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Component id="jScrollPane4" max="32767" attributes="0"/>
@@ -275,17 +275,17 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jb_pedido_addProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jtf_pedido_nomeProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jtf_pedido_quantProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jb_pedido_finalizar" alignment="3" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
-                              <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                              <Component id="jb_back_pedidoRegistration" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -332,13 +332,11 @@
                         <Property name="text" type="java.lang.String" value="Observa&#xe7;&#xf5;es:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField1">
+                    <Component class="javax.swing.JTextField" name="jtf_pedido_deliveryDeadLine">
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField3">
+                    <Component class="javax.swing.JTextField" name="jtf_pedido_id">
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField5">
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="jComboBox1">
+                    <Component class="javax.swing.JComboBox" name="jcb_pedido_client">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="4">
@@ -353,7 +351,7 @@
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton1">
+                    <Component class="javax.swing.JButton" name="jb_pedido_newClient">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/views/Icons/baseline_add_black_18dp.png"/>
@@ -364,7 +362,7 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_pedido_newClientActionPerformed"/>
                       </Events>
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane3">
@@ -374,7 +372,7 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTextArea" name="jTextArea1">
+                        <Component class="javax.swing.JTextArea" name="jta_pedido_note">
                           <Properties>
                             <Property name="columns" type="int" value="17"/>
                             <Property name="lineWrap" type="boolean" value="true"/>
@@ -414,7 +412,7 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JList" name="jList1">
+                        <Component class="javax.swing.JList" name="jList_pedido_queijos">
                           <Properties>
                             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                               <StringArray count="5">
@@ -439,7 +437,7 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTable" name="jTable1">
+                        <Component class="javax.swing.JTable" name="jtb_resumo_produtos_pedido">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="4" rowCount="4">
@@ -461,9 +459,9 @@
                         <Property name="text" type="java.lang.String" value="Resumo dos Produtos:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField2">
+                    <Component class="javax.swing.JTextField" name="jtf_pedido_nomeProduto">
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField4">
+                    <Component class="javax.swing.JTextField" name="jtf_pedido_quantProduto">
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel25">
                       <Properties>
@@ -475,12 +473,12 @@
                         <Property name="text" type="java.lang.String" value="Quantidade:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton2">
+                    <Component class="javax.swing.JButton" name="jb_pedido_addProduto">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Adicionar"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton3">
+                    <Component class="javax.swing.JButton" name="jb_pedido_finalizar">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/views/Icons/baseline_add_black_18dp.png"/>
@@ -488,7 +486,7 @@
                         <Property name="text" type="java.lang.String" value="FINALIZAR E SALVAR O PEDIDO"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton4">
+                    <Component class="javax.swing.JButton" name="jb_back_pedidoRegistration">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/views/Icons/baseline_arrow_back_black_18dp.png"/>
@@ -496,7 +494,7 @@
                         <Property name="text" type="java.lang.String" value="Cancelar e Descartar"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton5">
+                    <Component class="javax.swing.JButton" name="jb_pedido_newQueijo">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/views/Icons/baseline_add_black_18dp.png"/>
@@ -507,8 +505,10 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_pedido_newQueijoActionPerformed"/>
                       </Events>
+                    </Component>
+                    <Component class="javax.swing.JFormattedTextField" name="jtf_pedido_data">
                     </Component>
                   </SubComponents>
                 </Container>
