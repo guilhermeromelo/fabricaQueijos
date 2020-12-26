@@ -22,19 +22,19 @@ public class MainScreen extends javax.swing.JFrame {
     boolean clientOrderDecreasing = false;
     boolean queijoOrderDecreasing = false;
     Client clientRegistrationPage;
-    
+
     //SOUNDS
     AlertSounds player;
-    
+
     //JList
     private DefaultListModel jListQueijoModel;
-    
+
     public MainScreen() {
         initComponents();
-        
+
         //SOUNDS
         player = new AlertSounds();
-        
+
         //JTabbed Panel
         jlb_totalClientes.setText("30");
         jpn_clientsList.setVisible(true);
@@ -48,12 +48,13 @@ public class MainScreen extends javax.swing.JFrame {
         //Tables Initialization
         clientTableBuilder(jTableClient, ClientDAO.read(false, "", false));
         queijoTableBuilder(jTableQueijo, QueijoDAO.read(false, "", false));
-        
+        ArrayList<QueijoPedido> lista = new ArrayList();
+        produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, lista);
+
         //Lists Initialization
         queijoListBuilder();
         jtf_pedido_nomeProduto.setEditable(false);
-        
-        
+
         //Masks Initialization
         try {
             jtf_client_Phone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)########*")));
@@ -61,7 +62,7 @@ public class MainScreen extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             System.out.print("Erro: " + ex.toString());
         }
-        
+
         //ComboBox Initialization
         //QueijosOrder
         jComboBox_ordenar_queijos.removeAllItems();
@@ -71,7 +72,7 @@ public class MainScreen extends javax.swing.JFrame {
         jComboBox_ordenar_queijos.addItem("Tipo");
         jComboBox_ordenar_queijos.addItem("Valor por Kg");
         jComboBox_ordenar_queijos.addItem("Temeperatura Ideal");
-        
+
         //ClientesOrder
         jComboBox_ordenar_clientes.removeAllItems();
         jComboBox_ordenar_clientes.addItem("-------");
@@ -81,13 +82,12 @@ public class MainScreen extends javax.swing.JFrame {
         jComboBox_ordenar_clientes.addItem("Cartão Crédito");
         jComboBox_ordenar_clientes.addItem("Facebook");
         jComboBox_ordenar_clientes.addItem("Instagram");
-        
+
         //ClientComboBox Registration Page
         clientComboBoxBuilder();
-        
+
         clientRegistrationPage = null;
-        
-        
+
     }
 
     // Client Functions Begin ----------------------------------------------------------------------------------------------
@@ -193,30 +193,54 @@ public class MainScreen extends javax.swing.JFrame {
     }
     // Queijo Functions End ----------------------------------------------------------------------------------------------
 
-    void queijoListBuilder(){
+    void queijoListBuilder() {
         jListQueijoModel = new DefaultListModel();
         jListQueijoModel.removeAllElements();
         ArrayList<Queijo> queijoList = QueijoDAO.read(true, "queijoid", false);
-        queijoList.forEach(q ->{
-            jListQueijoModel.addElement("ID: "+q.getQueijoID()+", Tipo: "
-                    +q.getQueijoType()+", Peso: "+q.getWeight()+", Preço/Kg: "+q.getPricePerKg());
+        queijoList.forEach(q -> {
+            jListQueijoModel.addElement("ID: " + q.getQueijoID() + ", Tipo: "
+                    + q.getQueijoType() + ", Peso: " + q.getWeight() + ", Preço/Kg: " + q.getPricePerKg());
         });
         jList_pedido_queijos.setModel(jListQueijoModel);
         jList_pedido_queijos.setSelectedIndex(0);
     }
-    
-    void clientComboBoxBuilder(){
+
+    void clientComboBoxBuilder() {
         jcb_pedido_client.removeAllItems();
         jcb_pedido_client.addItem("Selecionar...");
         ArrayList<Client> clientList = ClientDAO.read(true, "clientName", false);
-        clientList.forEach(c->{
+        clientList.forEach(c -> {
             jcb_pedido_client.addItem(c.getClientName());
         });
         jtf_pedido_cpfCliente.setEditable(false);
         jtf_pedido_cpfCliente.setText("");
     }
-    
-    
+
+    void produtosPedidosTableBuilder(JTable jtable, ArrayList<QueijoPedido> produtosPedido) {
+        DefaultTableModel tableRows2;
+
+        tableRows2 = new DefaultTableModel(new String[]{"Nº", "ID", "Tipo", "Peso", "Valor/Kg",
+            "Qtd"}, 0);
+        ArrayList<Queijo> queijos = QueijoDAO.read(false, "", false);
+
+        if (!produtosPedido.isEmpty()) {
+            for (int j = 0; j < produtosPedido.size(); j++) {
+                QueijoPedido p = produtosPedido.get(j);
+                boolean achou = false;
+                for (int i = 0; i < queijos.size() && achou == false; i++) {
+                    Queijo queijoAux = queijos.get(i);
+                    if (String.valueOf(p.getQueijoPedidoID()).equals("" + queijoAux.getQueijoID())) {
+                        achou = true;
+                    }
+                    tableRows2.addRow(new Object[]{(j + 1), queijoAux.getQueijoID(),
+                        queijoAux.getQueijoType(), queijoAux.getWeight(), queijoAux.getPricePerKg(), p.getQuantity()});
+                }
+
+            }
+        }
+        jtable.setModel(tableRows2);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1696,10 +1720,11 @@ public class MainScreen extends javax.swing.JFrame {
 
                 if (delete == 0) {
                     String erro = ClientDAO.delete(clientDelete);
-                    if(erro==null)
+                    if (erro == null) {
                         player.sucessSong.play();
-                    else
+                    } else {
                         player.erroSong.play();
+                    }
                     JOptionPane.showMessageDialog(null, (erro == null)
                             ? "Cliente Removido com Sucesso!"
                             : "Erro Encontado: \n" + erro, "Resultado da operação",
@@ -1713,7 +1738,7 @@ public class MainScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "CPF não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
             }
             //ATUALIZAR A TABELA
-            clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder,(clientOrder.isEmpty() ? false : clientOrderDecreasing)));
+            clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder, (clientOrder.isEmpty() ? false : clientOrderDecreasing)));
         }
     }//GEN-LAST:event_jButton_removerClienteActionPerformed
 
@@ -1738,17 +1763,18 @@ public class MainScreen extends javax.swing.JFrame {
                 erro = ClientDAO.create(newClient);
             }
             //MOSTRAR RESULTADO DA OPERAÇÃO
-            if(erro==null)
-                        player.sucessSong.play();
-                    else
-                        player.erroSong.play();
+            if (erro == null) {
+                player.sucessSong.play();
+            } else {
+                player.erroSong.play();
+            }
             JOptionPane.showMessageDialog(null, (erro == null)
                     ? "Dados do Cliente salvos com sucesso!"
                     : "Erro Encontado: \n" + erro, "Resultado da operação",
                     (erro == null) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
             if (erro == null) {
                 //ATUALIZAR TABELA E TROCAR AS TELAS
-                clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder,(clientOrder.isEmpty() ? false : clientOrderDecreasing)));
+                clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder, (clientOrder.isEmpty() ? false : clientOrderDecreasing)));
                 jpn_clientRegistration.setVisible(false);
                 jpn_clientsList.setVisible(true);
             }
@@ -1778,7 +1804,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void jb_backClientPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_backClientPageActionPerformed
         // TODO add your handling code here:
         //TROCAR TELAS
-        clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder,(clientOrder.isEmpty() ? false : clientOrderDecreasing)));
+        clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder, (clientOrder.isEmpty() ? false : clientOrderDecreasing)));
         jpn_clientRegistration.setVisible(false);
         jpn_clientsList.setVisible(true);
     }//GEN-LAST:event_jb_backClientPageActionPerformed
@@ -1833,10 +1859,11 @@ public class MainScreen extends javax.swing.JFrame {
                     erro = QueijoDAO.create(newQueijo);
                 }
                 //MOSTRAR RESULTADO DA OPERAÇÃO
-                if(erro==null)
-                        player.sucessSong.play();
-                    else
-                        player.erroSong.play();
+                if (erro == null) {
+                    player.sucessSong.play();
+                } else {
+                    player.erroSong.play();
+                }
                 JOptionPane.showMessageDialog(null, (erro == null)
                         ? "Dados do Queijo salvos com sucesso!"
                         : "Erro Encontado: \n" + erro, "Resultado da operação",
@@ -1844,7 +1871,7 @@ public class MainScreen extends javax.swing.JFrame {
                                 : JOptionPane.ERROR_MESSAGE);
                 if (erro == null) {
                     //ATUALIZAR TABELA E TROCAR AS TELAS
-                    queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder,(queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
+                    queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder, (queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
                     //TROCAR TELAS
                     jpn_queijoList.setVisible(true);
                     jpn_queijoRegistration.setVisible(false);
@@ -1855,7 +1882,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jb_backQueijoPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_backQueijoPageActionPerformed
         // TODO add your handling code here:
-        queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder,(queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
+        queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder, (queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
         //TROCAR TELAS
         jpn_queijoList.setVisible(true);
         jpn_queijoRegistration.setVisible(false);
@@ -1923,10 +1950,11 @@ public class MainScreen extends javax.swing.JFrame {
 
                 if (delete == 0) {
                     String erro = QueijoDAO.delete(queijoModify);
-                    if(erro==null)
+                    if (erro == null) {
                         player.sucessSong.play();
-                    else
+                    } else {
                         player.erroSong.play();
+                    }
                     JOptionPane.showMessageDialog(null, (erro == null)
                             ? "Queijo Removido com Sucesso!"
                             : "Erro Encontado: \n" + erro, "Resultado da operação",
@@ -1940,42 +1968,42 @@ public class MainScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "ID do Queijo não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
             }
             //ATUALIZAR A TABELA
-            queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder,(queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
+            queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder, (queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
         }
     }//GEN-LAST:event_jButton_removerQueijoActionPerformed
 
     private void jComboBox_ordenar_queijosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox_ordenar_queijosItemStateChanged
         // TODO add your handling code here:
-        if(evt.getStateChange() == ItemEvent.SELECTED){
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
             String newChoice = jComboBox_ordenar_queijos.getSelectedItem().toString();
-            switch(newChoice){
-                case "-------":{
+            switch (newChoice) {
+                case "-------": {
                     queijoOrder = "";
                     break;
                 }
-                case "Id":{
+                case "Id": {
                     queijoOrder = "queijoid";
                     break;
                 }
-                case "Peso":{
+                case "Peso": {
                     queijoOrder = "weight";
                     break;
                 }
-                case "Valor por Kg":{
+                case "Valor por Kg": {
                     queijoOrder = "pricePerKg";
                     break;
                 }
-                case "Temeperatura Ideal":{
+                case "Temeperatura Ideal": {
                     queijoOrder = "recommendedTemperature";
                     break;
                 }
-                case "Tipo":{
+                case "Tipo": {
                     queijoOrder = "queijoType";
                     break;
                 }
             }
             queijoOrderDecreasing = false;
-            queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder,(queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
+            queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder, (queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
         }
     }//GEN-LAST:event_jComboBox_ordenar_queijosItemStateChanged
 
@@ -1996,16 +2024,15 @@ public class MainScreen extends javax.swing.JFrame {
                 }
             }
         }
-       
-        if(achou == true){
+
+        if (achou == true) {
             player.sucessSong.play();
-            JOptionPane.showMessageDialog(null, "Queijo Encontrado:\n ID: "+queijoSeek.getQueijoID()+
-                    ", \nTipo: "+queijoSeek.getQueijoType()+
-                    ", \nPeso: "+queijoSeek.getWeight()+
-                    " Kg, \nPreço Por Kg: R$ "+queijoSeek.getPricePerKg()+
-                    ", \nTemperatura Recomendada: "+queijoSeek.getRecommendedTemperature()+" ºC");
-        }
-        else{
+            JOptionPane.showMessageDialog(null, "Queijo Encontrado:\n ID: " + queijoSeek.getQueijoID()
+                    + ", \nTipo: " + queijoSeek.getQueijoType()
+                    + ", \nPeso: " + queijoSeek.getWeight()
+                    + " Kg, \nPreço Por Kg: R$ " + queijoSeek.getPricePerKg()
+                    + ", \nTemperatura Recomendada: " + queijoSeek.getRecommendedTemperature() + " ºC");
+        } else {
             player.erroSong.play();
             JOptionPane.showMessageDialog(null, "ID do Queijo não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
         }
@@ -2015,26 +2042,24 @@ public class MainScreen extends javax.swing.JFrame {
     private void jButton_queijo_menor_tempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_queijo_menor_tempActionPerformed
         // TODO add your handling code here:
         ArrayList<Queijo> queijoList = QueijoDAO.read(false, "", false);
-        if(!queijoList.isEmpty()){
-            
+        if (!queijoList.isEmpty()) {
+
             Queijo lowerTemperatureQueijo = null;
-            for(int i=0;i<queijoList.size();i++){
+            for (int i = 0; i < queijoList.size(); i++) {
                 Queijo queijoAux = queijoList.get(i);
-                if(i == 0){
+                if (i == 0) {
                     lowerTemperatureQueijo = queijoAux;
-                }
-                else if(queijoAux.getRecommendedTemperature()<lowerTemperatureQueijo.getRecommendedTemperature()){
+                } else if (queijoAux.getRecommendedTemperature() < lowerTemperatureQueijo.getRecommendedTemperature()) {
                     lowerTemperatureQueijo = queijoAux;
                 }
             }
             player.sucessSong.play();
-            JOptionPane.showMessageDialog(null, "Queijo de Menor Temperatura Encontrado:\n ID: "+lowerTemperatureQueijo.getQueijoID()+
-                    ", \nTipo: "+lowerTemperatureQueijo.getQueijoType()+
-                    ", \nPeso: "+lowerTemperatureQueijo.getWeight()+
-                    " Kg, \nPreço Por Kg: R$ "+lowerTemperatureQueijo.getPricePerKg()+
-                    ", \nTemperatura Recomendada: "+lowerTemperatureQueijo.getRecommendedTemperature()+" ºC");
-        }
-        else{
+            JOptionPane.showMessageDialog(null, "Queijo de Menor Temperatura Encontrado:\n ID: " + lowerTemperatureQueijo.getQueijoID()
+                    + ", \nTipo: " + lowerTemperatureQueijo.getQueijoType()
+                    + ", \nPeso: " + lowerTemperatureQueijo.getWeight()
+                    + " Kg, \nPreço Por Kg: R$ " + lowerTemperatureQueijo.getPricePerKg()
+                    + ", \nTemperatura Recomendada: " + lowerTemperatureQueijo.getRecommendedTemperature() + " ºC");
+        } else {
             player.erroSong.play();
             JOptionPane.showMessageDialog(null, "Nenhum Queijo Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
         }
@@ -2043,68 +2068,66 @@ public class MainScreen extends javax.swing.JFrame {
     private void jButton_queijo_mais_caroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_queijo_mais_caroActionPerformed
         // TODO add your handling code here:
         ArrayList<Queijo> queijoList = QueijoDAO.read(false, "", false);
-        if(!queijoList.isEmpty()){
+        if (!queijoList.isEmpty()) {
             Queijo mostExpensiveQueijo = null;
-            for(int i=0;i<queijoList.size();i++){
+            for (int i = 0; i < queijoList.size(); i++) {
                 Queijo queijoAux = queijoList.get(i);
-                if(i == 0){
+                if (i == 0) {
                     mostExpensiveQueijo = queijoAux;
-                }
-                else if(queijoAux.getPricePerKg()>mostExpensiveQueijo.getPricePerKg()){
+                } else if (queijoAux.getPricePerKg() > mostExpensiveQueijo.getPricePerKg()) {
                     mostExpensiveQueijo = queijoAux;
                 }
             }
             player.sucessSong.play();
-            JOptionPane.showMessageDialog(null, "Queijo Mais Caro Encontrado:\n ID: "+mostExpensiveQueijo.getQueijoID()+
-                    ", \nTipo: "+mostExpensiveQueijo.getQueijoType()+
-                    ", \nPeso: "+mostExpensiveQueijo.getWeight()+
-                    " Kg, \nPreço Por Kg: R$ "+mostExpensiveQueijo.getPricePerKg()+
-                    ", \nTemperatura Recomendada: "+mostExpensiveQueijo.getRecommendedTemperature()+" ºC");
-        }
-        else{
+            JOptionPane.showMessageDialog(null, "Queijo Mais Caro Encontrado:\n ID: " + mostExpensiveQueijo.getQueijoID()
+                    + ", \nTipo: " + mostExpensiveQueijo.getQueijoType()
+                    + ", \nPeso: " + mostExpensiveQueijo.getWeight()
+                    + " Kg, \nPreço Por Kg: R$ " + mostExpensiveQueijo.getPricePerKg()
+                    + ", \nTemperatura Recomendada: " + mostExpensiveQueijo.getRecommendedTemperature() + " ºC");
+        } else {
             player.erroSong.play();
             JOptionPane.showMessageDialog(null, "Nenhum Queijo Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton_queijo_mais_caroActionPerformed
 // Queijo Functions End ----------------------------------------------------------------------------------------------
-    
+
 // Client 2nd part Functions Begin ----------------------------------------------------------------------------------------------    
     private void jComboBox_ordenar_clientesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox_ordenar_clientesItemStateChanged
         // TODO add your handling code here:
-        if(evt.getStateChange() == ItemEvent.SELECTED){
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
             String newChoice = jComboBox_ordenar_clientes.getSelectedItem().toString();
-            switch(newChoice){
-                case "-------":{
+            switch (newChoice) {
+                case "-------": {
                     clientOrder = "";
                     break;
                 }
-                case "CPF":{
+                case "CPF": {
                     clientOrder = "cpf";
                     break;
                 }
-                case "Nome":{
+                case "Nome": {
                     clientOrder = "clientName";
                     break;
                 }
-                case "Endereço":{
+                case "Endereço": {
                     clientOrder = "address";
                     break;
                 }
-                case "Cartão Crédito":{
+                case "Cartão Crédito": {
                     clientOrder = "creditCard";
                     break;
                 }
-                case "Facebook":{
+                case "Facebook": {
                     clientOrder = "facebookURL";
                     break;
                 }
-                case "Instagram":{
+                case "Instagram": {
                     clientOrder = "instagramURL";
                     break;
                 }
             }
             clientOrderDecreasing = false;
-            clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder,(clientOrder.isEmpty() ? false : clientOrderDecreasing)));
+            clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder, (clientOrder.isEmpty() ? false : clientOrderDecreasing)));
         }
     }//GEN-LAST:event_jComboBox_ordenar_clientesItemStateChanged
 
@@ -2120,41 +2143,41 @@ public class MainScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         player.effectSong.play();
         clientOrderDecreasing = true;
-        if(jComboBox_ordenar_clientes.getSelectedItem() == "-------"){
+        if (jComboBox_ordenar_clientes.getSelectedItem() == "-------") {
             jComboBox_ordenar_clientes.setSelectedItem("CPF");
             clientOrder = "cpf";
         }
-        clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder,(clientOrder.isEmpty() ? false : clientOrderDecreasing)));
+        clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder, (clientOrder.isEmpty() ? false : clientOrderDecreasing)));
     }//GEN-LAST:event_jButton_client_order_decActionPerformed
 
     private void jButton_client_order_cresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_client_order_cresActionPerformed
         // TODO add your handling code here:
         player.effectSong.play();
         clientOrderDecreasing = false;
-        clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder,(clientOrder.isEmpty() ? false : clientOrderDecreasing)));
+        clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder, (clientOrder.isEmpty() ? false : clientOrderDecreasing)));
     }//GEN-LAST:event_jButton_client_order_cresActionPerformed
 //Client 2nd part Functions End ----------------------------------------------------------------------------------------------    
-    
+
 // Queijo Functions Begin ----------------------------------------------------------------------------------------------    
     private void jButton_queijo_order_dec1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_queijo_order_dec1ActionPerformed
         // TODO add your handling code here:
         player.effectSong.play();
         queijoOrderDecreasing = true;
-        if(jComboBox_ordenar_queijos.getSelectedItem() == "-------"){
+        if (jComboBox_ordenar_queijos.getSelectedItem() == "-------") {
             jComboBox_ordenar_queijos.setSelectedItem("Id");
             queijoOrder = "queijoid";
         }
-        queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder,(queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
+        queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder, (queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
     }//GEN-LAST:event_jButton_queijo_order_dec1ActionPerformed
 
     private void jButton_queijo_order_cres1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_queijo_order_cres1ActionPerformed
         // TODO add your handling code here:
         player.effectSong.play();
         queijoOrderDecreasing = false;
-        queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder,(queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
+        queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder, (queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
     }//GEN-LAST:event_jButton_queijo_order_cres1ActionPerformed
 // Queijo Functions End ----------------------------------------------------------------------------------------------
-    
+
 // Pedido Functions Begin ----------------------------------------------------------------------------------------------    
     private void jb_pedido_newClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedido_newClientActionPerformed
         // TODO add your handling code here:
@@ -2193,9 +2216,6 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jcb_pedido_clientItemStateChanged
 // Pedido Functions End ----------------------------------------------------------------------------------------------
 
-    
-    
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
