@@ -21,6 +21,7 @@ public class MainScreen extends javax.swing.JFrame {
     String queijoOrder = "";
     boolean clientOrderDecreasing = false;
     boolean queijoOrderDecreasing = false;
+    Client clientRegistrationPage;
     
     //SOUNDS
     AlertSounds player;
@@ -81,7 +82,11 @@ public class MainScreen extends javax.swing.JFrame {
         jComboBox_ordenar_clientes.addItem("Facebook");
         jComboBox_ordenar_clientes.addItem("Instagram");
         
+        //ClientComboBox Registration Page
         clientComboBoxBuilder();
+        
+        clientRegistrationPage = null;
+        
         
     }
 
@@ -202,10 +207,13 @@ public class MainScreen extends javax.swing.JFrame {
     
     void clientComboBoxBuilder(){
         jcb_pedido_client.removeAllItems();
+        jcb_pedido_client.addItem("Selecionar...");
         ArrayList<Client> clientList = ClientDAO.read(true, "clientName", false);
         clientList.forEach(c->{
             jcb_pedido_client.addItem(c.getClientName());
         });
+        jtf_pedido_cpfCliente.setEditable(false);
+        jtf_pedido_cpfCliente.setText("");
     }
     
     
@@ -394,6 +402,11 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel24.setText("Observações:");
 
         jcb_pedido_client.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcb_pedido_client.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcb_pedido_clientItemStateChanged(evt);
+            }
+        });
 
         jb_pedido_newClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_add_black_18dp.png"))); // NOI18N
         jb_pedido_newClient.setIconTextGap(2);
@@ -2159,6 +2172,25 @@ public class MainScreen extends javax.swing.JFrame {
     private void jb_pedido_finalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedido_finalizarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_pedido_finalizarActionPerformed
+
+    private void jcb_pedido_clientItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcb_pedido_clientItemStateChanged
+        // TODO add your handling code here:
+//        if(evt.getStateChange() == ItemEvent.SELECTED){
+//            String newChoice = jcb_pedido_client.getSelectedItem().toString();
+//            if(newChoice.equals("Selecionar..."))
+//                jtf_pedido_cpfCliente.setText("");
+//            else{
+//                ArrayList<Client> clientList = ClientDAO.read(true, "clientName", false);
+//                for(int i=0; i<clientList.size();i++){
+//                    Client c = clientList.get(i);
+//                    System.out.println("cName: "+c.getClientName());
+//                    if(c.getClientName().equals(newChoice))
+//                        clientRegistrationPage = c;
+//                }
+//            }
+//        }
+//        jtf_pedido_cpfCliente.setText(clientRegistrationPage.getClientName());
+    }//GEN-LAST:event_jcb_pedido_clientItemStateChanged
 // Pedido Functions End ----------------------------------------------------------------------------------------------
 
     
