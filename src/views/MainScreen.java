@@ -155,11 +155,11 @@ public class MainScreen extends javax.swing.JFrame {
     void queijoTableBuilder(JTable jtable, ArrayList<Queijo> queijoList) {
         DefaultTableModel tableRows1;
         tableRows1 = new DefaultTableModel(new String[]{"Nº", "ID", "Peso", "Valor Por Kg",
-            "Tipo", "Temperatura Ideal"}, 0);
+            "Tipo", "Temperatura Ideal", "Valor Venda"}, 0);
         for (int i = 0; i < queijoList.size(); i++) {
             Queijo q = queijoList.get(i);
             tableRows1.addRow(new Object[]{(i + 1), q.getQueijoID(), q.getWeight(),
-                q.getPricePerKg(), q.getQueijoType(), q.getRecommendedTemperature()});
+                q.getPricePerKg(), q.getQueijoType(), q.getRecommendedTemperature(), (q.getWeight()*q.getPricePerKg())});
         }
         jtable.setModel(tableRows1);
         jlb_totalQueijos.setText("" + queijoList.size());
@@ -220,7 +220,7 @@ public class MainScreen extends javax.swing.JFrame {
         DefaultTableModel tableRows2;
 
         tableRows2 = new DefaultTableModel(new String[]{"Nº", "ID", "Tipo", "Peso", "Valor/Kg",
-            "Qtd"}, 0);
+            "Qtd", "Valor Venda"}, 0);
         ArrayList<Queijo> queijos = QueijoDAO.read(false, "", false);
 
         if (!produtosPedido.isEmpty()) {
@@ -239,6 +239,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         }
         jtable.setModel(tableRows2);
+        
     }
 
     @SuppressWarnings("unchecked")
