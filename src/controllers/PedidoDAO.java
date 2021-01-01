@@ -113,4 +113,20 @@ public class PedidoDAO {
 
         return erro;
     }
+    
+    public static int whoIsLastPedidoID(){
+        int nextPedidoID = -1;
+        PreparedStatement state;
+        String msgSQL = "select max(pedidoid) from pedido";
+        try{
+            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            ResultSet res = state.executeQuery();
+            if(res.next()){
+                nextPedidoID = res.getInt("max");
+            }
+        }catch(SQLException e){
+            System.out.println("\n Erro Econtrado: " + e.toString());
+        }
+        return nextPedidoID;
+    }
 }

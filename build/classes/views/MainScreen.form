@@ -200,7 +200,7 @@
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="jtf_pedido_nomeProduto" max="32767" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jSpinner2" min="-2" pref="38" max="-2" attributes="0"/>
+                                          <Component id="jsp_quantidade_produto" min="-2" pref="38" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
@@ -298,7 +298,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jtf_pedido_nomeProduto" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jSpinner2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jsp_quantidade_produto" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
@@ -550,7 +550,7 @@
                     </Component>
                     <Component class="javax.swing.JFormattedTextField" name="jtf_pedido_data">
                     </Component>
-                    <Component class="javax.swing.JSpinner" name="jSpinner2">
+                    <Component class="javax.swing.JSpinner" name="jsp_quantidade_produto">
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel31">
                       <Properties>

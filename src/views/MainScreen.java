@@ -8,6 +8,7 @@ import controllers.*;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.event.ItemEvent;
+import java.util.StringTokenizer;
 import javax.swing.table.DefaultTableModel;
 import views.sounds.AlertSounds;
 
@@ -15,14 +16,22 @@ import views.sounds.AlertSounds;
 // Client Functions - linha 30 a 80
 public class MainScreen extends javax.swing.JFrame {
 
+    //GLOBAL VARS
+    //SET THE CLIENT AND QUEIJO REGISTRATION TO INSERT OR UPDATE
     boolean isClientUpdate = false;
     boolean isQueijoUpdate = false;
+    //HELPS THE TABLES ORDENATION
     String clientOrder = "";
     String queijoOrder = "";
     boolean clientOrderDecreasing = false;
     boolean queijoOrderDecreasing = false;
-    Client clientRegistrationPage = new Client();
+
+    //HELPS THE COMEBACK BUTTON IN ClientRegistration and QueijoRegistration Pages
     boolean fromPedidoToClientRegistration = false;
+    boolean fromPedidoToQueijoRegistration = false;
+
+    //LIST OF PEDIDOS IN THE PEDIDO REGISTRATION PAGE (BEFORE THE DATABASE LIST CREATION)
+    ArrayList<QueijoPedido> queijoPedidoList = new ArrayList();
 
     //SOUNDS
     AlertSounds player;
@@ -49,8 +58,7 @@ public class MainScreen extends javax.swing.JFrame {
         //Tables Initialization
         clientTableBuilder(jTableClient, ClientDAO.read(false, "", false));
         queijoTableBuilder(jTableQueijo, QueijoDAO.read(false, "", false));
-        ArrayList<QueijoPedido> lista = new ArrayList();
-        produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, lista);
+        produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList);
 
         //Lists Initialization
         queijoListBuilder();
@@ -88,7 +96,6 @@ public class MainScreen extends javax.swing.JFrame {
 
         //ClientComboBox Registration Page
         clientComboBoxBuilder();
-
 
     }
 
@@ -161,13 +168,11 @@ public class MainScreen extends javax.swing.JFrame {
         for (int i = 0; i < queijoList.size(); i++) {
             Queijo q = queijoList.get(i);
             tableRows1.addRow(new Object[]{(i + 1), q.getQueijoID(), q.getWeight(),
-                q.getPricePerKg(), q.getQueijoType(), q.getRecommendedTemperature(), (q.getWeight()*q.getPricePerKg())});
+                q.getPricePerKg(), q.getQueijoType(), q.getRecommendedTemperature(), (q.getWeight() * q.getPricePerKg())});
         }
         jtable.setModel(tableRows1);
         jlb_totalQueijos.setText("" + queijoList.size());
-        
-      
-        
+
     }
 
     public boolean NewQueijoVerification() {
@@ -225,8 +230,13 @@ public class MainScreen extends javax.swing.JFrame {
         DefaultTableModel tableRows2;
 
         tableRows2 = new DefaultTableModel(new String[]{"Nº", "ID", "Tipo", "Peso", "Valor/Kg",
-            "Qtd", "Valor Venda"}, 0);
+            "Qtd", "Valor Total"}, 0);
         ArrayList<Queijo> queijos = QueijoDAO.read(false, "", false);
+
+        System.out.println("LISTA TEM " + produtosPedido.size());
+        produtosPedido.forEach(p -> {
+            System.out.println(p.toString());
+        });
 
         if (!produtosPedido.isEmpty()) {
             for (int j = 0; j < produtosPedido.size(); j++) {
@@ -234,17 +244,20 @@ public class MainScreen extends javax.swing.JFrame {
                 boolean achou = false;
                 for (int i = 0; i < queijos.size() && achou == false; i++) {
                     Queijo queijoAux = queijos.get(i);
-                    if (String.valueOf(p.getQueijoPedidoID()).equals("" + queijoAux.getQueijoID())) {
+                    if (String.valueOf(p.getFk_id_queijo()).equals("" + queijoAux.getQueijoID())) {
                         achou = true;
+                        tableRows2.addRow(new Object[]{(j + 1), queijoAux.getQueijoID(),
+                            queijoAux.getQueijoType(), queijoAux.getWeight(), 
+                            queijoAux.getPricePerKg(), p.getQuantity(), (p.getQuantity() 
+                                    * queijoAux.getPricePerKg() * queijoAux.getWeight())});
                     }
-                    tableRows2.addRow(new Object[]{(j + 1), queijoAux.getQueijoID(),
-                        queijoAux.getQueijoType(), queijoAux.getWeight(), queijoAux.getPricePerKg(), p.getQuantity()});
+
                 }
 
             }
         }
         jtable.setModel(tableRows2);
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -283,7 +296,7 @@ public class MainScreen extends javax.swing.JFrame {
         jb_back_pedidoRegistration = new javax.swing.JButton();
         jb_pedido_newQueijo = new javax.swing.JButton();
         jtf_pedido_data = new javax.swing.JFormattedTextField();
-        jSpinner2 = new javax.swing.JSpinner();
+        jsp_quantidade_produto = new javax.swing.JSpinner();
         jLabel31 = new javax.swing.JLabel();
         jtf_pedido_cpfCliente = new javax.swing.JFormattedTextField();
         jPanel14 = new javax.swing.JPanel();
@@ -574,7 +587,7 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                             .addComponent(jtf_pedido_nomeProduto)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jsp_quantidade_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel4Layout.createSequentialGroup()
                             .addComponent(jLabel25)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -652,7 +665,7 @@ public class MainScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtf_pedido_nomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jsp_quantidade_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addComponent(jb_back_pedidoRegistration)
                 .addGap(33, 33, 33))
@@ -1789,8 +1802,9 @@ public class MainScreen extends javax.swing.JFrame {
                 clientComboBoxBuilder();
                 jpn_clientRegistration.setVisible(false);
                 jpn_clientsList.setVisible(true);
-                if(fromPedidoToClientRegistration == true)
+                if (fromPedidoToClientRegistration == true) {
                     jTabbedPane1.setSelectedIndex(1);
+                }
             }
         }
     }//GEN-LAST:event_jb_finalizarCadastroActionPerformed
@@ -1819,17 +1833,17 @@ public class MainScreen extends javax.swing.JFrame {
     private void jb_backClientPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_backClientPageActionPerformed
         // TODO add your handling code here:
         //TROCAR TELAS
-        if(fromPedidoToClientRegistration == false){
-           clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder, (clientOrder.isEmpty() ? false : clientOrderDecreasing)));
+        if (fromPedidoToClientRegistration == false) {
+            clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder, (clientOrder.isEmpty() ? false : clientOrderDecreasing)));
             jpn_clientRegistration.setVisible(false);
-            jpn_clientsList.setVisible(true); 
-        }else{
+            jpn_clientsList.setVisible(true);
+        } else {
             clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder, (clientOrder.isEmpty() ? false : clientOrderDecreasing)));
             jpn_clientRegistration.setVisible(false);
             jpn_clientsList.setVisible(true);
             jTabbedPane1.setSelectedIndex(1);
         }
-        
+
     }//GEN-LAST:event_jb_backClientPageActionPerformed
 // Client 1st part Functions End ----------------------------------------------------------------------------------------------
 
@@ -1893,7 +1907,7 @@ public class MainScreen extends javax.swing.JFrame {
                         (erro == null) ? JOptionPane.INFORMATION_MESSAGE
                                 : JOptionPane.ERROR_MESSAGE);
                 if (erro == null) {
-                    
+
                     //ATUALIZAR TABELA E TROCAR AS TELAS
                     queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder, (queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
                     //TROCAR TELAS
@@ -2230,26 +2244,25 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jb_pedido_finalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedido_finalizarActionPerformed
         // TODO add your handling code here:
+        PedidoDAO.whoIsLastPedidoID();
     }//GEN-LAST:event_jb_pedido_finalizarActionPerformed
 
     private void jcb_pedido_clientItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcb_pedido_clientItemStateChanged
         // TODO add your handling code here:
+        Client clientRegistrationPage = new Client();
         Client aux = new Client();
-        if(evt.getStateChange() == ItemEvent.SELECTED){
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
             String newChoice = jcb_pedido_client.getSelectedItem().toString();
-            if(newChoice.equals("Selecionar..."))
+            if (newChoice.equals("Selecionar...")) {
                 jtf_pedido_cpfCliente.setText("");
-            else{
+            } else {
                 ArrayList<Client> clientList = new ArrayList();
                 clientList = ClientDAO.read(true, "clientName", false);
-                for(int i=0; i<clientList.size();i++){
+                for (int i = 0; i < clientList.size(); i++) {
                     Client c = clientList.get(i);
-
-                    if(c.getClientName().equals(newChoice)){
+                    if (c.getClientName().equals(newChoice)) {
                         clientRegistrationPage = c;
-                        
                     }
-                        
                 }
             }
         }
@@ -2257,9 +2270,22 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jcb_pedido_clientItemStateChanged
 
     private void jb_pedido_addProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedido_addProdutoActionPerformed
-        // TODO add your handling code here:
-        
-        
+        //jtf_pedido_nomeProduto
+        int quant = Integer.parseInt(jsp_quantidade_produto.getValue().toString());
+
+        if (quant > 0) {
+            //BUSCAR O ID DO PRODUTO A ADICIONAR
+            int idNovoProduto;
+            StringTokenizer st2 = new StringTokenizer(jList_pedido_queijos.getSelectedValue(), ",");
+            String id = st2.nextToken();
+            id = id.replace("ID: ", "");
+            idNovoProduto = Integer.parseInt(id);
+
+            QueijoPedido newPedido = new QueijoPedido(0, 0, idNovoProduto, quant);
+            queijoPedidoList.add(newPedido);
+
+            produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList);
+        }
     }//GEN-LAST:event_jb_pedido_addProdutoActionPerformed
 // Pedido Functions End ----------------------------------------------------------------------------------------------
 
@@ -2398,7 +2424,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableClient;
@@ -2422,6 +2447,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jpn_pedidoList;
     private javax.swing.JPanel jpn_queijoList;
     private javax.swing.JPanel jpn_queijoRegistration;
+    private javax.swing.JSpinner jsp_quantidade_produto;
     private javax.swing.JTextArea jta_pedido_note;
     private javax.swing.JTable jtb_resumo_produtos_pedido;
     private javax.swing.JTextField jtf_client_Address;

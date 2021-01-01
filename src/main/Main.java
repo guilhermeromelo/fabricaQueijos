@@ -5,6 +5,7 @@ import controllers.*;
 import controllers.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import models.*;
 import views.*;
 import java.util.*;
@@ -39,9 +40,9 @@ public class Main {
 //                System.out.println(q.toString());
 //            });
 //            
-//            Pedido pedido = new Pedido("111.111-12", LocalDateTime.now(), 5);
-//            PedidoDAO pedidoDAO = new PedidoDAO();
-//            pedidoDAO.create(pedido);
+
+//            Pedido pedido = new Pedido("125.553.506-75", LocalDateTime.now(), 5, "Rapaz, perugnta no posto ipiranga");
+//            PedidoDAO.create(pedido);
               Connection con = DatabaseConnection.getConexao();
               
             
