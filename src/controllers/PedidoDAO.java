@@ -42,6 +42,7 @@ public class PedidoDAO {
             ResultSet res;
             res = state.executeQuery();
             pedidoList = resToArrayList(res);
+            res.close();
             state.close();
         } catch (SQLException e) {
             System.out.println("\n Erro Encontrado: " + e.toString());
@@ -62,7 +63,6 @@ public class PedidoDAO {
                 newpedido.setNote(res.getString("note"));
                 pedidoList.add(newpedido);
             }
-            res.close();
         } catch (SQLException e) {
             System.out.println("\n Erro Encontrado: " + e.toString());
         }
@@ -124,9 +124,30 @@ public class PedidoDAO {
             if(res.next()){
                 nextPedidoID = res.getInt("max");
             }
+            res.close();
+            state.close();
         }catch(SQLException e){
             System.out.println("\n Erro Econtrado: " + e.toString());
         }
         return nextPedidoID;
+    }
+
+
+    public static Pedido search(String id) {
+        PreparedStatement state;
+        Pedido pedidoList = new Pedido();
+        String msgSQL = "select * from pedido where pedidoid=?";
+        try {
+            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state.setInt(1, Integer.parseInt(id));
+            ResultSet res;
+            res = state.executeQuery();
+            pedidoList = resToArrayList(res).get(0);
+            res.close();
+            state.close();
+        } catch (SQLException e) {
+            System.out.println("\n Erro Encontrado: " + e.toString());
+        }
+        return pedidoList;
     }
 }

@@ -47,6 +47,7 @@ public class ClientDAO {
             state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
             res = state.executeQuery();
             clientList = resultSetToArrayListClient(res);
+            res.close();
             state.close();
         } catch (SQLException e) {
             System.out.println("\n Erro Encontrado: " + e.toString());
@@ -69,7 +70,6 @@ public class ClientDAO {
                 newClient.setPhone(res.getString("phone"));
                 clientList.add(newClient);
             }
-            res.close();
         } catch (SQLException e) {
             System.out.println("\n Erro Encontrado: " + e.toString());
         }

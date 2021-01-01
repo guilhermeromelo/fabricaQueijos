@@ -47,6 +47,7 @@ public class QueijoDAO {
             state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
             ResultSet res = state.executeQuery();
             queijoList = resultSetToArrayList(res);
+            res.close();
             state.close();
         } catch (SQLException e) {
             System.out.println("\n Erro Encontrado: " + e.toString());
@@ -66,7 +67,6 @@ public class QueijoDAO {
                 newQueijo.setWeight(res.getDouble("weight"));
                 queijoList.add(newQueijo);
             }
-            res.close();
         } catch (SQLException e) {
             System.out.println("\n Erro Encontrado: " + e.toString());
         }

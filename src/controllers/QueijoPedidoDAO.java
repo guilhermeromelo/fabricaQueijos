@@ -46,6 +46,7 @@ public class QueijoPedidoDAO {
             state.setInt(1, Integer.parseInt(id));
             ResultSet res = state.executeQuery();
             queijoPedidoList = resToArrayList(res);
+            res.close();
             state.close();
         } catch (SQLException e) {
             System.out.println("\n Erro Encontrado: " + e.toString());
@@ -64,7 +65,6 @@ public class QueijoPedidoDAO {
                 queijoPedido.setQueijoPedidoID(res.getInt("queijoPedidoID"));
                 queijoPedidoList.add(queijoPedido);
             }
-            res.close();
         } catch (SQLException e) {
             System.out.println("\n Erro Encontrado: " + e.toString());
         }
