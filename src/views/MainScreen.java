@@ -58,7 +58,7 @@ public class MainScreen extends javax.swing.JFrame {
         //Tables Initialization
         clientTableBuilder(jTableClient, ClientDAO.read(false, "", false));
         queijoTableBuilder(jTableQueijo, QueijoDAO.read(false, "", false));
-        produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList);
+        produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, true);
 
         //Lists Initialization
         queijoListBuilder();
@@ -228,8 +228,9 @@ public class MainScreen extends javax.swing.JFrame {
         jtf_pedido_cpfCliente.setText("");
     }
 
-    void produtosPedidosTableBuilder(JTable jtable, ArrayList<QueijoPedido> produtosPedido) {
+    void produtosPedidosTableBuilder(JTable jtable, ArrayList<QueijoPedido> produtosPedido, boolean registrationPage) {
         DefaultTableModel tableRows2;
+        double total = 0.00;
 
         tableRows2 = new DefaultTableModel(new String[]{"Nº", "ID", "Tipo", "Peso", "Valor/Kg",
             "Qtd", "Valor Total"}, 0);
@@ -247,12 +248,16 @@ public class MainScreen extends javax.swing.JFrame {
                             queijoAux.getQueijoType(), queijoAux.getWeight(), 
                             queijoAux.getPricePerKg(), p.getQuantity(), (p.getQuantity() 
                                     * queijoAux.getPricePerKg() * queijoAux.getWeight())});
+                        total += (p.getQuantity() 
+                                    * queijoAux.getPricePerKg() * queijoAux.getWeight());
                     }
 
                 }
 
             }
         }
+        if(registrationPage)
+            jlb_pedido_valor_total.setText(""+total);
         jtable.setModel(tableRows2);
 
     }
@@ -300,11 +305,12 @@ public class MainScreen extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jtf_pedido_hora = new javax.swing.JFormattedTextField();
         jLabel32 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
+        jlb_pedido_valor_total = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtf_pedido_n_cancelar = new javax.swing.JTextField();
         jbt_pedido_cancelar_produto = new javax.swing.JButton();
+        jLabel37 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -562,8 +568,9 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel32.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         jLabel32.setText("TOTAL: R$");
 
-        jLabel34.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jLabel34.setText("0,00");
+        jlb_pedido_valor_total.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jlb_pedido_valor_total.setText("0,00");
+        jlb_pedido_valor_total.setToolTipText("");
 
         jLabel35.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel35.setText("Cancelar Produto");
@@ -573,6 +580,14 @@ public class MainScreen extends javax.swing.JFrame {
 
         jbt_pedido_cancelar_produto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_clear_black_18dp.png"))); // NOI18N
         jbt_pedido_cancelar_produto.setText("Cancelar");
+        jbt_pedido_cancelar_produto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_pedido_cancelar_produtoActionPerformed(evt);
+            }
+        });
+
+        jLabel37.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel37.setText("dias");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -590,21 +605,26 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel22)
                             .addComponent(jLabel23))
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtf_pedido_deliveryDeadLine, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jtf_pedido_data, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel33)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtf_pedido_hora, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jtf_pedido_data, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel33)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jtf_pedido_hora, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jtf_pedido_deliveryDeadLine, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel37))))))
                     .addComponent(jL_Cadastrar_cliente1)
                     .addComponent(jb_back_pedidoRegistration)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -620,7 +640,7 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addComponent(jb_pedido_newClient))
                             .addComponent(jtf_pedido_id, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jtf_pedido_cpfCliente))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel4Layout.createSequentialGroup()
@@ -638,23 +658,24 @@ public class MainScreen extends javax.swing.JFrame {
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jb_pedido_addProduto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jb_pedido_finalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
-                    .addComponent(jL_Cadastrar_cliente4)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jb_pedido_finalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+                        .addComponent(jL_Cadastrar_cliente4)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addComponent(jLabel35)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel36)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jtf_pedido_n_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jbt_pedido_cancelar_produto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel32)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel35)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel36)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbt_pedido_cancelar_produto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(20, 20, 20))
+                        .addComponent(jlb_pedido_valor_total, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -690,12 +711,20 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtf_pedido_deliveryDeadLine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel23))
+                            .addComponent(jLabel23)
+                            .addComponent(jLabel37))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel24))
-                        .addGap(124, 124, 124))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel24)
+                                .addGap(214, 214, 214))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jScrollPane3)
+                                .addGap(134, 134, 134)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jb_back_pedidoRegistration)
+                            .addComponent(jb_pedido_finalizar))
+                        .addGap(33, 33, 33))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -723,17 +752,13 @@ public class MainScreen extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel36)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtf_pedido_n_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jbt_pedido_cancelar_produto)))
                         .addGap(51, 51, 51)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15)))
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jb_back_pedidoRegistration)
-                    .addComponent(jb_pedido_finalizar))
-                .addGap(33, 33, 33))
+                            .addComponent(jlb_pedido_valor_total, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(79, 79, 79))))
         );
 
         jLayeredPane1.add(jPanel4);
@@ -742,7 +767,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1340, Short.MAX_VALUE)
+            .addGap(0, 1349, Short.MAX_VALUE)
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -755,7 +780,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1340, Short.MAX_VALUE)
+            .addGap(0, 1349, Short.MAX_VALUE)
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -768,7 +793,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1340, Short.MAX_VALUE)
+            .addGap(0, 1349, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -781,7 +806,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1340, Short.MAX_VALUE)
+            .addGap(0, 1349, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2348,14 +2373,21 @@ public class MainScreen extends javax.swing.JFrame {
 
             QueijoPedido newPedido = new QueijoPedido(0, 0, idNovoProduto, quant);
             queijoPedidoList.add(newPedido);
-
-            produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList);
+            produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, true);
+            
         }
     }//GEN-LAST:event_jb_pedido_addProdutoActionPerformed
 
     private void jtf_pedido_horaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_pedido_horaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtf_pedido_horaActionPerformed
+
+    private void jbt_pedido_cancelar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_pedido_cancelar_produtoActionPerformed
+        // TODO add your handling code here:
+        if(Integer.parseInt(jtf_pedido_n_cancelar.getText()) <= queijoPedidoList.size() && Integer.parseInt(jtf_pedido_n_cancelar.getText())>0)
+            queijoPedidoList.remove(Integer.parseInt(jtf_pedido_n_cancelar.getText()) - 1);
+        produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, true);
+    }//GEN-LAST:event_jbt_pedido_cancelar_produtoActionPerformed
 // Pedido Functions End ----------------------------------------------------------------------------------------------
 
     public static void main(String args[]) {
@@ -2449,9 +2481,9 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2503,7 +2535,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableClient;
     private javax.swing.JTable jTableQueijo;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jb_backClientPage;
     private javax.swing.JButton jb_backQueijoPage;
     private javax.swing.JButton jb_back_pedidoRegistration;
@@ -2515,6 +2546,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton jb_pedido_newQueijo;
     private javax.swing.JButton jbt_pedido_cancelar_produto;
     private javax.swing.JComboBox<String> jcb_pedido_client;
+    private javax.swing.JLabel jlb_pedido_valor_total;
     private javax.swing.JLabel jlb_totalClientes;
     private javax.swing.JLabel jlb_totalPedidos;
     private javax.swing.JLabel jlb_totalQueijos;
@@ -2539,6 +2571,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_pedido_deliveryDeadLine;
     private javax.swing.JFormattedTextField jtf_pedido_hora;
     private javax.swing.JTextField jtf_pedido_id;
+    private javax.swing.JTextField jtf_pedido_n_cancelar;
     private javax.swing.JTextField jtf_pedido_nomeProduto;
     private javax.swing.JTextField jtf_queijo_Temperatura;
     private javax.swing.JFormattedTextField jtf_queijo_id;
