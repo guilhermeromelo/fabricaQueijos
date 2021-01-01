@@ -17,7 +17,7 @@ public class QueijoPedidoDAO {
     public static String create(QueijoPedido newqueijoPedido) {
         String erro = null;
         PreparedStatement state;
-        String msgSQL = "inserto into queijo_pedido(fk_id_pedido, fk_id_queijo, quantity) "
+        String msgSQL = "insert into queijo_pedido(fk_id_pedido, fk_id_queijo, quantity) "
                 + "values (?, ?, ?)";
         try {
             state = DatabaseConnection.getConexao().prepareStatement(msgSQL);

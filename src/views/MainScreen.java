@@ -60,6 +60,7 @@ public class MainScreen extends javax.swing.JFrame {
         clientTableBuilder(jTableClient, ClientDAO.read(false, "", false));
         queijoTableBuilder(jTableQueijo, QueijoDAO.read(false, "", false));
         produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, true);
+        pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
 
         //Lists Initialization
         queijoListBuilder();
@@ -206,6 +207,7 @@ public class MainScreen extends javax.swing.JFrame {
     }
     // Queijo Functions End ----------------------------------------------------------------------------------------------
 
+    // Pedido Functions Beginning --------------------------------------------------------------------------------------------
     void queijoListBuilder() {
         jListQueijoModel = new DefaultListModel();
         jListQueijoModel.removeAllElements();
@@ -227,6 +229,8 @@ public class MainScreen extends javax.swing.JFrame {
         });
         jtf_pedido_cpfCliente.setEditable(false);
         jtf_pedido_cpfCliente.setText("");
+        jcb_pedido_client.setSelectedIndex(0);
+        jtf_pedido_cpfCliente.setText("Selecione o cliente acima!");
     }
 
     void produtosPedidosTableBuilder(JTable jtable, ArrayList<QueijoPedido> produtosPedido, boolean registrationPage) {
@@ -261,7 +265,61 @@ public class MainScreen extends javax.swing.JFrame {
             jlb_pedido_valor_total.setText("" + total);
         }
         jtable.setModel(tableRows2);
+    }
 
+    void pedidosTableBuilder(JTable jtable, ArrayList<Pedido> pedidoList) {
+        DefaultTableModel tableRows1;
+        tableRows1 = new DefaultTableModel(new String[]{"Nº", "ID", "CPF", "Data",
+            "Hora", "Prazo Entrega (dias)"}, 0);
+        for (int i = 0; i < pedidoList.size(); i++) {
+            Pedido p = pedidoList.get(i);
+            tableRows1.addRow(new Object[]{(i + 1), p.getPedidoID(), p.getFk_client_cpf(),
+                dataBuilder(p.getPedidoDate()), horaBuilder(p.getPedidoDate()), p.getDeliveryDeadLine()});
+        }
+        jtable.setModel(tableRows1);
+        jlb_totalPedidos.setText("" + pedidoList.size());
+    }
+
+    String dataBuilder(LocalDateTime localDate) {
+        String dia = "" + localDate.getDayOfMonth();
+        if (dia.length() == 1) {
+            dia = "0" + dia;
+        }
+        String mes = "" + localDate.getMonthValue();
+        if (mes.length() == 1) {
+            mes = "0" + mes;
+        }
+        String ano = "" + localDate.getYear();
+        ano = ano.substring(2);
+        return dia + "/" + mes + "/" + ano;
+    }
+
+    String horaBuilder(LocalDateTime localDate) {
+        String hora = "" + localDate.getHour();
+        if (hora.length() == 1) {
+            hora = "0" + hora;
+        }
+        String min = "" + localDate.getMinute();
+        if (min.length() == 1) {
+            min = "0" + min;
+        }
+        return (hora + ":" + min);
+    }
+
+    void clearPedidoRegistrationPage() {
+        jtf_pedido_cpfCliente.setText("");
+        jtf_pedido_data.setText("");
+        jtf_pedido_deliveryDeadLine.setText("");
+        jtf_pedido_hora.setText("");
+        jtf_pedido_id.setText("Gerado pelo Sistema");
+        jtf_pedido_n_cancelar.setText("");
+        jtf_pedido_nomeProduto.setText("");
+        jtf_pedido_n_cancelar.setText("");
+        jta_pedido_note.setText("");
+        jsp_quantidade_produto.setValue(0);
+        jcb_pedido_client.setSelectedIndex(0);
+        jList_pedido_queijos.setSelectedIndex(0);
+        produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, new ArrayList(), true);
     }
 
     @SuppressWarnings("unchecked")
@@ -439,7 +497,7 @@ public class MainScreen extends javax.swing.JFrame {
         jpanel_Dashboard.setLayout(jpanel_DashboardLayout);
         jpanel_DashboardLayout.setHorizontalGroup(
             jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jpanel_DashboardLayout.setVerticalGroup(
             jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -655,7 +713,7 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addComponent(jb_pedido_newClient))
                             .addComponent(jtf_pedido_id, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jtf_pedido_cpfCliente))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel4Layout.createSequentialGroup()
@@ -762,13 +820,13 @@ public class MainScreen extends javax.swing.JFrame {
                                     .addComponent(jtf_pedido_nomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jsp_quantidade_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jb_pedido_addProduto)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel36)
                                 .addComponent(jtf_pedido_n_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jbt_pedido_cancelar_produto)))
+                                .addComponent(jbt_pedido_cancelar_produto))
+                            .addComponent(jb_pedido_addProduto))
                         .addGap(51, 51, 51)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -782,7 +840,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -795,7 +853,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -808,7 +866,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -821,7 +879,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -834,7 +892,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel_OrderPedido.setLayout(jPanel_OrderPedidoLayout);
         jPanel_OrderPedidoLayout.setHorizontalGroup(
             jPanel_OrderPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1353, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1352, Short.MAX_VALUE)
         );
         jPanel_OrderPedidoLayout.setVerticalGroup(
             jPanel_OrderPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -969,7 +1027,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -982,7 +1040,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -995,7 +1053,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1008,7 +1066,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1021,7 +1079,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel_PedidosList.setLayout(jPanel_PedidosListLayout);
         jPanel_PedidosListLayout.setHorizontalGroup(
             jPanel_PedidosListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane4)
+            .addComponent(jLayeredPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1352, Short.MAX_VALUE)
         );
         jPanel_PedidosListLayout.setVerticalGroup(
             jPanel_PedidosListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1146,7 +1204,7 @@ public class MainScreen extends javax.swing.JFrame {
                         .addComponent(jButton_busca_cliente_cpf)
                         .addGap(18, 18, 18)
                         .addComponent(jButton_busca_cliente_nome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
                         .addComponent(jButton_removerCliente)
                         .addGap(18, 18, 18)
                         .addComponent(jButton_modificarCliente)
@@ -1265,7 +1323,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(jb_backClientPage, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(538, Short.MAX_VALUE))
+                .addContainerGap(537, Short.MAX_VALUE))
         );
         jpn_clientRegistrationLayout.setVerticalGroup(
             jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1315,7 +1373,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1328,7 +1386,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1341,7 +1399,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1354,7 +1412,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1367,7 +1425,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel_ClientList.setLayout(jPanel_ClientListLayout);
         jPanel_ClientListLayout.setHorizontalGroup(
             jPanel_ClientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1353, Short.MAX_VALUE)
+            .addComponent(jLayeredPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1352, Short.MAX_VALUE)
         );
         jPanel_ClientListLayout.setVerticalGroup(
             jPanel_ClientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1491,7 +1549,7 @@ public class MainScreen extends javax.swing.JFrame {
                         .addComponent(jButton_queijo_order_cres1)
                         .addGap(151, 151, 151)
                         .addComponent(jLabel4)
-                        .addGap(0, 606, Short.MAX_VALUE))
+                        .addGap(0, 605, Short.MAX_VALUE))
                     .addGroup(jpn_queijoListLayout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1614,7 +1672,7 @@ public class MainScreen extends javax.swing.JFrame {
                                         .addComponent(jtf_queijo_peso)
                                         .addComponent(jtf_queijo_id)
                                         .addComponent(jtf_queijo_valorKg, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(541, Short.MAX_VALUE))
+                .addContainerGap(540, Short.MAX_VALUE))
         );
         jpn_queijoRegistrationLayout.setVerticalGroup(
             jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1654,7 +1712,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1667,7 +1725,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1680,7 +1738,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1693,7 +1751,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1706,7 +1764,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1719,7 +1777,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1353, Short.MAX_VALUE)
+            .addGap(0, 1352, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1732,7 +1790,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel_QueijoList.setLayout(jPanel_QueijoListLayout);
         jPanel_QueijoListLayout.setHorizontalGroup(
             jPanel_QueijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1353, Short.MAX_VALUE)
+            .addComponent(jLayeredPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1352, Short.MAX_VALUE)
         );
         jPanel_QueijoListLayout.setVerticalGroup(
             jPanel_QueijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1777,7 +1835,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1357, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -2380,18 +2438,28 @@ public class MainScreen extends javax.swing.JFrame {
         newPedido.setFk_client_cpf(jtf_pedido_cpfCliente.getText());
         newPedido.setDeliveryDeadLine(Integer.parseInt(jtf_pedido_deliveryDeadLine.getText()));
         newPedido.setNote(jta_pedido_note.getText());
-        
+
         //RECUPERAR DATA E HORA E GRAVAR
         StringTokenizer st = new StringTokenizer(jtf_pedido_data.getText(), "/");
         int dia = Integer.parseInt(st.nextToken());
         int mes = Integer.parseInt(st.nextToken());
-        int ano = Integer.parseInt(st.nextToken())+2000;
+        int ano = Integer.parseInt(st.nextToken()) + 2000;
         StringTokenizer st2 = new StringTokenizer(jtf_pedido_hora.getText(), ":");
         int hora = Integer.parseInt(st2.nextToken());
         int min = Integer.parseInt(st2.nextToken());
         newPedido.setPedidoDate(LocalDateTime.of(ano, mes, dia, hora, min));
-        
+
+        //CRIAR PEDIDO
         PedidoDAO.create(newPedido);
+
+        int idpedido = PedidoDAO.whoIsLastPedidoID();
+        queijoPedidoList.forEach(pedido -> {
+            pedido.setFk_id_pedido(idpedido);
+            QueijoPedidoDAO.create(pedido);
+        });
+        pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
+        clearPedidoRegistrationPage();
+        jTabbedPane1.setSelectedIndex(2);
     }//GEN-LAST:event_jb_pedido_finalizarActionPerformed
 
     private void jcb_pedido_clientItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcb_pedido_clientItemStateChanged
@@ -2400,7 +2468,7 @@ public class MainScreen extends javax.swing.JFrame {
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             String newChoice = jcb_pedido_client.getSelectedItem().toString();
             if (newChoice.equals("Selecionar...")) {
-                jtf_pedido_cpfCliente.setText("");
+                jtf_pedido_cpfCliente.setText("Selecione o cliente acima!");
             } else {
                 ArrayList<Client> clientList = new ArrayList();
                 clientList = ClientDAO.read(true, "clientName", false);
@@ -2410,9 +2478,10 @@ public class MainScreen extends javax.swing.JFrame {
                         clientRegistrationPage = c;
                     }
                 }
+                jtf_pedido_cpfCliente.setText(clientRegistrationPage.getCPF());
             }
         }
-        jtf_pedido_cpfCliente.setText(clientRegistrationPage.getCPF());
+        
     }//GEN-LAST:event_jcb_pedido_clientItemStateChanged
 
     private void jb_pedido_addProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedido_addProdutoActionPerformed
@@ -2452,42 +2521,13 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jbt_pedido_cancelar_produtoActionPerformed
 
     private void jb_pedido_hora_nowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedido_hora_nowActionPerformed
-        String dia = "" + LocalDateTime.now().getDayOfMonth();
-        if (dia.length() == 1) {
-            dia = "0" + dia;
-        }
-        String mes = "" + LocalDateTime.now().getMonthValue();
-        if (mes.length() == 1) {
-            mes = "0" + mes;
-        }
-        String ano = "" + LocalDateTime.now().getYear();
-        ano = ano.substring(2);
-        jtf_pedido_data.setText(dia + "/" + mes + "/" + ano);
 
-        String hora = "" + LocalDateTime.now().getHour();
-        if (hora.length() == 1) {
-            hora = "0" + hora;
-        }
-        String min = "" + LocalDateTime.now().getMinute();
-        if (min.length() == 1) {
-            min = "0" + min;
-        }
-        jtf_pedido_hora.setText(hora + ":" + min);
+        jtf_pedido_data.setText(dataBuilder(LocalDateTime.now()));
+        jtf_pedido_hora.setText(horaBuilder(LocalDateTime.now()));
     }//GEN-LAST:event_jb_pedido_hora_nowActionPerformed
 
     private void jb_back_pedidoRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_back_pedidoRegistrationActionPerformed
-        jtf_pedido_cpfCliente.setText("");
-        jtf_pedido_data.setText("");
-        jtf_pedido_deliveryDeadLine.setText("");
-        jtf_pedido_hora.setText("");
-        jtf_pedido_id.setText("");
-        jtf_pedido_n_cancelar.setText("");
-        jtf_pedido_nomeProduto.setText("");
-        jtf_pedido_n_cancelar.setText("");
-        jta_pedido_note.setText("");
-        jsp_quantidade_produto.setValue(0);
-        jcb_pedido_client.setSelectedIndex(0);
-        produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, new ArrayList(), true);
+        clearPedidoRegistrationPage();
     }//GEN-LAST:event_jb_back_pedidoRegistrationActionPerformed
 // Pedido Functions End ----------------------------------------------------------------------------------------------
 
