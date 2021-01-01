@@ -320,13 +320,102 @@ public class MainScreen extends javax.swing.JFrame {
         jtf_pedido_hora.setText("");
         jtf_pedido_id.setText("Gerado pelo Sistema");
         jtf_pedido_n_cancelar.setText("");
-        jtf_pedido_nomeProduto.setText("");
         jtf_pedido_n_cancelar.setText("");
         jta_pedido_note.setText("");
         jsp_quantidade_produto.setValue(0);
         jcb_pedido_client.setSelectedIndex(0);
         jList_pedido_queijos.setSelectedIndex(0);
+        jtf_pedido_nomeProduto.setText(jList_pedido_queijos.getSelectedValue());
         produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, new ArrayList(), true);
+    }
+
+    boolean newPedidoVerification() {
+        boolean valido = true;
+        String erro = "";
+        if (jcb_pedido_client.getSelectedIndex() == 0) {
+            valido = false;
+            erro = erro + "\nCliente Não selecionado";
+        }
+        if (dateVerification(jtf_pedido_data.getText()) == false) {
+            valido = false;
+            erro = erro + "\nData Inválida";
+        }
+        if (timeVerification(jtf_pedido_hora.getText()) == false) {
+            valido = false;
+            erro = erro + "\nHora Inválida";
+        }
+        if (jtf_pedido_deliveryDeadLine.getText().isEmpty()) {
+            valido = false;
+            erro = erro + "\nPrazo Entrega Inválido";
+        }
+        if (valido == false) {
+            player.erroSong.play();
+            JOptionPane.showMessageDialog(null, "Erro(s) Encontrados: " + erro,
+                    "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return valido;
+    }
+
+    boolean timeVerification(String time) {
+        boolean valido = true;
+        if (time.equals("  :  ") || time.contains(" ")) {
+            valido = false;
+        }
+        if (valido == true) {
+            StringTokenizer token = new StringTokenizer(time, ":");
+            int hora = Integer.parseInt(token.nextToken());
+            int min = Integer.parseInt(token.nextToken());
+
+            if (hora < 0 || hora > 23) {
+                valido = false;
+            }
+            if (min < 0 || min > 59) {
+                valido = false;
+            }
+        }
+        return valido;
+    }
+
+    boolean dateVerification(String date) {
+        //CRIAÇÃO DAS VARIAVEIS
+        boolean dataValida = true;
+        int dia = 29, mes = 12, ano = 2020;
+        if (date.equals("  /  /  ") || date.contains(" ")) {
+            dataValida = false;
+        }
+        if (dataValida == true) {
+            StringTokenizer dataTokenizer = new StringTokenizer(date, "/");
+            dia = Integer.parseInt(dataTokenizer.nextToken());
+            mes = Integer.parseInt(dataTokenizer.nextToken());
+            if (mes > 12 || mes < 1) {
+                dataValida = false;
+            }
+            //MES COM 31 DIAS
+            if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
+                if (dia > 31 || dia < 1) {
+                    dataValida = false;
+                }
+            } else if (mes == 2) {
+                //FEVEREIRO COM 29 DIAS
+                if (ano % 4 == 0) {
+                    if (dia > 29 || dia < 1) {
+                        dataValida = false;
+                    }
+                } else {
+                    //FEVEREIRO COM 28 DIAS
+                    if (dia > 28 || dia < 1) {
+                        dataValida = false;
+                    }
+                }
+            } else {
+                //MES COM 30 DIAS
+                if (dia > 30 || dia < 1) {
+                    dataValida = false;
+                }
+            }
+        }
+        return dataValida;
     }
 
     @SuppressWarnings("unchecked")
@@ -930,6 +1019,7 @@ public class MainScreen extends javax.swing.JFrame {
         jpn_pedidoList.setLayout(null);
 
         jl_pedidoList_id.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jl_pedidoList_id.setForeground(java.awt.Color.red);
         jl_pedidoList_id.setText("0");
         jpn_pedidoList.add(jl_pedidoList_id);
         jl_pedidoList_id.setBounds(910, 10, 60, 22);
@@ -1188,7 +1278,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel_PedidosList.setLayout(jPanel_PedidosListLayout);
         jPanel_PedidosListLayout.setHorizontalGroup(
             jPanel_PedidosListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1350, Short.MAX_VALUE)
+            .addComponent(jLayeredPane4)
         );
         jPanel_PedidosListLayout.setVerticalGroup(
             jPanel_PedidosListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1944,7 +2034,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1355, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -2542,34 +2632,68 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jList_pedido_queijosValueChanged
 
     private void jb_pedido_finalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedido_finalizarActionPerformed
-        PedidoDAO.whoIsLastPedidoID();
-        Pedido newPedido = new Pedido();
-        newPedido.setFk_client_cpf(jtf_pedido_cpfCliente.getText());
-        newPedido.setDeliveryDeadLine(Integer.parseInt(jtf_pedido_deliveryDeadLine.getText()));
-        newPedido.setNote(jta_pedido_note.getText());
+        if (newPedidoVerification()) {
+            int sucessCount = 0;
+            boolean erroProdutos = false;
+            PedidoDAO.whoIsLastPedidoID();
+            Pedido newPedido = new Pedido();
+            newPedido.setFk_client_cpf(jtf_pedido_cpfCliente.getText());
+            newPedido.setDeliveryDeadLine(Integer.parseInt(jtf_pedido_deliveryDeadLine.getText()));
+            newPedido.setNote(jta_pedido_note.getText());
 
-        //RECUPERAR DATA E HORA E GRAVAR
-        StringTokenizer st = new StringTokenizer(jtf_pedido_data.getText(), "/");
-        int dia = Integer.parseInt(st.nextToken());
-        int mes = Integer.parseInt(st.nextToken());
-        int ano = Integer.parseInt(st.nextToken()) + 2000;
-        StringTokenizer st2 = new StringTokenizer(jtf_pedido_hora.getText(), ":");
-        int hora = Integer.parseInt(st2.nextToken());
-        int min = Integer.parseInt(st2.nextToken());
-        newPedido.setPedidoDate(LocalDateTime.of(ano, mes, dia, hora, min));
+            //RECUPERAR DATA E HORA E GRAVAR
+            StringTokenizer st = new StringTokenizer(jtf_pedido_data.getText(), "/");
+            int dia = Integer.parseInt(st.nextToken());
+            int mes = Integer.parseInt(st.nextToken());
+            int ano = Integer.parseInt(st.nextToken()) + 2000;
+            StringTokenizer st2 = new StringTokenizer(jtf_pedido_hora.getText(), ":");
+            int hora = Integer.parseInt(st2.nextToken());
+            int min = Integer.parseInt(st2.nextToken());
+            newPedido.setPedidoDate(LocalDateTime.of(ano, mes, dia, hora, min));
 
-        //CRIAR PEDIDO
-        PedidoDAO.create(newPedido);
+            //CRIAR PEDIDO
+            String erro = PedidoDAO.create(newPedido);
+            if (erro != null) {
+                player.erroSong.play();
+                JOptionPane.showMessageDialog(null, "Erro Encontado: \n" + erro,
+                        "Resultado da operação", JOptionPane.ERROR_MESSAGE);
+            } else {
+                int idpedido = PedidoDAO.whoIsLastPedidoID();
 
-        int idpedido = PedidoDAO.whoIsLastPedidoID();
-        queijoPedidoList.forEach(pedido -> {
-            pedido.setFk_id_pedido(idpedido);
-            QueijoPedidoDAO.create(pedido);
-        });
-        pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
-        queijoPedidoList.clear();
-        clearPedidoRegistrationPage();
-        jTabbedPane1.setSelectedIndex(2);
+                for (int i = 0; i < queijoPedidoList.size(); i++) {
+                    QueijoPedido pedido = queijoPedidoList.get(i);
+                    pedido.setFk_id_pedido(idpedido);
+                    String erro1 = QueijoPedidoDAO.create(pedido);
+                    if (erro1 != null) {
+                        erroProdutos = true;
+                        player.erroSong.play();
+                        JOptionPane.showMessageDialog(null, "Erro Encontado: \n" + erro1,
+                                "Resultado da operação", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        sucessCount++;
+                    }
+                }
+                //MOSTRAR RESULTADO DA OPERAÇÃO
+                if (erro == null) {
+                    player.sucessSong.play();
+                } else {
+                    player.erroSong.play();
+                }
+                JOptionPane.showMessageDialog(null, (erro == null)
+                        ? (erroProdutos == false) ? "Pedido salvo com sucesso!"
+                                : "Pedido salvo com observações: \n "
+                                + sucessCount + "de " + queijoPedidoList.size() + "cadastrados"
+                        : "Erro Encontado: \n" + erro, "Resultado da operação",
+                        (erro == null) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
+
+                if (erro != null) {
+                    pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
+                    queijoPedidoList.clear();
+                    clearPedidoRegistrationPage();
+                    jTabbedPane1.setSelectedIndex(2);
+                }
+            }
+        }
     }//GEN-LAST:event_jb_pedido_finalizarActionPerformed
 
     private void jcb_pedido_clientItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcb_pedido_clientItemStateChanged
@@ -2609,6 +2733,9 @@ public class MainScreen extends javax.swing.JFrame {
             QueijoPedido newPedido = new QueijoPedido(0, 0, idNovoProduto, quant);
             queijoPedidoList.add(newPedido);
             produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, true);
+            
+            player.sucessSong.play();
+            JOptionPane.showMessageDialog(null, "Produto Adicionado ao Pedido!");
         } else {
             player.erroSong.play();
             JOptionPane.showMessageDialog(null, "Quantidade do Produto Inválida", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
@@ -2619,10 +2746,22 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jtf_pedido_horaActionPerformed
 
     private void jbt_pedido_cancelar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_pedido_cancelar_produtoActionPerformed
-        if (Integer.parseInt(jtf_pedido_n_cancelar.getText()) <= queijoPedidoList.size() && Integer.parseInt(jtf_pedido_n_cancelar.getText()) > 0) {
+        
+        if(jtf_pedido_n_cancelar.getText().isEmpty()){
+            player.erroSong.play();
+            JOptionPane.showMessageDialog(null, "Número do Produto Inválido (vazio)", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(!(jtf_pedido_n_cancelar.getText().matches("[0-9]+"))){
+            player.erroSong.play();
+            JOptionPane.showMessageDialog(null, "Número do Produto Inválido (contém letras)", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
+        } 
+        else if (Integer.parseInt(jtf_pedido_n_cancelar.getText()) <= queijoPedidoList.size() && Integer.parseInt(jtf_pedido_n_cancelar.getText()) > 0) {
             queijoPedidoList.remove(Integer.parseInt(jtf_pedido_n_cancelar.getText()) - 1);
             produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, true);
             jtf_pedido_n_cancelar.setText("");
+            player.sucessSong.play();
+            JOptionPane.showMessageDialog(null, "Produto Cancelado!");
+            
         } else {
             player.erroSong.play();
             JOptionPane.showMessageDialog(null, "Número do Produto Inválido", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
@@ -2653,8 +2792,7 @@ public class MainScreen extends javax.swing.JFrame {
         if (achou == true) {
             produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read(jtf_pedidoList_selected_id.getText()), false);
             jl_pedidoList_id.setText(jtf_pedidoList_selected_id.getText());
-        }
-        else{
+        } else {
             player.erroSong.play();
             JOptionPane.showMessageDialog(null, "ID do Pedido não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
         }
