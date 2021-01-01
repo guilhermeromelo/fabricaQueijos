@@ -37,12 +37,13 @@ public class QueijoPedidoDAO {
         return erro;
     }
 
-    public static ArrayList<QueijoPedido> read() {
+    public static ArrayList<QueijoPedido> read(String id) {
         ArrayList<QueijoPedido> queijoPedidoList = new ArrayList();
         PreparedStatement state;
-        String msgSQL = "select * from queijo_pedido";
+        String msgSQL = "select * from queijo_pedido where fk_id_pedido =?";
         try {
             state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state.setInt(1, Integer.parseInt(id));
             ResultSet res = state.executeQuery();
             queijoPedidoList = resToArrayList(res);
             state.close();

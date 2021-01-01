@@ -61,6 +61,8 @@ public class MainScreen extends javax.swing.JFrame {
         queijoTableBuilder(jTableQueijo, QueijoDAO.read(false, "", false));
         produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, true);
         pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
+        produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read("14"), false);
+        System.out.println(jtb_PedidoList.getValueAt(0, 1));
 
         //Lists Initialization
         queijoListBuilder();
@@ -270,7 +272,7 @@ public class MainScreen extends javax.swing.JFrame {
     void pedidosTableBuilder(JTable jtable, ArrayList<Pedido> pedidoList) {
         DefaultTableModel tableRows1;
         tableRows1 = new DefaultTableModel(new String[]{"Nº", "ID", "CPF", "Data",
-            "Hora", "Prazo Entrega (dias)"}, 0);
+            "Hora", "Prazo (dias)"}, 0);
         for (int i = 0; i < pedidoList.size(); i++) {
             Pedido p = pedidoList.get(i);
             tableRows1.addRow(new Object[]{(i + 1), p.getPedidoID(), p.getFk_client_cpf(),
