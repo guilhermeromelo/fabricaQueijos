@@ -1,5 +1,6 @@
 package controllers;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,13 +10,15 @@ import models.Pedido;
 
 public class PedidoDAO {
 
+    static Connection connection = DatabaseConnection.getConexao();
+    
     public static String create(Pedido newpedido) {
         String erro = null;
         PreparedStatement state;
         String msgSQL = "insert into pedido (fk_client_cpf, pedidoDate, deliveryDeadLine, note)"
                 + "values (?,?,?,?)";
         try {
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             state.setString(1, newpedido.getFk_client_cpf());
             Timestamp timestamp = Timestamp.valueOf(newpedido.getPedidoDate());
             state.setTimestamp(2, timestamp);
@@ -38,7 +41,7 @@ public class PedidoDAO {
         ArrayList<Pedido> pedidoList = new ArrayList();
         String msgSQL = "select * from pedido";
         try {
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             ResultSet res;
             res = state.executeQuery();
             pedidoList = resToArrayList(res);
@@ -75,7 +78,7 @@ public class PedidoDAO {
         String msgSQL = "update pedido set fk_client_cpf=?, pedidoDate=?,"
                 + "deliveryDeadLine=?, note=? where pedidoID=?";
         try {
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             state.setString(1, pedido.getFk_client_cpf());
             Timestamp timestamp = Timestamp.valueOf(pedido.getPedidoDate());
             state.setTimestamp(2, timestamp);
@@ -99,7 +102,7 @@ public class PedidoDAO {
         PreparedStatement state;
         String msgSQL = "delete from pedido where pedidoID=?";
         try {
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             state.setInt(1, pedido.getPedidoID());
             state.execute();
             state.close();
@@ -119,7 +122,7 @@ public class PedidoDAO {
         PreparedStatement state;
         String msgSQL = "select max(pedidoid) from pedido";
         try{
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             ResultSet res = state.executeQuery();
             if(res.next()){
                 nextPedidoID = res.getInt("max");
@@ -138,7 +141,7 @@ public class PedidoDAO {
         Pedido pedidoList = new Pedido();
         String msgSQL = "select * from pedido where pedidoid=?";
         try {
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             state.setInt(1, Integer.parseInt(id));
             ResultSet res;
             res = state.executeQuery();

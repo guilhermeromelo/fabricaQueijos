@@ -8,6 +8,7 @@ import controllers.*;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.event.ItemEvent;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.StringTokenizer;
 import javax.swing.table.DefaultTableModel;
@@ -39,6 +40,9 @@ public class MainScreen extends javax.swing.JFrame {
 
     //JList
     private DefaultListModel jListQueijoModel;
+    
+    //DECIMAL FORMATTER
+    DecimalFormat df = new DecimalFormat("#.00");
 
     public MainScreen() {
         initComponents();
@@ -173,8 +177,8 @@ public class MainScreen extends javax.swing.JFrame {
             "Tipo", "Temperatura Ideal", "Valor Venda"}, 0);
         for (int i = 0; i < queijoList.size(); i++) {
             Queijo q = queijoList.get(i);
-            tableRows1.addRow(new Object[]{(i + 1), q.getQueijoID(), q.getWeight(),
-                q.getPricePerKg(), q.getQueijoType(), q.getRecommendedTemperature(), (q.getWeight() * q.getPricePerKg())});
+            tableRows1.addRow(new Object[]{(i + 1), q.getQueijoID(), df.format(q.getWeight()),
+                q.getPricePerKg(), q.getQueijoType(), q.getRecommendedTemperature(), df.format(q.getWeight() * q.getPricePerKg())});
         }
         jtable.setModel(tableRows1);
         jlb_totalQueijos.setText("" + queijoList.size());
@@ -216,7 +220,7 @@ public class MainScreen extends javax.swing.JFrame {
         ArrayList<Queijo> queijoList = QueijoDAO.read(true, "queijoid", false);
         queijoList.forEach(q -> {
             jListQueijoModel.addElement("ID: " + q.getQueijoID() + ", Tipo: "
-                    + q.getQueijoType() + ", Peso: " + q.getWeight() + ", Preço/Kg: " + q.getPricePerKg());
+                    + q.getQueijoType() + ", Peso: " + df.format(q.getWeight()) + ", Preço/Kg: " + df.format(q.getPricePerKg()));
         });
         jList_pedido_queijos.setModel(jListQueijoModel);
         jList_pedido_queijos.setSelectedIndex(0);
@@ -239,6 +243,7 @@ public class MainScreen extends javax.swing.JFrame {
         DefaultTableModel tableRows2;
         double total = 0.00;
 
+
         tableRows2 = new DefaultTableModel(new String[]{"Nº", "ID", "Tipo", "Peso", "Valor/Kg",
             "Qtd", "Valor Total"}, 0);
         ArrayList<Queijo> queijos = QueijoDAO.read(false, "", false);
@@ -252,11 +257,12 @@ public class MainScreen extends javax.swing.JFrame {
                     if (String.valueOf(p.getFk_id_queijo()).equals("" + queijoAux.getQueijoID())) {
                         achou = true;
                         tableRows2.addRow(new Object[]{(j + 1), queijoAux.getQueijoID(),
-                            queijoAux.getQueijoType(), queijoAux.getWeight(),
-                            queijoAux.getPricePerKg(), p.getQuantity(), (p.getQuantity()
+                            queijoAux.getQueijoType(), df.format(queijoAux.getWeight()),
+                            queijoAux.getPricePerKg(), p.getQuantity(), df.format(p.getQuantity()
                             * queijoAux.getPricePerKg() * queijoAux.getWeight())});
                         total += (p.getQuantity()
                                 * queijoAux.getPricePerKg() * queijoAux.getWeight());
+                        
                     }
 
                 }
@@ -266,9 +272,9 @@ public class MainScreen extends javax.swing.JFrame {
             }
         }
         if (registrationPage) {
-            jlb_pedido_valor_total.setText("" + total);
+            jlb_pedido_valor_total.setText("" + df.format(total));
         } else {
-            jlb_pedidoList_valor_total.setText("" + total);
+            jlb_pedidoList_valor_total.setText("" + df.format(total));
 
         }
         jtable.setModel(tableRows2);
@@ -2686,7 +2692,7 @@ public class MainScreen extends javax.swing.JFrame {
                         : "Erro Encontado: \n" + erro, "Resultado da operação",
                         (erro == null) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
 
-                if (erro != null) {
+                if (erro == null) {
                     pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
                     queijoPedidoList.clear();
                     clearPedidoRegistrationPage();

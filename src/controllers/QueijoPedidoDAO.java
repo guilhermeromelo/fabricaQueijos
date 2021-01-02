@@ -1,5 +1,6 @@
 package controllers;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,19 +9,15 @@ import models.QueijoPedido;
 
 public class QueijoPedidoDAO {
 
-    /*
-    private int queijoPedidoID;
-    private int fk_id_pedido;
-    private int fk_id_queijo;
-    private int quantity;
-     */
+    static Connection connection = DatabaseConnection.getConexao();
+    
     public static String create(QueijoPedido newqueijoPedido) {
         String erro = null;
         PreparedStatement state;
         String msgSQL = "insert into queijo_pedido(fk_id_pedido, fk_id_queijo, quantity) "
                 + "values (?, ?, ?)";
         try {
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             state.setInt(1, newqueijoPedido.getFk_id_pedido());
             state.setInt(2, newqueijoPedido.getFk_id_queijo());
             state.setInt(3, newqueijoPedido.getQuantity());
@@ -42,7 +39,7 @@ public class QueijoPedidoDAO {
         PreparedStatement state;
         String msgSQL = "select * from queijo_pedido where fk_id_pedido =?";
         try {
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             state.setInt(1, Integer.parseInt(id));
             ResultSet res = state.executeQuery();
             queijoPedidoList = resToArrayList(res);
@@ -77,7 +74,7 @@ public class QueijoPedidoDAO {
         String msgSQL = "update queijo_pedido set fk_id_pedido=?, fk_id_queijo=?, "
                 + "quantity=? where queijoPedidoID=?";
         try{
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             state.setInt(1, queijoPedido.getFk_id_pedido());
             state.setInt(2, queijoPedido.getFk_id_queijo());
             state.setInt(3, queijoPedido.getQuantity());
@@ -97,7 +94,7 @@ public class QueijoPedidoDAO {
         PreparedStatement state;
         String msgSQL = "delete from queijo_pedido where queijoPedidoID=?";
         try{
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             state.setInt(1, queijoPedido.getFk_id_pedido());
             state.execute();
             state.close();

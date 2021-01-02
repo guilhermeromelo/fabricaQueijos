@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 public class Main {
 
     public static void main(String[] args) {
-        try{
+//        try{
 //            /* TESTES DO CLIENTE */
 //            Client cliente = new Client("125.111.111-12", "Guilherme", "34 988396298", 
 //                    "Rua Mariquinha Montandon", "facebook/guirmelo", "insta/guirmelo", "1111 2222 3333 4444");
@@ -40,15 +40,15 @@ public class Main {
 //                System.out.println(q.toString());
 //            });
 //            
-
+//
 //            Pedido pedido = new Pedido("125.553.506-75", LocalDateTime.now(), 5, "Rapaz, perugnta no posto ipiranga");
 //            PedidoDAO.create(pedido);
-              Connection con = DatabaseConnection.getConexao();
-              
-            
-        }catch(SQLException e){
-            System.out.println("\n Erro Encontrado: "+e.toString());
-        }
+//              Connection con = DatabaseConnection.getConexao();
+//              
+//            
+//        }catch(SQLException e){
+//            System.out.println("\n Erro Encontrado: "+e.toString());
+//        }
         
         MainScreen tela = new MainScreen();
         tela.setVisible(true);

@@ -9,13 +9,15 @@ import models.Queijo;
 
 public class QueijoDAO {
     
+    static Connection connection = DatabaseConnection.getConexao();
+    
     public static String create(Queijo queijo) {
         String erro = null;
         PreparedStatement state;
         String msgSQL = "insert into queijo(weight, pricePerKg, queijoType, recommendedTemperature)"
                 + "values (?, ?, ?, ?)";
         try {
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             state.setDouble(1, queijo.getWeight());
             state.setDouble(2, queijo.getPricePerKg());
             state.setString(3, queijo.getQueijoType());
@@ -44,7 +46,7 @@ public class QueijoDAO {
         }
 
         try {
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             ResultSet res = state.executeQuery();
             queijoList = resultSetToArrayList(res);
             res.close();
@@ -79,7 +81,7 @@ public class QueijoDAO {
         String msgSQL = "update queijo set weight=?, pricePerKg=?, queijoType=?, "
                 + "recommendedTemperature=? where queijoID=?";
         try {
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             state.setDouble(1, queijo.getWeight());
             state.setDouble(2, queijo.getPricePerKg());
             state.setString(3, queijo.getQueijoType());
@@ -102,7 +104,7 @@ public class QueijoDAO {
         PreparedStatement state;
         String msgSQL = "delete from queijo where queijoID=?";
         try {
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             state.setInt(1, queijo.getQueijoID());
             state.execute();
             state.close();

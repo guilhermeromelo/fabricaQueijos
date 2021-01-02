@@ -6,13 +6,15 @@ import models.Client;
 
 public class ClientDAO {
     
+    static Connection connection = DatabaseConnection.getConexao();
+    
     public static String create(Client newClient) {
         String erro = null;
         PreparedStatement state;
         String msgSQL = "insert into client (cpf, clientName, phone, address,"
                 + "facebookURL, instagramURL, creditCard) values (?,?,?,?,?,?,?)";
         try {
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             state.setString(1, newClient.getCPF());
             state.setString(2, newClient.getClientName());
             state.setString(3, newClient.getPhone());
@@ -44,7 +46,7 @@ public class ClientDAO {
             msgSQL = "Select * from client";
         }
         try {
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             res = state.executeQuery();
             clientList = resultSetToArrayListClient(res);
             res.close();
@@ -83,7 +85,7 @@ public class ClientDAO {
         String msgSQL = "update client set address=?, clientName=?, creditCard=?, "
                 + "facebookURL=?, instagramURL=?, phone=? where cpf=?";
         try {
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             state.setString(1, client.getAddress());
             state.setString(2, client.getClientName());
             state.setString(3, client.getCreditCard());
@@ -108,7 +110,7 @@ public class ClientDAO {
         PreparedStatement state;
         String msgSQL = "delete from client where cpf=?";
         try {
-            state = DatabaseConnection.getConexao().prepareStatement(msgSQL);
+            state = connection.prepareStatement(msgSQL);
             state.setString(1, client.getCPF());
             state.execute();
             state.close();

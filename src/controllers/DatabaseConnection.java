@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection{
-    public static Connection getConexao() throws SQLException{
+    public static Connection getConexao(){
         Connection databaseConnection = null;
         try {
             //Class.forName("org.postgresql.Driver");
