@@ -40,7 +40,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     //JList
     private DefaultListModel jListQueijoModel;
-    
+
     //DECIMAL FORMATTER
     DecimalFormat df = new DecimalFormat("#.00");
 
@@ -59,13 +59,14 @@ public class MainScreen extends javax.swing.JFrame {
         //Second panel
         jpn_clientRegistration.setVisible(false);
         jpn_queijoRegistration.setVisible(false);
+        jpn_firstPedido.setVisible(false);
 
         //Tables Initialization
         clientTableBuilder(jTableClient, ClientDAO.read(false, "", false));
         queijoTableBuilder(jTableQueijo, QueijoDAO.read(false, "", false));
-        produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, true);
+        produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, 1);
         pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
-        produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read("" + jtb_PedidoList.getValueAt(0, 1)), false);
+        produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read("" + jtb_PedidoList.getValueAt(0, 1)), 2);
         jl_pedidoList_id.setText("" + jtb_PedidoList.getValueAt(0, 1));
 
         //Lists Initialization
@@ -239,10 +240,9 @@ public class MainScreen extends javax.swing.JFrame {
         jtf_pedido_cpfCliente.setText("Selecione o cliente acima!");
     }
 
-    void produtosPedidosTableBuilder(JTable jtable, ArrayList<QueijoPedido> produtosPedido, boolean registrationPage) {
+    void produtosPedidosTableBuilder(JTable jtable, ArrayList<QueijoPedido> produtosPedido, int registrationPage) {
         DefaultTableModel tableRows2;
         double total = 0.00;
-
 
         tableRows2 = new DefaultTableModel(new String[]{"Nº", "ID", "Tipo", "Peso", "Valor/Kg",
             "Qtd", "Valor Total"}, 0);
@@ -262,20 +262,21 @@ public class MainScreen extends javax.swing.JFrame {
                             * queijoAux.getPricePerKg() * queijoAux.getWeight())});
                         total += (p.getQuantity()
                                 * queijoAux.getPricePerKg() * queijoAux.getWeight());
-                        
+
                     }
 
                 }
-                if (registrationPage == false) {
+                if (registrationPage == 2) {
                     jta_pedidoList_obs.setText(PedidoDAO.search("" + p.getFk_id_pedido()).getNote());
                 }
             }
         }
-        if (registrationPage) {
+        if (registrationPage == 1) {
             jlb_pedido_valor_total.setText("" + df.format(total));
-        } else {
+        } else if (registrationPage == 2) {
             jlb_pedidoList_valor_total.setText("" + df.format(total));
-
+        } else {
+            jlb_firstPedido_total.setText("" + df.format(total));
         }
         jtable.setModel(tableRows2);
     }
@@ -332,7 +333,7 @@ public class MainScreen extends javax.swing.JFrame {
         jcb_pedido_client.setSelectedIndex(0);
         jList_pedido_queijos.setSelectedIndex(0);
         jtf_pedido_nomeProduto.setText(jList_pedido_queijos.getSelectedValue());
-        produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, new ArrayList(), true);
+        produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, new ArrayList(), 1);
     }
 
     boolean newPedidoVerification() {
@@ -489,10 +490,10 @@ public class MainScreen extends javax.swing.JFrame {
         jb_ordenar_pedidos_cres = new javax.swing.JButton();
         jLabel29 = new javax.swing.JLabel();
         jlb_totalPedidos = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jb_pedido_lastPedidoFromClient = new javax.swing.JButton();
+        jb_pedidoList_inserir = new javax.swing.JButton();
+        jb_pedidoList_modificar = new javax.swing.JButton();
+        jb_pedidoList_remover = new javax.swing.JButton();
+        jb_pedido_firstPedidoFromClient = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         jtb_PedidoList_queijoPedido = new javax.swing.JTable();
         jLabel34 = new javax.swing.JLabel();
@@ -518,7 +519,31 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel45 = new javax.swing.JLabel();
         jlb_pedidoList_valor_total = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
-        jPanel19 = new javax.swing.JPanel();
+        jpn_firstPedido = new javax.swing.JPanel();
+        jLabel47 = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jtb_fistPedido_produtos = new javax.swing.JTable();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jtf_fistPedido_note = new javax.swing.JTextArea();
+        jLabel48 = new javax.swing.JLabel();
+        jtf_fistPedido_deliveryDeadLine = new javax.swing.JTextField();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        jtf_fistPedido_hora = new javax.swing.JFormattedTextField();
+        jLabel51 = new javax.swing.JLabel();
+        jtf_fistPedido_data = new javax.swing.JFormattedTextField();
+        jLabel52 = new javax.swing.JLabel();
+        jtf_fistPedido_cpfCliente = new javax.swing.JFormattedTextField();
+        jLabel53 = new javax.swing.JLabel();
+        jLabel54 = new javax.swing.JLabel();
+        jLabel55 = new javax.swing.JLabel();
+        jtf_fistPedido_id = new javax.swing.JTextField();
+        jL_Cadastrar_cliente5 = new javax.swing.JLabel();
+        jtf_fistPedido_clientName = new javax.swing.JTextField();
+        jL_Cadastrar_cliente6 = new javax.swing.JLabel();
+        jb_back_firstPedido = new javax.swing.JButton();
+        jLabel56 = new javax.swing.JLabel();
+        jlb_firstPedido_total = new javax.swing.JLabel();
         jPanel18 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
@@ -1011,7 +1036,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel_OrderPedido.setLayout(jPanel_OrderPedidoLayout);
         jPanel_OrderPedidoLayout.setHorizontalGroup(
             jPanel_OrderPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1350, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1)
         );
         jPanel_OrderPedidoLayout.setVerticalGroup(
             jPanel_OrderPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1074,30 +1099,45 @@ public class MainScreen extends javax.swing.JFrame {
         jpn_pedidoList.add(jlb_totalPedidos);
         jlb_totalPedidos.setBounds(209, 612, 34, 17);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_add_black_18dp.png"))); // NOI18N
-        jButton3.setText("Inserir Pedido");
-        jpn_pedidoList.add(jButton3);
-        jButton3.setBounds(1190, 600, 150, 27);
-
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_edit_black_18dp.png"))); // NOI18N
-        jButton4.setText("Modificar Pedido");
-        jpn_pedidoList.add(jButton4);
-        jButton4.setBounds(1020, 600, 160, 27);
-
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_delete_black_18dp.png"))); // NOI18N
-        jButton5.setText("Remover Pedido");
-        jpn_pedidoList.add(jButton5);
-        jButton5.setBounds(850, 600, 160, 27);
-
-        jb_pedido_lastPedidoFromClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
-        jb_pedido_lastPedidoFromClient.setText("PEDIDO MAIS ANTIGO DE UM CLIENTE");
-        jb_pedido_lastPedidoFromClient.addActionListener(new java.awt.event.ActionListener() {
+        jb_pedidoList_inserir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_add_black_18dp.png"))); // NOI18N
+        jb_pedidoList_inserir.setText("Inserir Pedido");
+        jb_pedidoList_inserir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_pedido_lastPedidoFromClientActionPerformed(evt);
+                jb_pedidoList_inserirActionPerformed(evt);
             }
         });
-        jpn_pedidoList.add(jb_pedido_lastPedidoFromClient);
-        jb_pedido_lastPedidoFromClient.setBounds(540, 600, 280, 27);
+        jpn_pedidoList.add(jb_pedidoList_inserir);
+        jb_pedidoList_inserir.setBounds(1190, 600, 150, 27);
+
+        jb_pedidoList_modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_edit_black_18dp.png"))); // NOI18N
+        jb_pedidoList_modificar.setText("Modificar Pedido");
+        jb_pedidoList_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_pedidoList_modificarActionPerformed(evt);
+            }
+        });
+        jpn_pedidoList.add(jb_pedidoList_modificar);
+        jb_pedidoList_modificar.setBounds(1020, 600, 160, 27);
+
+        jb_pedidoList_remover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_delete_black_18dp.png"))); // NOI18N
+        jb_pedidoList_remover.setText("Remover Pedido");
+        jb_pedidoList_remover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_pedidoList_removerActionPerformed(evt);
+            }
+        });
+        jpn_pedidoList.add(jb_pedidoList_remover);
+        jb_pedidoList_remover.setBounds(850, 600, 160, 27);
+
+        jb_pedido_firstPedidoFromClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
+        jb_pedido_firstPedidoFromClient.setText("PEDIDO MAIS ANTIGO DE UM CLIENTE");
+        jb_pedido_firstPedidoFromClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_pedido_firstPedidoFromClientActionPerformed(evt);
+            }
+        });
+        jpn_pedidoList.add(jb_pedido_firstPedidoFromClient);
+        jb_pedido_firstPedidoFromClient.setBounds(540, 600, 280, 27);
 
         jtb_PedidoList_queijoPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1233,18 +1273,195 @@ public class MainScreen extends javax.swing.JFrame {
 
         jLayeredPane4.add(jpn_pedidoList);
 
-        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
-        jPanel19.setLayout(jPanel19Layout);
-        jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1350, Short.MAX_VALUE)
+        jLabel47.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel47.setText("PEDIDO MAIS ANTIGO DO CLIENTE");
+
+        jtb_fistPedido_produtos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane9.setViewportView(jtb_fistPedido_produtos);
+
+        jtf_fistPedido_note.setColumns(17);
+        jtf_fistPedido_note.setLineWrap(true);
+        jtf_fistPedido_note.setRows(5);
+        jScrollPane10.setViewportView(jtf_fistPedido_note);
+
+        jLabel48.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel48.setText("Observações:");
+
+        jLabel49.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel49.setText("Prazo de Entrega:");
+
+        jLabel50.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel50.setText("dias");
+
+        jtf_fistPedido_hora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_fistPedido_horaActionPerformed(evt);
+            }
+        });
+
+        jLabel51.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel51.setText("Hora:");
+
+        jLabel52.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel52.setText("Data do Pedido:");
+
+        jLabel53.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel53.setText("Cpf Cliente:");
+
+        jLabel54.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel54.setText("Cliente:");
+
+        jLabel55.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel55.setText("ID do pedido:");
+
+        jL_Cadastrar_cliente5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jL_Cadastrar_cliente5.setText("Dados Do Pedido:");
+
+        jL_Cadastrar_cliente6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jL_Cadastrar_cliente6.setText("Resumo do Pedido:");
+
+        jb_back_firstPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_arrow_back_black_18dp.png"))); // NOI18N
+        jb_back_firstPedido.setText("Retornar a Listagem de Pedidos");
+        jb_back_firstPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_back_firstPedidoActionPerformed(evt);
+            }
+        });
+
+        jLabel56.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabel56.setText("TOTAL: R$");
+
+        jlb_firstPedido_total.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jlb_firstPedido_total.setText("0,00");
+        jlb_firstPedido_total.setToolTipText("");
+
+        javax.swing.GroupLayout jpn_firstPedidoLayout = new javax.swing.GroupLayout(jpn_firstPedido);
+        jpn_firstPedido.setLayout(jpn_firstPedidoLayout);
+        jpn_firstPedidoLayout.setHorizontalGroup(
+            jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpn_firstPedidoLayout.createSequentialGroup()
+                .addGroup(jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpn_firstPedidoLayout.createSequentialGroup()
+                        .addGap(561, 561, 561)
+                        .addComponent(jb_back_firstPedido))
+                    .addGroup(jpn_firstPedidoLayout.createSequentialGroup()
+                        .addGap(499, 499, 499)
+                        .addComponent(jLabel47)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_firstPedidoLayout.createSequentialGroup()
+                .addContainerGap(280, Short.MAX_VALUE)
+                .addGroup(jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jpn_firstPedidoLayout.createSequentialGroup()
+                        .addComponent(jLabel56)
+                        .addGap(18, 18, 18)
+                        .addComponent(jlb_firstPedido_total, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpn_firstPedidoLayout.createSequentialGroup()
+                        .addGroup(jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jpn_firstPedidoLayout.createSequentialGroup()
+                                .addComponent(jLabel55)
+                                .addGap(30, 30, 30)
+                                .addComponent(jtf_fistPedido_id))
+                            .addComponent(jL_Cadastrar_cliente5)
+                            .addGroup(jpn_firstPedidoLayout.createSequentialGroup()
+                                .addComponent(jLabel52)
+                                .addGap(15, 15, 15)
+                                .addComponent(jtf_fistPedido_data, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel51)
+                                .addGap(6, 6, 6)
+                                .addComponent(jtf_fistPedido_hora))
+                            .addGroup(jpn_firstPedidoLayout.createSequentialGroup()
+                                .addComponent(jLabel49)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtf_fistPedido_deliveryDeadLine, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel50))
+                            .addGroup(jpn_firstPedidoLayout.createSequentialGroup()
+                                .addComponent(jLabel48)
+                                .addGap(30, 30, 30)
+                                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpn_firstPedidoLayout.createSequentialGroup()
+                                .addGroup(jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel53)
+                                    .addComponent(jLabel54))
+                                .addGap(44, 44, 44)
+                                .addGroup(jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtf_fistPedido_clientName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtf_fistPedido_cpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(112, 112, 112)
+                        .addGroup(jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jL_Cadastrar_cliente6)
+                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(73, 73, 73))
         );
-        jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+        jpn_firstPedidoLayout.setVerticalGroup(
+            jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpn_firstPedidoLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel47)
+                .addGap(91, 91, 91)
+                .addGroup(jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jL_Cadastrar_cliente5)
+                    .addComponent(jL_Cadastrar_cliente6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpn_firstPedidoLayout.createSequentialGroup()
+                        .addGroup(jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel55)
+                            .addComponent(jtf_fistPedido_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
+                        .addGroup(jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel54)
+                            .addComponent(jtf_fistPedido_clientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpn_firstPedidoLayout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(jLabel53))
+                            .addComponent(jtf_fistPedido_cpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpn_firstPedidoLayout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel52))
+                            .addComponent(jtf_fistPedido_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel51)
+                            .addComponent(jtf_fistPedido_hora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpn_firstPedidoLayout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addGroup(jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel49)
+                                    .addComponent(jtf_fistPedido_deliveryDeadLine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addGroup(jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel48)
+                            .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                        .addComponent(jb_back_firstPedido)
+                        .addGap(34, 34, 34))
+                    .addGroup(jpn_firstPedidoLayout.createSequentialGroup()
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlb_firstPedido_total, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        jLayeredPane4.add(jPanel19);
+        jLayeredPane4.add(jpn_firstPedido);
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
@@ -1635,7 +1852,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel_ClientList.setLayout(jPanel_ClientListLayout);
         jPanel_ClientListLayout.setHorizontalGroup(
             jPanel_ClientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1350, Short.MAX_VALUE)
+            .addComponent(jLayeredPane2)
         );
         jPanel_ClientListLayout.setVerticalGroup(
             jPanel_ClientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2000,7 +2217,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel_QueijoList.setLayout(jPanel_QueijoListLayout);
         jPanel_QueijoListLayout.setHorizontalGroup(
             jPanel_QueijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1350, Short.MAX_VALUE)
+            .addComponent(jLayeredPane3)
         );
         jPanel_QueijoListLayout.setVerticalGroup(
             jPanel_QueijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2693,7 +2910,7 @@ public class MainScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, (erro == null)
                         ? (erroProdutos == false) ? "Pedido salvo com sucesso!"
                                 : "Pedido salvo com observações: \n "
-                                + sucessCount + "de " + queijoPedidoList.size() + "cadastrados"
+                                + sucessCount + "de " + queijoPedidoList.size() + " produtos cadastrados"
                         : "Erro Encontado: \n" + erro, "Resultado da operação",
                         (erro == null) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
 
@@ -2742,8 +2959,8 @@ public class MainScreen extends javax.swing.JFrame {
 
             QueijoPedido newPedido = new QueijoPedido(0, 0, idNovoProduto, quant);
             queijoPedidoList.add(newPedido);
-            produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, true);
-            
+            produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, 1);
+
             player.sucessSong.play();
             JOptionPane.showMessageDialog(null, "Produto Adicionado ao Pedido!");
         } else {
@@ -2756,21 +2973,19 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jtf_pedido_horaActionPerformed
 
     private void jbt_pedido_cancelar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_pedido_cancelar_produtoActionPerformed
-        if(jtf_pedido_n_cancelar.getText().isEmpty()){
+        if (jtf_pedido_n_cancelar.getText().isEmpty()) {
             player.erroSong.play();
             JOptionPane.showMessageDialog(null, "Número do Produto Inválido (vazio)", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
-        }
-        else if(!(jtf_pedido_n_cancelar.getText().matches("[0-9]+"))){
+        } else if (!(jtf_pedido_n_cancelar.getText().matches("[0-9]+"))) {
             player.erroSong.play();
             JOptionPane.showMessageDialog(null, "Número do Produto Inválido (contém letras)", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
-        } 
-        else if (Integer.parseInt(jtf_pedido_n_cancelar.getText()) <= queijoPedidoList.size() && Integer.parseInt(jtf_pedido_n_cancelar.getText()) > 0) {
+        } else if (Integer.parseInt(jtf_pedido_n_cancelar.getText()) <= queijoPedidoList.size() && Integer.parseInt(jtf_pedido_n_cancelar.getText()) > 0) {
             queijoPedidoList.remove(Integer.parseInt(jtf_pedido_n_cancelar.getText()) - 1);
-            produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, true);
+            produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, 1);
             jtf_pedido_n_cancelar.setText("");
             player.sucessSong.play();
             JOptionPane.showMessageDialog(null, "Produto Cancelado!");
-            
+
         } else {
             player.erroSong.play();
             JOptionPane.showMessageDialog(null, "Número do Produto Inválido", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
@@ -2798,7 +3013,8 @@ public class MainScreen extends javax.swing.JFrame {
             }
         }
         if (achou == true) {
-            produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read(jtf_pedidoList_selected_id.getText()), false);
+            player.sucessSong.play();
+            produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read(jtf_pedidoList_selected_id.getText()), 2);
             jl_pedidoList_id.setText(jtf_pedidoList_selected_id.getText());
         } else {
             player.erroSong.play();
@@ -2807,28 +3023,144 @@ public class MainScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jb_pedidoList_consultarActionPerformed
 
-    private void jb_pedido_lastPedidoFromClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedido_lastPedidoFromClientActionPerformed
+    private void jb_pedido_firstPedidoFromClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedido_firstPedidoFromClientActionPerformed
         // TODO add your handling code here:
         //PERGUNTAR E ACHAR QUAL O OBJETO A SER EXCLUIDO
         player.alertSong.play();
+        String clientName = "";
+        Pedido firstPedido = null;
         String cpfClient = JOptionPane.showInputDialog("Por favor digite o do Cliente: ");
-        ArrayList<Client> clientList = ClientDAO.read(false, "", false);
         boolean achou = false;
-        for(int i=0;i<clientList.size() && achou == false;i++){
-            if(clientList.get(i).getCPF().equals(cpfClient))
-                achou = true;
-        }
-        if(achou == true){
-            Pedido lastPedido = PedidoDAO.lastPedidoFromClient(cpfClient);
-            JOptionPane.showMessageDialog(null, "Pedido Encontrado: \nID: "
-                    +lastPedido.getPedidoID()+"\n Data: "+lastPedido.getPedidoDate().toString());
-        }
-        else{
+        if (cpfClient != null) {
+            ArrayList<Client> clientList = ClientDAO.read(false, "", false);
+            for (int i = 0; i < clientList.size() && achou == false; i++) {
+                String auxCPF = clientList.get(i).getCPF();
+                if (auxCPF.replace(".", "").replace("-", "").equals(cpfClient.replace(".", "").replace("-", ""))) {
+                    firstPedido = PedidoDAO.firstPedidoFromClient(clientList.get(i).getCPF());
+                    achou = true;
+                    clientName = clientList.get(i).getClientName();
+                }
+            }
+
+            if (achou == true) {
+                //BUILD SCREEN - SET FORMFIELD NOT EDITABLE
+                jtf_fistPedido_cpfCliente.setEditable(false);
+                jtf_fistPedido_clientName.setEditable(false);
+                jtf_fistPedido_data.setEditable(false);
+                jtf_fistPedido_hora.setEditable(false);
+                jtf_fistPedido_deliveryDeadLine.setEditable(false);
+                jtf_fistPedido_id.setEditable(false);
+                jtf_fistPedido_note.setEditable(false);
+
+                //BUILD SCREEN - SET FORMFIELD TEXT
+                jtf_fistPedido_cpfCliente.setText(firstPedido.getFk_client_cpf());
+                jtf_fistPedido_clientName.setText(clientName);
+                jtf_fistPedido_data.setText(dataBuilder(firstPedido.getPedidoDate()));
+                jtf_fistPedido_hora.setText(horaBuilder(firstPedido.getPedidoDate()));
+                jtf_fistPedido_deliveryDeadLine.setText("" + firstPedido.getDeliveryDeadLine());
+                jtf_fistPedido_id.setText("" + firstPedido.getPedidoID());
+                jtf_fistPedido_note.setText(firstPedido.getNote());
+
+                //BUILD SCREEN - BUILDTABLE
+                ArrayList<QueijoPedido> firstPedidoProdutoList = QueijoPedidoDAO.read("" + firstPedido.getPedidoID());
+                produtosPedidosTableBuilder(jtb_fistPedido_produtos, firstPedidoProdutoList, 3);
+
+                //CHANGE JPANELS
+                player.sucessSong.play();
+                jpn_pedidoList.setVisible(false);
+                jpn_firstPedido.setVisible(true);
+            } else {
+                player.erroSong.play();
+                JOptionPane.showMessageDialog(null, "CPF Inválido", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
             player.erroSong.play();
             JOptionPane.showMessageDialog(null, "CPF Inválido", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
         }
-        
-    }//GEN-LAST:event_jb_pedido_lastPedidoFromClientActionPerformed
+
+
+    }//GEN-LAST:event_jb_pedido_firstPedidoFromClientActionPerformed
+
+    private void jtf_fistPedido_horaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_fistPedido_horaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_fistPedido_horaActionPerformed
+
+    private void jb_back_firstPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_back_firstPedidoActionPerformed
+        //CHANGE JPANELS
+        jpn_pedidoList.setVisible(true);
+        jpn_firstPedido.setVisible(false);
+    }//GEN-LAST:event_jb_back_firstPedidoActionPerformed
+
+    private void jb_pedidoList_removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedidoList_removerActionPerformed
+        player.alertSong.play();
+        String id = null;
+        id = JOptionPane.showInputDialog("Por favor o ID do Pedido a Remover: ");
+
+        if (id != null && !id.isEmpty()) {
+            ArrayList<Pedido> pedidoList = PedidoDAO.read();
+            Pedido pedidoRemove = null;
+            boolean achou = false;
+            for (int i = 0; i < pedidoList.size() && achou == false; i++) {
+                pedidoRemove = pedidoList.get(i);
+                if (pedidoRemove.getPedidoID() == Integer.parseInt(id)) {
+                    achou = true;
+                }
+            }
+            if (achou == true) {
+                player.alertSong.play();
+                int delete = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir "
+                        + "o Pedido:\nID: " + pedidoRemove.getPedidoID() + "\nNome Cliente: "
+                        + ClientDAO.nameSearch(pedidoRemove.getFk_client_cpf())
+                        + "\nCPF: " + pedidoRemove.getFk_client_cpf() + "\nIsto Irá apagar o pedido e seus produtos",
+                        "Confirmar Exclusão", JOptionPane.YES_NO_OPTION);
+                if (delete == 0) {
+                    String erro = "";
+                    String erroNoPedido = "";
+                    int sucessCount = 0;
+                    ArrayList<QueijoPedido> queijoPedidoList = QueijoPedidoDAO.read("" + pedidoRemove.getPedidoID());
+                    for (int i = 0; i < queijoPedidoList.size(); i++) {
+                        String erroAtual = QueijoPedidoDAO.delete(queijoPedidoList.get(i));
+                        if (erroAtual == null) {
+                            sucessCount++;
+                        } else {
+                            erro = erro + erroAtual;
+                        }
+
+                    }
+                    erroNoPedido = PedidoDAO.delete(pedidoRemove);
+                    
+                    pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
+                    produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read("" + jtb_PedidoList.getValueAt(0, 1)), 2);
+                    jl_pedidoList_id.setText("" + jtb_PedidoList.getValueAt(0, 1));
+                    
+                    JOptionPane.showMessageDialog(null, (erroNoPedido.isEmpty())
+                            ? (erro.isEmpty()) ? "Pedido removido com sucesso!"
+                            : "Pedido salvo com observações: \n "
+                            + sucessCount + "de " + queijoPedidoList.size() + " produtos excluídos"
+                            : "Erro Encontado: \n" + erro, "Resultado da operação",
+                            (erro == null) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
+                } else {
+                    player.sucessSong.play();
+                    JOptionPane.showMessageDialog(null, "Operação Cancelada!");
+                }
+            } else {
+                player.erroSong.play();
+                JOptionPane.showMessageDialog(null, "ID Inválido", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } else {
+            player.erroSong.play();
+            JOptionPane.showMessageDialog(null, "ID Inválido", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jb_pedidoList_removerActionPerformed
+
+    private void jb_pedidoList_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedidoList_modificarActionPerformed
+
+    }//GEN-LAST:event_jb_pedidoList_modificarActionPerformed
+
+    private void jb_pedidoList_inserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedidoList_inserirActionPerformed
+        jTabbedPane1.setSelectedIndex(1);
+    }//GEN-LAST:event_jb_pedidoList_inserirActionPerformed
 // Pedido Functions End ----------------------------------------------------------------------------------------------
 
     public static void main(String args[]) {
@@ -2864,9 +3196,6 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButton_busca_cliente_cpf;
@@ -2892,6 +3221,8 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jL_Cadastrar_cliente2;
     private javax.swing.JLabel jL_Cadastrar_cliente3;
     private javax.swing.JLabel jL_Cadastrar_cliente4;
+    private javax.swing.JLabel jL_Cadastrar_cliente5;
+    private javax.swing.JLabel jL_Cadastrar_cliente6;
     private javax.swing.JLabel jL_Cadastrar_queijo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -2934,7 +3265,17 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -2961,7 +3302,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2975,6 +3315,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_PedidosList;
     private javax.swing.JPanel jPanel_QueijoList;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -2982,11 +3323,13 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTableClient;
     private javax.swing.JTable jTableQueijo;
     private javax.swing.JButton jb_backClientPage;
     private javax.swing.JButton jb_backQueijoPage;
+    private javax.swing.JButton jb_back_firstPedido;
     private javax.swing.JButton jb_back_pedidoRegistration;
     private javax.swing.JButton jb_finalizarCadastro;
     private javax.swing.JButton jb_finalizarCadastroQueijo;
@@ -2995,10 +3338,13 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton jb_ordenar_pedidos_cres;
     private javax.swing.JButton jb_ordenar_pedidos_desc;
     private javax.swing.JButton jb_pedidoList_consultar;
+    private javax.swing.JButton jb_pedidoList_inserir;
+    private javax.swing.JButton jb_pedidoList_modificar;
+    private javax.swing.JButton jb_pedidoList_remover;
     private javax.swing.JButton jb_pedido_addProduto;
     private javax.swing.JButton jb_pedido_finalizar;
+    private javax.swing.JButton jb_pedido_firstPedidoFromClient;
     private javax.swing.JButton jb_pedido_hora_now;
-    private javax.swing.JButton jb_pedido_lastPedidoFromClient;
     private javax.swing.JButton jb_pedido_newClient;
     private javax.swing.JButton jb_pedido_newQueijo;
     private javax.swing.JButton jbt_pedido_cancelar_produto;
@@ -3006,6 +3352,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcb_ordenar_pedidos;
     private javax.swing.JComboBox<String> jcb_pedido_client;
     private javax.swing.JLabel jl_pedidoList_id;
+    private javax.swing.JLabel jlb_firstPedido_total;
     private javax.swing.JLabel jlb_pedidoList_valor_total;
     private javax.swing.JLabel jlb_pedido_valor_total;
     private javax.swing.JLabel jlb_totalClientes;
@@ -3014,6 +3361,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jpanel_Dashboard;
     private javax.swing.JPanel jpn_clientRegistration;
     private javax.swing.JPanel jpn_clientsList;
+    private javax.swing.JPanel jpn_firstPedido;
     private javax.swing.JPanel jpn_pedidoList;
     private javax.swing.JPanel jpn_queijoList;
     private javax.swing.JPanel jpn_queijoRegistration;
@@ -3022,6 +3370,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JTextArea jta_pedido_note;
     private javax.swing.JTable jtb_PedidoList;
     private javax.swing.JTable jtb_PedidoList_queijoPedido;
+    private javax.swing.JTable jtb_fistPedido_produtos;
     private javax.swing.JTable jtb_resumo_produtos_pedido;
     private javax.swing.JTextField jtf_client_Address;
     private javax.swing.JFormattedTextField jtf_client_CPF;
@@ -3030,6 +3379,13 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_client_Insta;
     private javax.swing.JTextField jtf_client_Name;
     private javax.swing.JFormattedTextField jtf_client_Phone;
+    private javax.swing.JTextField jtf_fistPedido_clientName;
+    private javax.swing.JFormattedTextField jtf_fistPedido_cpfCliente;
+    private javax.swing.JFormattedTextField jtf_fistPedido_data;
+    private javax.swing.JTextField jtf_fistPedido_deliveryDeadLine;
+    private javax.swing.JFormattedTextField jtf_fistPedido_hora;
+    private javax.swing.JTextField jtf_fistPedido_id;
+    private javax.swing.JTextArea jtf_fistPedido_note;
     private javax.swing.JTextField jtf_pedidoList_selected_id;
     private javax.swing.JFormattedTextField jtf_pedido_cpfCliente;
     private javax.swing.JFormattedTextField jtf_pedido_data;

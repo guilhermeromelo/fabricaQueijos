@@ -123,4 +123,21 @@ public class ClientDAO {
         }
         return erro;
     }
+    
+    public static String nameSearch(String cpf) {
+        PreparedStatement state;
+        String msgSQL = "select clientname from client where cpf = ?";
+        String clientName = null;
+        try{
+            state=connection.prepareStatement(msgSQL);
+            state.setString(1, cpf);
+            ResultSet res = state.executeQuery();
+            if(res.next()){
+                clientName = res.getString("clientname");
+            }
+        }catch(SQLException e){
+            System.out.println("\nErro Encontrado: "+e.toString());
+        }
+        return clientName;
+    }
 }

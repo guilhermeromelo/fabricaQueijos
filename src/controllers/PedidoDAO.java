@@ -154,7 +154,7 @@ public class PedidoDAO {
         return pedidoList;
     }
     
-    public static Pedido lastPedidoFromClient(String cpf){
+    public static Pedido firstPedidoFromClient(String cpf){
         PreparedStatement state;
         String msgSQL = "select * from pedido where fk_client_cpf = ? order by pedidodate limit 1";
         Pedido lastPedido = null;
