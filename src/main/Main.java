@@ -54,6 +54,6 @@ public class Main {
         tela.setVisible(true);
         tela.setLocationRelativeTo(null);
         
-        System.out.println("Hello Wolrd!");
+        System.out.println("Desenvolvido por Guilherme Rodrigues de Melo");
     }
 }

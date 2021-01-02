@@ -153,4 +153,19 @@ public class PedidoDAO {
         }
         return pedidoList;
     }
+    
+    public static Pedido lastPedidoFromClient(String cpf){
+        PreparedStatement state;
+        String msgSQL = "select * from pedido where fk_client_cpf = ? order by pedidodate limit 1";
+        Pedido lastPedido = null;
+        try{
+            state=connection.prepareStatement(msgSQL);
+            state.setString(1, cpf);
+            ResultSet res = state.executeQuery();
+            lastPedido = resToArrayList(res).get(0);
+        }catch(SQLException e){
+            System.out.println("\nErro Encontrado: "+ e.toString());
+        }
+        return lastPedido;
+    }
 }

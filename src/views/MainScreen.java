@@ -492,7 +492,7 @@ public class MainScreen extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jb_pedido_lastPedidoFromClient = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         jtb_PedidoList_queijoPedido = new javax.swing.JTable();
         jLabel34 = new javax.swing.JLabel();
@@ -1089,10 +1089,15 @@ public class MainScreen extends javax.swing.JFrame {
         jpn_pedidoList.add(jButton5);
         jButton5.setBounds(850, 600, 160, 27);
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
-        jButton6.setText("PEDIDO MAIS ANTIGO DE UM CLIENTE");
-        jpn_pedidoList.add(jButton6);
-        jButton6.setBounds(540, 600, 280, 27);
+        jb_pedido_lastPedidoFromClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
+        jb_pedido_lastPedidoFromClient.setText("PEDIDO MAIS ANTIGO DE UM CLIENTE");
+        jb_pedido_lastPedidoFromClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_pedido_lastPedidoFromClientActionPerformed(evt);
+            }
+        });
+        jpn_pedidoList.add(jb_pedido_lastPedidoFromClient);
+        jb_pedido_lastPedidoFromClient.setBounds(540, 600, 280, 27);
 
         jtb_PedidoList_queijoPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2223,7 +2228,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_backClientPageActionPerformed
 // Client 1st part Functions End ----------------------------------------------------------------------------------------------
 
-// Queijo Functions Begin ----------------------------------------------------------------------------------------------    
+// Queijo 1st part Functions Begin ----------------------------------------------------------------------------------------------    
     private void jButton_inserirQueijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_inserirQueijoActionPerformed
         jtf_queijo_id.setEditable(false);
         //INICIAR TEXTFIELDS
@@ -2509,7 +2514,7 @@ public class MainScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Nenhum Queijo Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton_queijo_mais_caroActionPerformed
-// Queijo Functions End ----------------------------------------------------------------------------------------------
+// Queijo 1st part Functions End ----------------------------------------------------------------------------------------------
 
 // Client 2nd part Functions Begin ----------------------------------------------------------------------------------------------    
     private void jComboBox_ordenar_clientesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox_ordenar_clientesItemStateChanged
@@ -2578,7 +2583,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_client_order_cresActionPerformed
 //Client 2nd part Functions End ----------------------------------------------------------------------------------------------    
 
-// Queijo Functions Begin ----------------------------------------------------------------------------------------------    
+// Queijo 2nd part Functions Begin ----------------------------------------------------------------------------------------------    
     private void jButton_queijo_order_dec1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_queijo_order_dec1ActionPerformed
         // TODO add your handling code here:
         player.effectSong.play();
@@ -2596,7 +2601,7 @@ public class MainScreen extends javax.swing.JFrame {
         queijoOrderDecreasing = false;
         queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder, (queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
     }//GEN-LAST:event_jButton_queijo_order_cres1ActionPerformed
-// Queijo Functions End ----------------------------------------------------------------------------------------------
+// Queijo 2nd part Functions End ----------------------------------------------------------------------------------------------
 
 // Pedido Functions Begin ----------------------------------------------------------------------------------------------    
     private void jb_pedido_newClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedido_newClientActionPerformed
@@ -2704,7 +2709,6 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jcb_pedido_clientItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcb_pedido_clientItemStateChanged
         Client clientRegistrationPage = new Client();
-        Client aux = new Client();
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             String newChoice = jcb_pedido_client.getSelectedItem().toString();
             if (newChoice.equals("Selecionar...")) {
@@ -2752,7 +2756,6 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jtf_pedido_horaActionPerformed
 
     private void jbt_pedido_cancelar_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_pedido_cancelar_produtoActionPerformed
-        
         if(jtf_pedido_n_cancelar.getText().isEmpty()){
             player.erroSong.play();
             JOptionPane.showMessageDialog(null, "Número do Produto Inválido (vazio)", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
@@ -2776,7 +2779,6 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jbt_pedido_cancelar_produtoActionPerformed
 
     private void jb_pedido_hora_nowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedido_hora_nowActionPerformed
-
         jtf_pedido_data.setText(dataBuilder(LocalDateTime.now()));
         jtf_pedido_hora.setText(horaBuilder(LocalDateTime.now()));
     }//GEN-LAST:event_jb_pedido_hora_nowActionPerformed
@@ -2804,6 +2806,29 @@ public class MainScreen extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jb_pedidoList_consultarActionPerformed
+
+    private void jb_pedido_lastPedidoFromClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedido_lastPedidoFromClientActionPerformed
+        // TODO add your handling code here:
+        //PERGUNTAR E ACHAR QUAL O OBJETO A SER EXCLUIDO
+        player.alertSong.play();
+        String cpfClient = JOptionPane.showInputDialog("Por favor digite o do Cliente: ");
+        ArrayList<Client> clientList = ClientDAO.read(false, "", false);
+        boolean achou = false;
+        for(int i=0;i<clientList.size() && achou == false;i++){
+            if(clientList.get(i).getCPF().equals(cpfClient))
+                achou = true;
+        }
+        if(achou == true){
+            Pedido lastPedido = PedidoDAO.lastPedidoFromClient(cpfClient);
+            JOptionPane.showMessageDialog(null, "Pedido Encontrado: \nID: "
+                    +lastPedido.getPedidoID()+"\n Data: "+lastPedido.getPedidoDate().toString());
+        }
+        else{
+            player.erroSong.play();
+            JOptionPane.showMessageDialog(null, "CPF Inválido", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jb_pedido_lastPedidoFromClientActionPerformed
 // Pedido Functions End ----------------------------------------------------------------------------------------------
 
     public static void main(String args[]) {
@@ -2842,7 +2867,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButton_busca_cliente_cpf;
@@ -2974,6 +2998,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton jb_pedido_addProduto;
     private javax.swing.JButton jb_pedido_finalizar;
     private javax.swing.JButton jb_pedido_hora_now;
+    private javax.swing.JButton jb_pedido_lastPedidoFromClient;
     private javax.swing.JButton jb_pedido_newClient;
     private javax.swing.JButton jb_pedido_newQueijo;
     private javax.swing.JButton jbt_pedido_cancelar_produto;
