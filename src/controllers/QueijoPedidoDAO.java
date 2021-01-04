@@ -95,7 +95,7 @@ public class QueijoPedidoDAO {
         String msgSQL = "delete from queijo_pedido where queijoPedidoID=?";
         try{
             state = connection.prepareStatement(msgSQL);
-            state.setInt(1, queijoPedido.getFk_id_pedido());
+            state.setInt(1, queijoPedido.getQueijoPedidoID());
             state.execute();
             state.close();
         }catch(SQLException e){
