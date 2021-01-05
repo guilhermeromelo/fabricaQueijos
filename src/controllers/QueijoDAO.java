@@ -108,13 +108,12 @@ public class QueijoDAO {
             state.setInt(1, queijo.getQueijoID());
             state.execute();
             state.close();
-            System.out.println("\n Queijo removido com sucesso!");
         } catch (SQLException e) {
             System.out.println("\n Erro Encontrado: " + e.toString());
             erro = e.toString();
         }
         if (erro == null) {
-            System.out.println("\n Queijo Atualizado com sucesso!");
+            System.out.println("\n Queijo Removido com sucesso!");
         }
         return erro;
     }

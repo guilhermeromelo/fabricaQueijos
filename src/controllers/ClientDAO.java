@@ -119,7 +119,7 @@ public class ClientDAO {
             erro = e.toString();
         }
         if (erro == null) {
-            System.out.println("\n Cliente Excluído com sucesso!");
+            System.out.println("\n Cliente Removido com sucesso!");
         }
         return erro;
     }

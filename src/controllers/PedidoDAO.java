@@ -111,7 +111,7 @@ public class PedidoDAO {
             erro = e.toString();
         }
         if (erro == null) {
-            System.out.println("\n Pedido Alterado com Sucesso!");
+            System.out.println("\n Pedido Removido com Sucesso!");
         }
 
         return erro;
