@@ -559,6 +559,8 @@ public class MainScreen extends javax.swing.JFrame {
         jButton_busca_cliente_nome = new javax.swing.JButton();
         jButton_client_order_dec = new javax.swing.JButton();
         jButton_client_order_cres = new javax.swing.JButton();
+        jtf_cliente_filtrar = new javax.swing.JTextField();
+        jLabel41 = new javax.swing.JLabel();
         jpn_clientRegistration = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -1076,12 +1078,12 @@ public class MainScreen extends javax.swing.JFrame {
         jb_ordenar_pedidos_desc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_down_black_18dp.png"))); // NOI18N
         jb_ordenar_pedidos_desc.setMargin(new java.awt.Insets(0, 14, 0, 14));
         jpn_pedidoList.add(jb_ordenar_pedidos_desc);
-        jb_ordenar_pedidos_desc.setBounds(250, 10, 48, 34);
+        jb_ordenar_pedidos_desc.setBounds(250, 10, 48, 30);
 
         jb_ordenar_pedidos_cres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_up_black_18dp.png"))); // NOI18N
         jb_ordenar_pedidos_cres.setMargin(new java.awt.Insets(0, 14, 0, 14));
         jpn_pedidoList.add(jb_ordenar_pedidos_cres);
-        jb_ordenar_pedidos_cres.setBounds(310, 10, 48, 34);
+        jb_ordenar_pedidos_cres.setBounds(310, 10, 48, 30);
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel29.setText("Total de Pedidos Cadastrados: ");
@@ -1207,12 +1209,12 @@ public class MainScreen extends javax.swing.JFrame {
         jb_ordenar_QueijosPedido_desc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_down_black_18dp.png"))); // NOI18N
         jb_ordenar_QueijosPedido_desc.setMargin(new java.awt.Insets(0, 14, 0, 14));
         jpn_pedidoList.add(jb_ordenar_QueijosPedido_desc);
-        jb_ordenar_QueijosPedido_desc.setBounds(1250, 10, 48, 34);
+        jb_ordenar_QueijosPedido_desc.setBounds(1250, 10, 48, 30);
 
         jb_ordenar_QueijosPedido_cres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_up_black_18dp.png"))); // NOI18N
         jb_ordenar_QueijosPedido_cres.setMargin(new java.awt.Insets(0, 14, 0, 14));
         jpn_pedidoList.add(jb_ordenar_QueijosPedido_cres);
-        jb_ordenar_QueijosPedido_cres.setBounds(1310, 10, 48, 34);
+        jb_ordenar_QueijosPedido_cres.setBounds(1310, 10, 48, 30);
 
         jta_pedidoList_obs.setColumns(20);
         jta_pedidoList_obs.setRows(5);
@@ -1573,6 +1575,9 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        jLabel41.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel41.setText("Filtrar (Nome/CPF):");
+
         javax.swing.GroupLayout jpn_clientsListLayout = new javax.swing.GroupLayout(jpn_clientsList);
         jpn_clientsList.setLayout(jpn_clientsListLayout);
         jpn_clientsListLayout.setHorizontalGroup(
@@ -1605,24 +1610,30 @@ public class MainScreen extends javax.swing.JFrame {
                         .addComponent(jButton_client_order_cres)
                         .addGap(186, 186, 186)
                         .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel41)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtf_cliente_filtrar, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jpn_clientsListLayout.setVerticalGroup(
             jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_clientsListLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton_client_order_dec)
-                            .addComponent(jButton_client_order_cres))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_clientsListLayout.createSequentialGroup()
+                    .addGroup(jpn_clientsListLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2))
+                    .addGroup(jpn_clientsListLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton_client_order_cres, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton_client_order_dec, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel19)
-                                .addComponent(jComboBox_ordenar_clientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jComboBox_ordenar_clientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtf_cliente_filtrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel41)))))
                 .addGap(8, 8, 8)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1947,7 +1958,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jpn_queijoList.add(jButton_queijo_order_dec1);
-        jButton_queijo_order_dec1.setBounds(252, 8, 48, 34);
+        jButton_queijo_order_dec1.setBounds(252, 8, 48, 30);
 
         jButton_queijo_order_cres1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_up_black_18dp.png"))); // NOI18N
         jButton_queijo_order_cres1.setMargin(new java.awt.Insets(0, 14, 0, 14));
@@ -1957,7 +1968,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jpn_queijoList.add(jButton_queijo_order_cres1);
-        jButton_queijo_order_cres1.setBounds(312, 8, 48, 34);
+        jButton_queijo_order_cres1.setBounds(312, 8, 48, 30);
 
         jLayeredPane3.add(jpn_queijoList);
 
@@ -3185,6 +3196,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
@@ -3303,6 +3315,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_client_Insta;
     private javax.swing.JTextField jtf_client_Name;
     private javax.swing.JFormattedTextField jtf_client_Phone;
+    private javax.swing.JTextField jtf_cliente_filtrar;
     private javax.swing.JTextField jtf_fistPedido_clientName;
     private javax.swing.JFormattedTextField jtf_fistPedido_cpfCliente;
     private javax.swing.JFormattedTextField jtf_fistPedido_data;
