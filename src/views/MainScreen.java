@@ -504,10 +504,6 @@ public class MainScreen extends javax.swing.JFrame {
         jb_pedidoList_consultar = new javax.swing.JButton();
         jLabel30 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
         jLabel44 = new javax.swing.JLabel();
         jcb_ordenar_QueijosPedido = new javax.swing.JComboBox<>();
         jb_ordenar_QueijosPedido_desc = new javax.swing.JButton();
@@ -644,7 +640,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jpanel_DashboardLayout.setVerticalGroup(
             jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Dashboard", jpanel_Dashboard);
@@ -852,7 +848,7 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addComponent(jb_pedido_newClient))
                             .addComponent(jtf_pedido_id, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jtf_pedido_cpfCliente))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel4Layout.createSequentialGroup()
@@ -872,9 +868,9 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jb_pedido_finalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+                        .addComponent(jb_pedido_finalizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jL_Cadastrar_cliente4)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+                        .addComponent(jScrollPane5)
                         .addGroup(jPanel4Layout.createSequentialGroup()
                             .addComponent(jLabel35)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -985,7 +981,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jLayeredPane1.add(jPanel14);
@@ -998,7 +994,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jLayeredPane1.add(jPanel15);
@@ -1011,7 +1007,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jLayeredPane1.add(jPanel8);
@@ -1024,7 +1020,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jLayeredPane1.add(jPanel2);
@@ -1066,7 +1062,7 @@ public class MainScreen extends javax.swing.JFrame {
         jScrollPane6.setViewportView(jtb_PedidoList);
 
         jpn_pedidoList.add(jScrollPane6);
-        jScrollPane6.setBounds(10, 45, 640, 540);
+        jScrollPane6.setBounds(10, 50, 640, 560);
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel28.setText("Ordenar:");
@@ -1075,26 +1071,26 @@ public class MainScreen extends javax.swing.JFrame {
 
         jcb_ordenar_pedidos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jpn_pedidoList.add(jcb_ordenar_pedidos);
-        jcb_ordenar_pedidos.setBounds(82, 14, 160, 20);
+        jcb_ordenar_pedidos.setBounds(82, 14, 160, 26);
 
         jb_ordenar_pedidos_desc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_down_black_18dp.png"))); // NOI18N
         jb_ordenar_pedidos_desc.setMargin(new java.awt.Insets(0, 14, 0, 14));
         jpn_pedidoList.add(jb_ordenar_pedidos_desc);
-        jb_ordenar_pedidos_desc.setBounds(252, 11, 51, 23);
+        jb_ordenar_pedidos_desc.setBounds(250, 10, 48, 34);
 
         jb_ordenar_pedidos_cres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_up_black_18dp.png"))); // NOI18N
         jb_ordenar_pedidos_cres.setMargin(new java.awt.Insets(0, 14, 0, 14));
         jpn_pedidoList.add(jb_ordenar_pedidos_cres);
-        jb_ordenar_pedidos_cres.setBounds(313, 11, 51, 23);
+        jb_ordenar_pedidos_cres.setBounds(310, 10, 48, 34);
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel29.setText("Total de Pedidos Cadastrados: ");
         jpn_pedidoList.add(jLabel29);
-        jLabel29.setBounds(10, 610, 189, 17);
+        jLabel29.setBounds(10, 630, 189, 17);
 
         jlb_totalPedidos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jpn_pedidoList.add(jlb_totalPedidos);
-        jlb_totalPedidos.setBounds(210, 610, 34, 17);
+        jlb_totalPedidos.setBounds(210, 630, 34, 17);
 
         jb_pedidoList_inserir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_add_black_18dp.png"))); // NOI18N
         jb_pedidoList_inserir.setText("Inserir Pedido");
@@ -1104,7 +1100,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jpn_pedidoList.add(jb_pedidoList_inserir);
-        jb_pedidoList_inserir.setBounds(1210, 600, 150, 27);
+        jb_pedidoList_inserir.setBounds(1220, 630, 150, 34);
 
         jb_pedidoList_modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_edit_black_18dp.png"))); // NOI18N
         jb_pedidoList_modificar.setText("Modificar Pedido");
@@ -1114,7 +1110,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jpn_pedidoList.add(jb_pedidoList_modificar);
-        jb_pedidoList_modificar.setBounds(1040, 600, 160, 27);
+        jb_pedidoList_modificar.setBounds(1050, 630, 160, 34);
 
         jb_pedidoList_remover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_delete_black_18dp.png"))); // NOI18N
         jb_pedidoList_remover.setText("Remover Pedido");
@@ -1124,7 +1120,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jpn_pedidoList.add(jb_pedidoList_remover);
-        jb_pedidoList_remover.setBounds(870, 600, 160, 27);
+        jb_pedidoList_remover.setBounds(880, 630, 160, 34);
 
         jb_pedido_firstPedidoFromClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
         jb_pedido_firstPedidoFromClient.setText("PEDIDO MAIS ANTIGO DO CLIENTE");
@@ -1134,7 +1130,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jpn_pedidoList.add(jb_pedido_firstPedidoFromClient);
-        jb_pedido_firstPedidoFromClient.setBounds(600, 600, 260, 27);
+        jb_pedido_firstPedidoFromClient.setBounds(610, 630, 260, 34);
 
         jtb_PedidoList_queijoPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1150,7 +1146,7 @@ public class MainScreen extends javax.swing.JFrame {
         jScrollPane7.setViewportView(jtb_PedidoList_queijoPedido);
 
         jpn_pedidoList.add(jScrollPane7);
-        jScrollPane7.setBounds(790, 50, 570, 410);
+        jScrollPane7.setBounds(790, 50, 570, 440);
 
         jLabel34.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1176,7 +1172,7 @@ public class MainScreen extends javax.swing.JFrame {
         jpn_pedidoList.add(jLabel40);
         jLabel40.setBounds(640, 240, 160, 30);
         jpn_pedidoList.add(jtf_pedidoList_selected_id);
-        jtf_pedidoList_selected_id.setBounds(680, 310, 70, 20);
+        jtf_pedidoList_selected_id.setBounds(680, 310, 70, 24);
 
         jb_pedidoList_consultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_arrow_forward_ios_black_18dp.png"))); // NOI18N
         jb_pedidoList_consultar.setText("Consultar");
@@ -1187,7 +1183,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jpn_pedidoList.add(jb_pedidoList_consultar);
-        jb_pedidoList_consultar.setBounds(660, 350, 110, 27);
+        jb_pedidoList_consultar.setBounds(660, 350, 110, 34);
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel30.setText("PEDIDOS CADASTRADOS");
@@ -1199,70 +1195,51 @@ public class MainScreen extends javax.swing.JFrame {
         jpn_pedidoList.add(jLabel42);
         jLabel42.setBounds(810, 20, 110, 22);
 
-        jLabel43.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel43.setText("Ordenar:");
-        jpn_pedidoList.add(jLabel43);
-        jLabel43.setBounds(10, 14, 62, 17);
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jpn_pedidoList.add(jComboBox2);
-        jComboBox2.setBounds(82, 14, 160, 20);
-
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_down_black_18dp.png"))); // NOI18N
-        jButton8.setMargin(new java.awt.Insets(0, 14, 0, 14));
-        jpn_pedidoList.add(jButton8);
-        jButton8.setBounds(252, 11, 51, 23);
-
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_up_black_18dp.png"))); // NOI18N
-        jButton9.setMargin(new java.awt.Insets(0, 14, 0, 14));
-        jpn_pedidoList.add(jButton9);
-        jButton9.setBounds(313, 11, 51, 23);
-
         jLabel44.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel44.setText("Ordenar:");
         jpn_pedidoList.add(jLabel44);
-        jLabel44.setBounds(1000, 20, 62, 17);
+        jLabel44.setBounds(1010, 10, 62, 20);
 
         jcb_ordenar_QueijosPedido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jpn_pedidoList.add(jcb_ordenar_QueijosPedido);
-        jcb_ordenar_QueijosPedido.setBounds(1080, 20, 160, 20);
+        jcb_ordenar_QueijosPedido.setBounds(1080, 10, 160, 26);
 
         jb_ordenar_QueijosPedido_desc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_down_black_18dp.png"))); // NOI18N
         jb_ordenar_QueijosPedido_desc.setMargin(new java.awt.Insets(0, 14, 0, 14));
         jpn_pedidoList.add(jb_ordenar_QueijosPedido_desc);
-        jb_ordenar_QueijosPedido_desc.setBounds(1250, 20, 51, 23);
+        jb_ordenar_QueijosPedido_desc.setBounds(1250, 10, 48, 34);
 
         jb_ordenar_QueijosPedido_cres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_up_black_18dp.png"))); // NOI18N
         jb_ordenar_QueijosPedido_cres.setMargin(new java.awt.Insets(0, 14, 0, 14));
         jpn_pedidoList.add(jb_ordenar_QueijosPedido_cres);
-        jb_ordenar_QueijosPedido_cres.setBounds(1310, 20, 51, 23);
+        jb_ordenar_QueijosPedido_cres.setBounds(1310, 10, 48, 34);
 
         jta_pedidoList_obs.setColumns(20);
         jta_pedidoList_obs.setRows(5);
         jScrollPane8.setViewportView(jta_pedidoList_obs);
 
         jpn_pedidoList.add(jScrollPane8);
-        jScrollPane8.setBounds(790, 480, 240, 100);
+        jScrollPane8.setBounds(790, 510, 240, 100);
 
         jLabel27.setText("OBSERVAÇÕES:");
         jpn_pedidoList.add(jLabel27);
-        jLabel27.setBounds(790, 460, 120, 14);
+        jLabel27.setBounds(790, 490, 120, 16);
 
         jLabel45.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         jLabel45.setText("TOTAL:");
         jpn_pedidoList.add(jLabel45);
-        jLabel45.setBounds(1110, 460, 170, 58);
+        jLabel45.setBounds(1110, 490, 170, 58);
 
         jlb_pedidoList_valor_total.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         jlb_pedidoList_valor_total.setText("0,00");
         jlb_pedidoList_valor_total.setToolTipText("");
         jpn_pedidoList.add(jlb_pedidoList_valor_total);
-        jlb_pedidoList_valor_total.setBounds(1130, 520, 230, 58);
+        jlb_pedidoList_valor_total.setBounds(1130, 550, 230, 58);
 
         jLabel46.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         jLabel46.setText("R$");
         jpn_pedidoList.add(jLabel46);
-        jLabel46.setBounds(1060, 520, 70, 58);
+        jLabel46.setBounds(1060, 550, 70, 58);
 
         jLayeredPane4.add(jpn_pedidoList);
 
@@ -1448,7 +1425,7 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGroup(jpn_firstPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlb_firstPedido_total, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                 .addComponent(jb_back_firstPedido)
                 .addGap(34, 34, 34))
         );
@@ -1463,7 +1440,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jLayeredPane4.add(jPanel18);
@@ -1476,7 +1453,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jLayeredPane4.add(jPanel17);
@@ -1489,7 +1466,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jLayeredPane4.add(jPanel16);
@@ -1605,17 +1582,6 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jpn_clientsListLayout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox_ordenar_clientes, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton_client_order_dec)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton_client_order_cres)
-                        .addGap(183, 183, 183)
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jpn_clientsListLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlb_totalClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1623,34 +1589,42 @@ public class MainScreen extends javax.swing.JFrame {
                         .addComponent(jButton_busca_cliente_cpf)
                         .addGap(18, 18, 18)
                         .addComponent(jButton_busca_cliente_nome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 288, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
                         .addComponent(jButton_removerCliente)
                         .addGap(18, 18, 18)
                         .addComponent(jButton_modificarCliente)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton_inserirCliente)))
+                        .addComponent(jButton_inserirCliente))
+                    .addGroup(jpn_clientsListLayout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox_ordenar_clientes, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_client_order_dec)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_client_order_cres)
+                        .addGap(186, 186, 186)
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jpn_clientsListLayout.setVerticalGroup(
             jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_clientsListLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_clientsListLayout.createSequentialGroup()
-                        .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton_client_order_dec)
-                                .addComponent(jButton_client_order_cres))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_clientsListLayout.createSequentialGroup()
-                                .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel19)
-                                    .addComponent(jComboBox_ordenar_clientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(11, 11, 11))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_clientsListLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton_client_order_dec)
+                            .addComponent(jButton_client_order_cres))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_clientsListLayout.createSequentialGroup()
+                            .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel19)
+                                .addComponent(jComboBox_ordenar_clientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(8, 8, 8)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1753,7 +1727,7 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(jpn_clientRegistrationLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jL_Cadastrar_cliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                 .addGroup(jpn_clientRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
                     .addComponent(jtf_client_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1800,7 +1774,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jLayeredPane2.add(jPanel3);
@@ -1813,7 +1787,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jLayeredPane2.add(jPanel5);
@@ -1826,7 +1800,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jLayeredPane2.add(jPanel6);
@@ -1839,7 +1813,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jLayeredPane2.add(jPanel1);
@@ -1859,8 +1833,12 @@ public class MainScreen extends javax.swing.JFrame {
 
         jLayeredPane3.setLayout(new javax.swing.OverlayLayout(jLayeredPane3));
 
+        jpn_queijoList.setLayout(null);
+
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("QUEIJOS CADASTRADOS");
+        jpn_queijoList.add(jLabel4);
+        jLabel4.setBounds(545, 6, 222, 22);
 
         jTableQueijo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1875,10 +1853,17 @@ public class MainScreen extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTableQueijo);
 
+        jpn_queijoList.add(jScrollPane2);
+        jScrollPane2.setBounds(6, 47, 1362, 570);
+
         jlb_totalQueijos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jpn_queijoList.add(jlb_totalQueijos);
+        jlb_totalQueijos.setBounds(199, 635, 34, 17);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Total de Queijos Cadastrados: ");
+        jpn_queijoList.add(jLabel12);
+        jLabel12.setBounds(6, 635, 187, 17);
 
         jButton_inserirQueijo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_add_black_18dp.png"))); // NOI18N
         jButton_inserirQueijo.setText("Inserir Queijo");
@@ -1887,6 +1872,8 @@ public class MainScreen extends javax.swing.JFrame {
                 jButton_inserirQueijoActionPerformed(evt);
             }
         });
+        jpn_queijoList.add(jButton_inserirQueijo);
+        jButton_inserirQueijo.setBounds(1240, 629, 128, 34);
 
         jButton_modificarQueijo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_edit_black_18dp.png"))); // NOI18N
         jButton_modificarQueijo.setText("Modificar Queijo");
@@ -1895,6 +1882,8 @@ public class MainScreen extends javax.swing.JFrame {
                 jButton_modificarQueijoActionPerformed(evt);
             }
         });
+        jpn_queijoList.add(jButton_modificarQueijo);
+        jButton_modificarQueijo.setBounds(1078, 629, 144, 34);
 
         jButton_removerQueijo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_delete_black_18dp.png"))); // NOI18N
         jButton_removerQueijo.setText("Remover Queijo");
@@ -1903,9 +1892,13 @@ public class MainScreen extends javax.swing.JFrame {
                 jButton_removerQueijoActionPerformed(evt);
             }
         });
+        jpn_queijoList.add(jButton_removerQueijo);
+        jButton_removerQueijo.setBounds(918, 629, 142, 34);
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel18.setText("Ordenar:");
+        jpn_queijoList.add(jLabel18);
+        jLabel18.setBounds(10, 7, 62, 30);
 
         jComboBox_ordenar_queijos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox_ordenar_queijos.addItemListener(new java.awt.event.ItemListener() {
@@ -1913,6 +1906,8 @@ public class MainScreen extends javax.swing.JFrame {
                 jComboBox_ordenar_queijosItemStateChanged(evt);
             }
         });
+        jpn_queijoList.add(jComboBox_ordenar_queijos);
+        jComboBox_ordenar_queijos.setBounds(80, 10, 160, 26);
 
         jButton_busca_queijo_ID.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
         jButton_busca_queijo_ID.setText("Busca por ID");
@@ -1921,6 +1916,8 @@ public class MainScreen extends javax.swing.JFrame {
                 jButton_busca_queijo_IDActionPerformed(evt);
             }
         });
+        jpn_queijoList.add(jButton_busca_queijo_ID);
+        jButton_busca_queijo_ID.setBounds(281, 629, 124, 34);
 
         jButton_queijo_menor_temp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
         jButton_queijo_menor_temp.setText("Queijo Menor Temperatura");
@@ -1929,6 +1926,8 @@ public class MainScreen extends javax.swing.JFrame {
                 jButton_queijo_menor_tempActionPerformed(evt);
             }
         });
+        jpn_queijoList.add(jButton_queijo_menor_temp);
+        jButton_queijo_menor_temp.setBounds(423, 629, 204, 34);
 
         jButton_queijo_mais_caro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
         jButton_queijo_mais_caro.setText("Queijo Mais Caro");
@@ -1937,6 +1936,8 @@ public class MainScreen extends javax.swing.JFrame {
                 jButton_queijo_mais_caroActionPerformed(evt);
             }
         });
+        jpn_queijoList.add(jButton_queijo_mais_caro);
+        jButton_queijo_mais_caro.setBounds(645, 629, 148, 34);
 
         jButton_queijo_order_dec1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_down_black_18dp.png"))); // NOI18N
         jButton_queijo_order_dec1.setMargin(new java.awt.Insets(0, 14, 0, 14));
@@ -1945,6 +1946,8 @@ public class MainScreen extends javax.swing.JFrame {
                 jButton_queijo_order_dec1ActionPerformed(evt);
             }
         });
+        jpn_queijoList.add(jButton_queijo_order_dec1);
+        jButton_queijo_order_dec1.setBounds(252, 8, 48, 34);
 
         jButton_queijo_order_cres1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_up_black_18dp.png"))); // NOI18N
         jButton_queijo_order_cres1.setMargin(new java.awt.Insets(0, 14, 0, 14));
@@ -1953,76 +1956,8 @@ public class MainScreen extends javax.swing.JFrame {
                 jButton_queijo_order_cres1ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jpn_queijoListLayout = new javax.swing.GroupLayout(jpn_queijoList);
-        jpn_queijoList.setLayout(jpn_queijoListLayout);
-        jpn_queijoListLayout.setHorizontalGroup(
-            jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpn_queijoListLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(jpn_queijoListLayout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox_ordenar_queijos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton_queijo_order_dec1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton_queijo_order_cres1)
-                        .addGap(185, 185, 185)
-                        .addComponent(jLabel4)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jpn_queijoListLayout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlb_totalQueijos, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)
-                        .addComponent(jButton_busca_queijo_ID)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton_queijo_menor_temp)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton_queijo_mais_caro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
-                        .addComponent(jButton_removerQueijo)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton_modificarQueijo)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton_inserirQueijo)))
-                .addContainerGap())
-        );
-        jpn_queijoListLayout.setVerticalGroup(
-            jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpn_queijoListLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpn_queijoListLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton_queijo_order_dec1)
-                            .addComponent(jButton_queijo_order_cres1)))
-                    .addGroup(jpn_queijoListLayout.createSequentialGroup()
-                        .addGroup(jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel18)
-                                .addComponent(jComboBox_ordenar_queijos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addGroup(jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jlb_totalQueijos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel12))
-                    .addGroup(jpn_queijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton_modificarQueijo)
-                        .addComponent(jButton_inserirQueijo)
-                        .addComponent(jButton_removerQueijo)
-                        .addComponent(jButton_busca_queijo_ID)
-                        .addComponent(jButton_queijo_menor_temp)
-                        .addComponent(jButton_queijo_mais_caro)))
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
+        jpn_queijoList.add(jButton_queijo_order_cres1);
+        jButton_queijo_order_cres1.setBounds(312, 8, 48, 34);
 
         jLayeredPane3.add(jpn_queijoList);
 
@@ -2091,7 +2026,7 @@ public class MainScreen extends javax.swing.JFrame {
                                     .addComponent(jtf_queijo_peso)
                                     .addComponent(jtf_queijo_id)
                                     .addComponent(jtf_queijo_valorKg, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(491, Short.MAX_VALUE))
+                .addContainerGap(489, Short.MAX_VALUE))
         );
         jpn_queijoRegistrationLayout.setVerticalGroup(
             jpn_queijoRegistrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2120,7 +2055,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(jtf_queijo_Temperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(jb_finalizarCadastroQueijo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
                 .addComponent(jb_backQueijoPage)
                 .addGap(46, 46, 46))
         );
@@ -2135,7 +2070,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jLayeredPane3.add(jPanel13);
@@ -2148,7 +2083,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jLayeredPane3.add(jPanel12);
@@ -2161,7 +2096,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jLayeredPane3.add(jPanel11);
@@ -2174,7 +2109,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jLayeredPane3.add(jPanel10);
@@ -2187,7 +2122,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jLayeredPane3.add(jPanel9);
@@ -2200,7 +2135,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         jLayeredPane3.add(jPanel7);
@@ -2250,7 +2185,7 @@ public class MainScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1376, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1373, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(526, 526, 526)
@@ -3190,8 +3125,6 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JButton jButton_busca_cliente_cpf;
     private javax.swing.JButton jButton_busca_cliente_nome;
     private javax.swing.JButton jButton_busca_queijo_ID;
@@ -3207,7 +3140,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton jButton_queijo_order_dec1;
     private javax.swing.JButton jButton_removerCliente;
     private javax.swing.JButton jButton_removerQueijo;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox_ordenar_clientes;
     private javax.swing.JComboBox<String> jComboBox_ordenar_queijos;
     private javax.swing.JLabel jL_Cadastrar_cliente;
@@ -3254,7 +3186,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
