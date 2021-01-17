@@ -25,8 +25,10 @@ public class MainScreen extends javax.swing.JFrame {
     //HELPS THE TABLES ORDENATION
     String clientOrder = "";
     String queijoOrder = "";
+    String pedidoOrder = "";
     boolean clientOrderDecreasing = false;
     boolean queijoOrderDecreasing = false;
+    boolean pedidoOrderDecreasing = false;
 
     //HELPS THE COMEBACK BUTTON IN ClientRegistration and QueijoRegistration Pages
     boolean fromPedidoToClientRegistration = false;
@@ -65,14 +67,24 @@ public class MainScreen extends javax.swing.JFrame {
         clientTableBuilder(jTableClient, ClientDAO.read(false, "", false));
         queijoTableBuilder(jTableQueijo, QueijoDAO.read(false, "", false));
         produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, 1);
-        pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
-        if (PedidoDAO.read().isEmpty()) {
+        pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read(false, "", false));
+        if (PedidoDAO.read(false, "", false).isEmpty()) {
             produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, new ArrayList(), 2);
             jl_pedidoList_id.setText("");
         } else {
             produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read("" + jtb_PedidoList.getValueAt(0, 1)), 2);
             jl_pedidoList_id.setText("" + jtb_PedidoList.getValueAt(0, 1));
         }
+        
+        jTableClient.setDefaultEditor(Object.class, null);
+        jTableQueijo.setDefaultEditor(Object.class, null);
+        jtb_PedidoList.setDefaultEditor(Object.class, null);
+        jtb_resumo_produtos_pedido.setDefaultEditor(Object.class, null);
+        jtb_PedidoList_queijoPedido.setDefaultEditor(Object.class, null);
+        jtb_fistPedido_produtos.setDefaultEditor(Object.class, null);
+        //jTableClient.setDefaultEditor(Object.class, null);
+        //jTableClient.setDefaultEditor(Object.class, null);
+        
 
         //Lists Initialization
         queijoListBuilder();
@@ -109,6 +121,14 @@ public class MainScreen extends javax.swing.JFrame {
         jComboBox_ordenar_clientes.addItem("Cartão Crédito");
         jComboBox_ordenar_clientes.addItem("Facebook");
         jComboBox_ordenar_clientes.addItem("Instagram");
+        
+        //PedidosOrder
+        jcb_ordenar_pedidos.removeAllItems();
+        jcb_ordenar_pedidos.addItem("-------");
+        jcb_ordenar_pedidos.addItem("ID");
+        jcb_ordenar_pedidos.addItem("Cliente");
+        jcb_ordenar_pedidos.addItem("CPF");
+        jcb_ordenar_pedidos.addItem("Data");
 
         //ClientComboBox Registration Page
         clientComboBoxBuilder();
@@ -1075,6 +1095,11 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel28.setBounds(10, 14, 62, 17);
 
         jcb_ordenar_pedidos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcb_ordenar_pedidos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcb_ordenar_pedidosItemStateChanged(evt);
+            }
+        });
         jpn_pedidoList.add(jcb_ordenar_pedidos);
         jcb_ordenar_pedidos.setBounds(82, 14, 160, 26);
 
@@ -2300,8 +2325,8 @@ public class MainScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "CPF não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
             }
             //ATUALIZAR A TABELA
-            pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
-            if (PedidoDAO.read().isEmpty()) {
+            pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read(false, "", false));
+            if (PedidoDAO.read(false, "", false).isEmpty()) {
                 produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, new ArrayList(), 2);
                 jl_pedidoList_id.setText("");
             } else {
@@ -2456,8 +2481,8 @@ public class MainScreen extends javax.swing.JFrame {
                 if (erro == null) {
 
                     //ATUALIZAR TABELA E TROCAR AS TELAS
-                    pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
-                    if (PedidoDAO.read().isEmpty()) {
+                    pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read(false, "", false));
+                    if (PedidoDAO.read(false, "", false).isEmpty()) {
                         produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, new ArrayList(), 2);
                         jl_pedidoList_id.setText("");
                     } else {
@@ -2575,8 +2600,8 @@ public class MainScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "ID do Queijo não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
             }
             //ATUALIZAR A TABELA
-            pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
-            if (PedidoDAO.read().isEmpty()) {
+            pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read(false, "", false));
+            if (PedidoDAO.read(false, "", false).isEmpty()) {
                 produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, new ArrayList(), 2);
                 jl_pedidoList_id.setText("");
             } else {
@@ -2881,8 +2906,8 @@ public class MainScreen extends javax.swing.JFrame {
                         (erro == null) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
 
                 if (erro == null) {
-                    pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
-                    if (PedidoDAO.read().isEmpty()) {
+                    pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read(false, "", false));
+                    if (PedidoDAO.read(false, "", false).isEmpty()) {
                         produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, new ArrayList(), 2);
                         jl_pedidoList_id.setText("");
                     } else {
@@ -2977,7 +3002,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jb_pedidoList_consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedidoList_consultarActionPerformed
         jtf_pedidoList_selected_id.getText();
-        ArrayList<Pedido> pedidoList = PedidoDAO.read();
+        ArrayList<Pedido> pedidoList = PedidoDAO.read(false, "", false);
         boolean achou = false;
         for (int i = 0; i < pedidoList.size(); i++) {
             Pedido p = pedidoList.get(i);
@@ -3071,7 +3096,7 @@ public class MainScreen extends javax.swing.JFrame {
         id = JOptionPane.showInputDialog("Por favor o ID do Pedido a Remover: ");
 
         if (id != null && !id.isEmpty()) {
-            ArrayList<Pedido> pedidoList = PedidoDAO.read();
+            ArrayList<Pedido> pedidoList = PedidoDAO.read(false, "", false);
             Pedido pedidoRemove = null;
             boolean achou = false;
             for (int i = 0; i < pedidoList.size() && achou == false; i++) {
@@ -3104,8 +3129,8 @@ public class MainScreen extends javax.swing.JFrame {
                     }
                     erroNoPedido = PedidoDAO.delete(pedidoRemove);
 
-                    pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
-                    if (PedidoDAO.read().isEmpty()) {
+                    pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read(false, "", false));
+                    if (PedidoDAO.read(false, "", false).isEmpty()) {
                         produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, new ArrayList(), 2);
                         jl_pedidoList_id.setText("");
                     } else {
@@ -3158,6 +3183,38 @@ public class MainScreen extends javax.swing.JFrame {
         }
         clientTableBuilder(jTableClient, clientListFiltered);
     }//GEN-LAST:event_jtf_cliente_filtrarKeyTyped
+
+    private void jcb_ordenar_pedidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcb_ordenar_pedidosItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            String newChoice = jcb_ordenar_pedidos.getSelectedItem().toString();
+            switch (newChoice) {
+                case "-------": {
+                    pedidoOrder = "";
+                    break;
+                }
+                case "ID": {
+                    pedidoOrder = "pedidoID";
+                    break;
+                }
+                case "Cliente": {
+                    pedidoOrder = "clientName";
+                    break;
+                }
+                case "CPF": {
+                    pedidoOrder = "fk_client_cpf";
+                    break;
+                }
+                case "Data": {
+                    pedidoOrder = "pedidoDate";
+                    break;
+                }
+            }
+            pedidoOrderDecreasing = false;
+            pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read((pedidoOrder.isEmpty() ? false : true), pedidoOrder, (pedidoOrder.isEmpty() ? false : pedidoOrderDecreasing)));
+            //clientTableBuilder(jTableClient, ClientDAO.read((pedidoOrder.isEmpty() ? false : true), clientOrder, (clientOrder.isEmpty() ? false : clientOrderDecreasing)));
+        }
+    }//GEN-LAST:event_jcb_ordenar_pedidosItemStateChanged
 // Pedido Functions End ----------------------------------------------------------------------------------------------
 
     public static void main(String args[]) {

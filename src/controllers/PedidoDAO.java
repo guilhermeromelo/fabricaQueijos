@@ -36,10 +36,20 @@ public class PedidoDAO {
         return erro;
     }
 
-    public static ArrayList<Pedido> read() {
+    public static ArrayList<Pedido> read(boolean ordered, String orderParameter, boolean desc) {
         PreparedStatement state;
         ArrayList<Pedido> pedidoList = new ArrayList();
-        String msgSQL = "select * from pedido";
+        String msgSQL;
+        if (ordered == true) {
+            if(orderParameter.equals("clientName")){
+                msgSQL = "select * from pedido natural join clients where pedido.fk_client_cpf = clients.cpf order by clients.clientName"+ (desc==true ? " desc": "");
+            }
+            else{
+                msgSQL = "Select * from pedido order by " + orderParameter + (desc==true ? " desc": "");    
+            }
+        } else {
+            msgSQL = "Select * from pedido";
+        }
         try {
             state = connection.prepareStatement(msgSQL);
             ResultSet res;
@@ -186,4 +196,8 @@ public class PedidoDAO {
         }
         return lastPedido;
     }
+    /*
+    public static Double getPedidoPrice(int idPedido){
+        
+    }*/
 }
