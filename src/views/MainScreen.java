@@ -560,8 +560,6 @@ public class MainScreen extends javax.swing.JFrame {
         jButton_removerCliente = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
         jComboBox_ordenar_clientes = new javax.swing.JComboBox<>();
-        jButton_busca_cliente_cpf = new javax.swing.JButton();
-        jButton_busca_cliente_nome = new javax.swing.JButton();
         jButton_client_order_dec = new javax.swing.JButton();
         jButton_client_order_cres = new javax.swing.JButton();
         jtf_cliente_filtrar = new javax.swing.JTextField();
@@ -1117,7 +1115,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jpn_pedidoList.add(jb_pedidoList_modificar);
-        jb_pedidoList_modificar.setBounds(1040, 630, 160, 34);
+        jb_pedidoList_modificar.setBounds(1030, 630, 160, 34);
 
         jb_pedidoList_remover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_delete_black_18dp.png"))); // NOI18N
         jb_pedidoList_remover.setText("Remover Pedido");
@@ -1127,7 +1125,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jpn_pedidoList.add(jb_pedidoList_remover);
-        jb_pedidoList_remover.setBounds(870, 630, 160, 34);
+        jb_pedidoList_remover.setBounds(850, 630, 160, 34);
 
         jb_pedido_firstPedidoFromClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
         jb_pedido_firstPedidoFromClient.setText("PEDIDO MAIS ANTIGO DO CLIENTE");
@@ -1137,7 +1135,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jpn_pedidoList.add(jb_pedido_firstPedidoFromClient);
-        jb_pedido_firstPedidoFromClient.setBounds(600, 630, 260, 34);
+        jb_pedido_firstPedidoFromClient.setBounds(570, 630, 260, 34);
 
         jtb_PedidoList_queijoPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1516,6 +1514,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jButton_inserirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_add_black_18dp.png"))); // NOI18N
         jButton_inserirCliente.setText("Inserir Cliente");
+        jButton_inserirCliente.setMargin(new java.awt.Insets(4, 14, 4, 14));
         jButton_inserirCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_inserirClienteActionPerformed(evt);
@@ -1524,6 +1523,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jButton_modificarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_edit_black_18dp.png"))); // NOI18N
         jButton_modificarCliente.setText("Modificar Cliente");
+        jButton_modificarCliente.setMargin(new java.awt.Insets(4, 14, 4, 14));
         jButton_modificarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_modificarClienteActionPerformed(evt);
@@ -1532,6 +1532,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jButton_removerCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_delete_black_18dp.png"))); // NOI18N
         jButton_removerCliente.setText("Remover Cliente");
+        jButton_removerCliente.setMargin(new java.awt.Insets(4, 14, 4, 14));
         jButton_removerCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_removerClienteActionPerformed(evt);
@@ -1545,22 +1546,6 @@ public class MainScreen extends javax.swing.JFrame {
         jComboBox_ordenar_clientes.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox_ordenar_clientesItemStateChanged(evt);
-            }
-        });
-
-        jButton_busca_cliente_cpf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
-        jButton_busca_cliente_cpf.setText("Buscar Por CPF");
-        jButton_busca_cliente_cpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_busca_cliente_cpfActionPerformed(evt);
-            }
-        });
-
-        jButton_busca_cliente_nome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
-        jButton_busca_cliente_nome.setText("Buscar Por Nome");
-        jButton_busca_cliente_nome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_busca_cliente_nomeActionPerformed(evt);
             }
         });
 
@@ -1601,11 +1586,7 @@ public class MainScreen extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlb_totalClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(132, 132, 132)
-                        .addComponent(jButton_busca_cliente_cpf)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton_busca_cliente_nome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton_removerCliente)
                         .addGap(18, 18, 18)
                         .addComponent(jButton_modificarCliente)
@@ -1621,7 +1602,7 @@ public class MainScreen extends javax.swing.JFrame {
                         .addComponent(jButton_client_order_cres)
                         .addGap(186, 186, 186)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
                         .addComponent(jLabel41)
                         .addGap(18, 18, 18)
                         .addComponent(jtf_cliente_filtrar, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1647,21 +1628,19 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addComponent(jLabel41)))))
                 .addGap(8, 8, 8)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton_inserirCliente)
-                        .addComponent(jButton_modificarCliente)
-                        .addComponent(jButton_removerCliente))
-                    .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jpn_clientsListLayout.createSequentialGroup()
-                            .addGap(7, 7, 7)
-                            .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jlb_totalClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)))
+                .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_clientsListLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlb_totalClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(10, 10, 10))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_clientsListLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton_busca_cliente_cpf)
-                            .addComponent(jButton_busca_cliente_nome))))
+                            .addComponent(jButton_inserirCliente)
+                            .addComponent(jButton_modificarCliente)
+                            .addComponent(jButton_removerCliente))))
                 .addGap(13, 13, 13))
         );
 
@@ -1905,7 +1884,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jpn_queijoList.add(jButton_modificarQueijo);
-        jButton_modificarQueijo.setBounds(1060, 630, 144, 34);
+        jButton_modificarQueijo.setBounds(1044, 630, 160, 34);
 
         jButton_removerQueijo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_delete_black_18dp.png"))); // NOI18N
         jButton_removerQueijo.setText("Remover Queijo");
@@ -1915,7 +1894,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jpn_queijoList.add(jButton_removerQueijo);
-        jButton_removerQueijo.setBounds(900, 630, 142, 34);
+        jButton_removerQueijo.setBounds(870, 630, 160, 34);
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel18.setText("Ordenar:");
@@ -1939,7 +1918,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jpn_queijoList.add(jButton_busca_queijo_ID);
-        jButton_busca_queijo_ID.setBounds(260, 630, 140, 34);
+        jButton_busca_queijo_ID.setBounds(300, 630, 140, 34);
 
         jButton_queijo_menor_temp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
         jButton_queijo_menor_temp.setText("Queijo Menor Temperatura");
@@ -1949,7 +1928,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jpn_queijoList.add(jButton_queijo_menor_temp);
-        jButton_queijo_menor_temp.setBounds(413, 629, 230, 34);
+        jButton_queijo_menor_temp.setBounds(450, 630, 230, 34);
 
         jButton_queijo_mais_caro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_search_black_18dp.png"))); // NOI18N
         jButton_queijo_mais_caro.setText("Queijo Mais Caro");
@@ -1959,7 +1938,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jpn_queijoList.add(jButton_queijo_mais_caro);
-        jButton_queijo_mais_caro.setBounds(660, 630, 170, 34);
+        jButton_queijo_mais_caro.setBounds(690, 630, 170, 34);
 
         jButton_queijo_order_dec1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_down_black_18dp.png"))); // NOI18N
         jButton_queijo_order_dec1.setMargin(new java.awt.Insets(0, 14, 0, 14));
@@ -2207,7 +2186,7 @@ public class MainScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1378, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(526, 526, 526)
@@ -2768,14 +2747,6 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBox_ordenar_clientesItemStateChanged
 
-    private void jButton_busca_cliente_nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_busca_cliente_nomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_busca_cliente_nomeActionPerformed
-
-    private void jButton_busca_cliente_cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_busca_cliente_cpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_busca_cliente_cpfActionPerformed
-
     private void jButton_client_order_decActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_client_order_decActionPerformed
         // TODO add your handling code here:
         player.effectSong.play();
@@ -3032,7 +3003,7 @@ public class MainScreen extends javax.swing.JFrame {
         player.alertSong.play();
         String clientName = "";
         Pedido firstPedido = null;
-        String cpfClient = JOptionPane.showInputDialog("Por favor digite o do Cliente: ");
+        String cpfClient = JOptionPane.showInputDialog("Por favor digite o CPF do Cliente: ");
         boolean achou = false;
         if (cpfClient != null) {
             ArrayList<Client> clientList = ClientDAO.read(false, "", false);
@@ -3222,8 +3193,6 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_busca_cliente_cpf;
-    private javax.swing.JButton jButton_busca_cliente_nome;
     private javax.swing.JButton jButton_busca_queijo_ID;
     private javax.swing.JButton jButton_client_order_cres;
     private javax.swing.JButton jButton_client_order_dec;

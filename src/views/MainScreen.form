@@ -68,7 +68,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="1378" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
@@ -972,7 +972,7 @@
                       </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="1040" y="630" width="160" height="-1"/>
+                          <AbsoluteConstraints x="1030" y="630" width="160" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -988,7 +988,7 @@
                       </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="870" y="630" width="160" height="-1"/>
+                          <AbsoluteConstraints x="850" y="630" width="160" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -1004,7 +1004,7 @@
                       </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="600" y="630" width="260" height="-1"/>
+                          <AbsoluteConstraints x="570" y="630" width="260" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -1712,11 +1712,7 @@
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jlb_totalClientes" min="-2" pref="34" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
-                                      <Component id="jButton_busca_cliente_cpf" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jButton_busca_cliente_nome" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="234" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Component id="jButton_removerCliente" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jButton_modificarCliente" min="-2" max="-2" attributes="0"/>
@@ -1733,7 +1729,7 @@
                                       <Component id="jButton_client_order_cres" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="186" max="-2" attributes="0"/>
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace pref="206" max="32767" attributes="0"/>
                                       <Component id="jLabel41" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jtf_cliente_filtrar" min="-2" pref="240" max="-2" attributes="0"/>
@@ -1769,24 +1765,21 @@
                               </Group>
                               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               <Component id="jScrollPane1" pref="568" max="32767" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                      <Component id="jButton_inserirCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jButton_modificarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jButton_removerCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jlb_totalClientes" alignment="1" min="-2" pref="17" max="-2" attributes="0"/>
-                                              <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jlb_totalClientes" alignment="1" min="-2" pref="17" max="-2" attributes="0"/>
+                                          <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                          <Component id="jButton_busca_cliente_cpf" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jButton_busca_cliente_nome" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jButton_inserirCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButton_modificarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButton_removerCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1846,6 +1839,9 @@
                           <Image iconType="3" name="/views/Icons/baseline_add_black_18dp.png"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Inserir Cliente"/>
+                        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                          <Insets value="[4, 14, 4, 14]"/>
+                        </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_inserirClienteActionPerformed"/>
@@ -1857,6 +1853,9 @@
                           <Image iconType="3" name="/views/Icons/baseline_edit_black_18dp.png"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Modificar Cliente"/>
+                        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                          <Insets value="[4, 14, 4, 14]"/>
+                        </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_modificarClienteActionPerformed"/>
@@ -1868,6 +1867,9 @@
                           <Image iconType="3" name="/views/Icons/baseline_delete_black_18dp.png"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Remover Cliente"/>
+                        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                          <Insets value="[4, 14, 4, 14]"/>
+                        </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_removerClienteActionPerformed"/>
@@ -1898,28 +1900,6 @@
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton_busca_cliente_cpf">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/views/Icons/baseline_search_black_18dp.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Buscar Por CPF"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_busca_cliente_cpfActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton_busca_cliente_nome">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/views/Icons/baseline_search_black_18dp.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Buscar Por Nome"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_busca_cliente_nomeActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton_client_order_dec">
                       <Properties>
@@ -2380,7 +2360,7 @@
                       </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="1060" y="630" width="-1" height="-1"/>
+                          <AbsoluteConstraints x="1044" y="630" width="160" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -2396,7 +2376,7 @@
                       </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="900" y="630" width="-1" height="-1"/>
+                          <AbsoluteConstraints x="870" y="630" width="160" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -2448,7 +2428,7 @@
                       </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="260" y="630" width="140" height="-1"/>
+                          <AbsoluteConstraints x="300" y="630" width="140" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -2464,7 +2444,7 @@
                       </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="413" y="629" width="230" height="-1"/>
+                          <AbsoluteConstraints x="450" y="630" width="230" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -2480,7 +2460,7 @@
                       </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="660" y="630" width="170" height="-1"/>
+                          <AbsoluteConstraints x="690" y="630" width="170" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
