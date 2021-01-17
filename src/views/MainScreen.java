@@ -26,9 +26,12 @@ public class MainScreen extends javax.swing.JFrame {
     String clientOrder = "";
     String queijoOrder = "";
     String pedidoOrder = "";
+    String queijoPedidoOrder = "";
     boolean clientOrderDecreasing = false;
     boolean queijoOrderDecreasing = false;
     boolean pedidoOrderDecreasing = false;
+    boolean queijoPedidoOrderDecreasing = false;
+    String idPedidoToShow;
 
     //HELPS THE COMEBACK BUTTON IN ClientRegistration and QueijoRegistration Pages
     boolean fromPedidoToClientRegistration = false;
@@ -75,16 +78,14 @@ public class MainScreen extends javax.swing.JFrame {
             produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read("" + jtb_PedidoList.getValueAt(0, 1)), 2);
             jl_pedidoList_id.setText("" + jtb_PedidoList.getValueAt(0, 1));
         }
-        
+
+        //LOCK CELLS EDITION
         jTableClient.setDefaultEditor(Object.class, null);
         jTableQueijo.setDefaultEditor(Object.class, null);
         jtb_PedidoList.setDefaultEditor(Object.class, null);
         jtb_resumo_produtos_pedido.setDefaultEditor(Object.class, null);
         jtb_PedidoList_queijoPedido.setDefaultEditor(Object.class, null);
         jtb_fistPedido_produtos.setDefaultEditor(Object.class, null);
-        //jTableClient.setDefaultEditor(Object.class, null);
-        //jTableClient.setDefaultEditor(Object.class, null);
-        
 
         //Lists Initialization
         queijoListBuilder();
@@ -121,7 +122,7 @@ public class MainScreen extends javax.swing.JFrame {
         jComboBox_ordenar_clientes.addItem("Cartão Crédito");
         jComboBox_ordenar_clientes.addItem("Facebook");
         jComboBox_ordenar_clientes.addItem("Instagram");
-        
+
         //PedidosOrder
         jcb_ordenar_pedidos.removeAllItems();
         jcb_ordenar_pedidos.addItem("-------");
@@ -129,7 +130,7 @@ public class MainScreen extends javax.swing.JFrame {
         jcb_ordenar_pedidos.addItem("Cliente");
         jcb_ordenar_pedidos.addItem("CPF");
         jcb_ordenar_pedidos.addItem("Data");
-
+        
         //ClientComboBox Registration Page
         clientComboBoxBuilder();
 
@@ -274,6 +275,7 @@ public class MainScreen extends javax.swing.JFrame {
         ArrayList<Queijo> queijos = QueijoDAO.read(false, "", false);
 
         if (!produtosPedido.isEmpty()) {
+            idPedidoToShow = "" + produtosPedido.get(0).getFk_id_pedido();
             for (int j = 0; j < produtosPedido.size(); j++) {
                 QueijoPedido p = produtosPedido.get(j);
                 boolean achou = false;
@@ -281,6 +283,7 @@ public class MainScreen extends javax.swing.JFrame {
                     Queijo queijoAux = queijos.get(i);
                     if (String.valueOf(p.getFk_id_queijo()).equals("" + queijoAux.getQueijoID())) {
                         achou = true;
+
                         tableRows2.addRow(new Object[]{(j + 1), queijoAux.getQueijoID(),
                             queijoAux.getQueijoType(), df.format(queijoAux.getWeight()),
                             queijoAux.getPricePerKg(), p.getQuantity(), df.format(p.getQuantity()
@@ -295,7 +298,10 @@ public class MainScreen extends javax.swing.JFrame {
                     jta_pedidoList_obs.setText(PedidoDAO.search("" + p.getFk_id_pedido()).getNote());
                 }
             }
+        } else {
+            idPedidoToShow = "";
         }
+
         if (registrationPage == 1) {
             jlb_pedido_valor_total.setText("" + df.format(total));
         } else if (registrationPage == 2) {
@@ -529,10 +535,6 @@ public class MainScreen extends javax.swing.JFrame {
         jb_pedidoList_consultar = new javax.swing.JButton();
         jLabel30 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
-        jcb_ordenar_QueijosPedido = new javax.swing.JComboBox<>();
-        jb_ordenar_QueijosPedido_desc = new javax.swing.JButton();
-        jb_ordenar_QueijosPedido_cres = new javax.swing.JButton();
         jScrollPane8 = new javax.swing.JScrollPane();
         jta_pedidoList_obs = new javax.swing.JTextArea();
         jLabel27 = new javax.swing.JLabel();
@@ -1105,11 +1107,21 @@ public class MainScreen extends javax.swing.JFrame {
 
         jb_ordenar_pedidos_desc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_down_black_18dp.png"))); // NOI18N
         jb_ordenar_pedidos_desc.setMargin(new java.awt.Insets(0, 14, 0, 14));
+        jb_ordenar_pedidos_desc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_ordenar_pedidos_descActionPerformed(evt);
+            }
+        });
         jpn_pedidoList.add(jb_ordenar_pedidos_desc);
         jb_ordenar_pedidos_desc.setBounds(250, 10, 48, 30);
 
         jb_ordenar_pedidos_cres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_up_black_18dp.png"))); // NOI18N
         jb_ordenar_pedidos_cres.setMargin(new java.awt.Insets(0, 14, 0, 14));
+        jb_ordenar_pedidos_cres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_ordenar_pedidos_cresActionPerformed(evt);
+            }
+        });
         jpn_pedidoList.add(jb_ordenar_pedidos_cres);
         jb_ordenar_pedidos_cres.setBounds(310, 10, 48, 30);
 
@@ -1224,25 +1236,6 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel42.setText("ID PEDIDO:");
         jpn_pedidoList.add(jLabel42);
         jLabel42.setBounds(810, 20, 110, 22);
-
-        jLabel44.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel44.setText("Ordenar:");
-        jpn_pedidoList.add(jLabel44);
-        jLabel44.setBounds(1010, 10, 62, 20);
-
-        jcb_ordenar_QueijosPedido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jpn_pedidoList.add(jcb_ordenar_QueijosPedido);
-        jcb_ordenar_QueijosPedido.setBounds(1080, 10, 160, 26);
-
-        jb_ordenar_QueijosPedido_desc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_down_black_18dp.png"))); // NOI18N
-        jb_ordenar_QueijosPedido_desc.setMargin(new java.awt.Insets(0, 14, 0, 14));
-        jpn_pedidoList.add(jb_ordenar_QueijosPedido_desc);
-        jb_ordenar_QueijosPedido_desc.setBounds(1250, 10, 48, 30);
-
-        jb_ordenar_QueijosPedido_cres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/baseline_keyboard_arrow_up_black_18dp.png"))); // NOI18N
-        jb_ordenar_QueijosPedido_cres.setMargin(new java.awt.Insets(0, 14, 0, 14));
-        jpn_pedidoList.add(jb_ordenar_QueijosPedido_cres);
-        jb_ordenar_QueijosPedido_cres.setBounds(1310, 10, 48, 30);
 
         jta_pedidoList_obs.setColumns(20);
         jta_pedidoList_obs.setRows(5);
@@ -1653,19 +1646,17 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addComponent(jLabel41)))))
                 .addGap(8, 8, 8)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_clientsListLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
                         .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlb_totalClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(10, 10, 10))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_clientsListLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton_inserirCliente)
-                            .addComponent(jButton_modificarCliente)
-                            .addComponent(jButton_removerCliente))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpn_clientsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton_inserirCliente)
+                        .addComponent(jButton_modificarCliente)
+                        .addComponent(jButton_removerCliente)))
                 .addGap(13, 13, 13))
         );
 
@@ -3215,6 +3206,28 @@ public class MainScreen extends javax.swing.JFrame {
             //clientTableBuilder(jTableClient, ClientDAO.read((pedidoOrder.isEmpty() ? false : true), clientOrder, (clientOrder.isEmpty() ? false : clientOrderDecreasing)));
         }
     }//GEN-LAST:event_jcb_ordenar_pedidosItemStateChanged
+
+    private void jb_ordenar_pedidos_descActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ordenar_pedidos_descActionPerformed
+        // TODO add your handling code here:
+        player.effectSong.play();
+        pedidoOrderDecreasing = true;
+        if (jcb_ordenar_pedidos.getSelectedItem() == "-------") {
+            jcb_ordenar_pedidos.setSelectedItem("ID");
+            pedidoOrder = "pedidoID";
+        }
+        pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read((pedidoOrder.isEmpty() ? false : true), pedidoOrder, (pedidoOrder.isEmpty() ? false : pedidoOrderDecreasing)));
+    }//GEN-LAST:event_jb_ordenar_pedidos_descActionPerformed
+
+    private void jb_ordenar_pedidos_cresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ordenar_pedidos_cresActionPerformed
+        // TODO add your handling code here:
+        player.effectSong.play();
+        pedidoOrderDecreasing = false;
+        if (jcb_ordenar_pedidos.getSelectedItem() == "-------") {
+            jcb_ordenar_pedidos.setSelectedItem("ID");
+            pedidoOrder = "pedidoID";
+        }
+        pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read((pedidoOrder.isEmpty() ? false : true), pedidoOrder, (pedidoOrder.isEmpty() ? false : pedidoOrderDecreasing)));
+    }//GEN-LAST:event_jb_ordenar_pedidos_cresActionPerformed
 // Pedido Functions End ----------------------------------------------------------------------------------------------
 
     public static void main(String args[]) {
@@ -3310,7 +3323,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
@@ -3381,8 +3393,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton jb_back_pedidoRegistration;
     private javax.swing.JButton jb_finalizarCadastro;
     private javax.swing.JButton jb_finalizarCadastroQueijo;
-    private javax.swing.JButton jb_ordenar_QueijosPedido_cres;
-    private javax.swing.JButton jb_ordenar_QueijosPedido_desc;
     private javax.swing.JButton jb_ordenar_pedidos_cres;
     private javax.swing.JButton jb_ordenar_pedidos_desc;
     private javax.swing.JButton jb_pedidoList_consultar;
@@ -3396,7 +3406,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton jb_pedido_newClient;
     private javax.swing.JButton jb_pedido_newQueijo;
     private javax.swing.JButton jbt_pedido_cancelar_produto;
-    private javax.swing.JComboBox<String> jcb_ordenar_QueijosPedido;
     private javax.swing.JComboBox<String> jcb_ordenar_pedidos;
     private javax.swing.JComboBox<String> jcb_pedido_client;
     private javax.swing.JLabel jl_pedidoList_id;

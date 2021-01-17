@@ -34,7 +34,7 @@ public class QueijoPedidoDAO {
         return erro;
     }
 
-    public static ArrayList<QueijoPedido> read(String id) {
+    public static ArrayList<QueijoPedido> read(String id, boolean ordered, String orderParameter, boolean desc) {
         ArrayList<QueijoPedido> queijoPedidoList = new ArrayList();
         PreparedStatement state;
         String msgSQL = "select * from queijo_pedido where fk_id_pedido =?";
