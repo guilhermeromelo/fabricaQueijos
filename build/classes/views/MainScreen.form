@@ -1948,6 +1948,9 @@
                       </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtf_cliente_filtrar">
+                      <Events>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_cliente_filtrarKeyTyped"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel41">
                       <Properties>

@@ -1036,7 +1036,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel_OrderPedido.setLayout(jPanel_OrderPedidoLayout);
         jPanel_OrderPedidoLayout.setHorizontalGroup(
             jPanel_OrderPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1376, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1)
         );
         jPanel_OrderPedidoLayout.setVerticalGroup(
             jPanel_OrderPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1482,7 +1482,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel_PedidosList.setLayout(jPanel_PedidosListLayout);
         jPanel_PedidosListLayout.setHorizontalGroup(
             jPanel_PedidosListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1376, Short.MAX_VALUE)
+            .addComponent(jLayeredPane4)
         );
         jPanel_PedidosListLayout.setVerticalGroup(
             jPanel_PedidosListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1577,6 +1577,12 @@ public class MainScreen extends javax.swing.JFrame {
         jButton_client_order_cres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_client_order_cresActionPerformed(evt);
+            }
+        });
+
+        jtf_cliente_filtrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_cliente_filtrarKeyTyped(evt);
             }
         });
 
@@ -1838,7 +1844,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel_ClientList.setLayout(jPanel_ClientListLayout);
         jPanel_ClientListLayout.setHorizontalGroup(
             jPanel_ClientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1376, Short.MAX_VALUE)
+            .addComponent(jLayeredPane2)
         );
         jPanel_ClientListLayout.setVerticalGroup(
             jPanel_ClientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2160,7 +2166,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel_QueijoList.setLayout(jPanel_QueijoListLayout);
         jPanel_QueijoListLayout.setHorizontalGroup(
             jPanel_QueijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1376, Short.MAX_VALUE)
+            .addComponent(jLayeredPane3)
         );
         jPanel_QueijoListLayout.setVerticalGroup(
             jPanel_QueijoListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2201,7 +2207,7 @@ public class MainScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1378, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(526, 526, 526)
@@ -3168,6 +3174,19 @@ public class MainScreen extends javax.swing.JFrame {
     private void jb_pedidoList_inserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedidoList_inserirActionPerformed
         jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_jb_pedidoList_inserirActionPerformed
+
+    private void jtf_cliente_filtrarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_cliente_filtrarKeyTyped
+        ArrayList<Client> clientList = ClientDAO.read(false, "", false);
+        String typedText = jtf_cliente_filtrar.getText();
+        ArrayList<Client> clientListFiltered = new ArrayList();
+        for (int i = 0; i < clientList.size(); i++) {
+            if (clientList.get(i).getClientName().toLowerCase().contains(typedText.toLowerCase())
+                    || clientList.get(i).getCPF().replace(".", "").replace("-", "").contains(typedText.replace(".", "").replace("-", ""))) {
+                clientListFiltered.add(clientList.get(i));
+            }
+        }
+        clientTableBuilder(jTableClient, clientListFiltered);
+    }//GEN-LAST:event_jtf_cliente_filtrarKeyTyped
 // Pedido Functions End ----------------------------------------------------------------------------------------------
 
     public static void main(String args[]) {
