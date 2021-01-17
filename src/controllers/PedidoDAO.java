@@ -125,7 +125,7 @@ public class PedidoDAO {
             state = connection.prepareStatement(msgSQL);
             ResultSet res = state.executeQuery();
             if(res.next()){
-                nextPedidoID = res.getInt("max");
+                nextPedidoID = res.getInt("max(pedidoid)");
             }
             res.close();
             state.close();

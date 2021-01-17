@@ -11,7 +11,7 @@ public class ClientDAO {
     public static String create(Client newClient) {
         String erro = null;
         PreparedStatement state;
-        String msgSQL = "insert into client (cpf, clientName, phone, address,"
+        String msgSQL = "insert into clients (cpf, clientName, phone, address,"
                 + "facebookURL, instagramURL, creditCard) values (?,?,?,?,?,?,?)";
         try {
             state = connection.prepareStatement(msgSQL);
@@ -41,9 +41,9 @@ public class ClientDAO {
         ResultSet res;
         String msgSQL;
         if (ordered == true) {
-            msgSQL = "Select * from client order by " + orderParameter + (desc==true ? " desc": "");
+            msgSQL = "Select * from clients order by " + orderParameter + (desc==true ? " desc": "");
         } else {
-            msgSQL = "Select * from client";
+            msgSQL = "Select * from clients";
         }
         try {
             state = connection.prepareStatement(msgSQL);
@@ -82,7 +82,7 @@ public class ClientDAO {
     public static String update(Client client) {
         String erro = null;
         PreparedStatement state;
-        String msgSQL = "update client set address=?, clientName=?, creditCard=?, "
+        String msgSQL = "update clients set address=?, clientName=?, creditCard=?, "
                 + "facebookURL=?, instagramURL=?, phone=? where cpf=?";
         try {
             state = connection.prepareStatement(msgSQL);
@@ -108,7 +108,7 @@ public class ClientDAO {
     public static String delete(Client client) {
         String erro = null;
         PreparedStatement state;
-        String msgSQL = "delete from client where cpf=?";
+        String msgSQL = "delete from clients where cpf=?";
         try {
             state = connection.prepareStatement(msgSQL);
             state.setString(1, client.getCPF());
@@ -126,7 +126,7 @@ public class ClientDAO {
     
     public static String nameSearch(String cpf) {
         PreparedStatement state;
-        String msgSQL = "select clientname from client where cpf = ?";
+        String msgSQL = "select clientname from clients where cpf = ?";
         String clientName = null;
         try{
             state=connection.prepareStatement(msgSQL);

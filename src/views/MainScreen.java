@@ -66,8 +66,13 @@ public class MainScreen extends javax.swing.JFrame {
         queijoTableBuilder(jTableQueijo, QueijoDAO.read(false, "", false));
         produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, 1);
         pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
-        produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read("" + jtb_PedidoList.getValueAt(0, 1)), 2);
-        jl_pedidoList_id.setText("" + jtb_PedidoList.getValueAt(0, 1));
+        if (PedidoDAO.read().isEmpty()) {
+            produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, new ArrayList(), 2);
+            jl_pedidoList_id.setText("");
+        } else {
+            produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read("" + jtb_PedidoList.getValueAt(0, 1)), 2);
+            jl_pedidoList_id.setText("" + jtb_PedidoList.getValueAt(0, 1));
+        }
 
         //Lists Initialization
         queijoListBuilder();
@@ -2299,6 +2304,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
             //ATUALIZAR A TABELA
             clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder, (clientOrder.isEmpty() ? false : clientOrderDecreasing)));
+            clientComboBoxBuilder();
         }
     }//GEN-LAST:event_jButton_removerClienteActionPerformed
 
@@ -2530,6 +2536,8 @@ public class MainScreen extends javax.swing.JFrame {
 
                 if (delete == 0) {
                     String erro = QueijoDAO.delete(queijoModify);
+                    queijoListBuilder();
+                    queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder, (queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
                     if (erro == null) {
                         player.sucessSong.play();
                     } else {
@@ -2854,6 +2862,13 @@ public class MainScreen extends javax.swing.JFrame {
 
                 if (erro == null) {
                     pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
+                    if (PedidoDAO.read().isEmpty()) {
+                        produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, new ArrayList(), 2);
+                        jl_pedidoList_id.setText("");
+                    } else {
+                        produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read("" + jtb_PedidoList.getValueAt(0, 1)), 2);
+                        jl_pedidoList_id.setText("" + jtb_PedidoList.getValueAt(0, 1));
+                    }
                     queijoPedidoList.clear();
                     clearPedidoRegistrationPage();
                     jTabbedPane1.setSelectedIndex(2);
@@ -3057,7 +3072,7 @@ public class MainScreen extends javax.swing.JFrame {
                     String erroNoPedido;
                     int sucessCount = 0;
                     ArrayList<QueijoPedido> queijoPedidoList = QueijoPedidoDAO.read("" + pedidoRemove.getPedidoID());
-                    
+
                     for (int i = 0; i < queijoPedidoList.size(); i++) {
                         String erroAtual = QueijoPedidoDAO.delete(queijoPedidoList.get(i));
                         if (erroAtual == null) {
@@ -3068,12 +3083,17 @@ public class MainScreen extends javax.swing.JFrame {
 
                     }
                     erroNoPedido = PedidoDAO.delete(pedidoRemove);
-                    
+
                     pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
-                    produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read("" + jtb_PedidoList.getValueAt(0, 1)), 2);
-                    jl_pedidoList_id.setText("" + jtb_PedidoList.getValueAt(0, 1));
-                    
-                    JOptionPane.showMessageDialog(null, (erroNoPedido==null)
+                    if (PedidoDAO.read().isEmpty()) {
+                        produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, new ArrayList(), 2);
+                        jl_pedidoList_id.setText("");
+                    } else {
+                        produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read("" + jtb_PedidoList.getValueAt(0, 1)), 2);
+                        jl_pedidoList_id.setText("" + jtb_PedidoList.getValueAt(0, 1));
+                    }
+
+                    JOptionPane.showMessageDialog(null, (erroNoPedido == null)
                             ? (erro.isEmpty()) ? "Pedido removido com sucesso!"
                             : "Pedido salvo com observações: \n "
                             + sucessCount + "de " + queijoPedidoList.size() + " produtos excluídos"
