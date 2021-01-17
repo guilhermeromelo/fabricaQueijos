@@ -2280,10 +2280,22 @@ public class MainScreen extends javax.swing.JFrame {
             if (achou == true) {
                 player.alertSong.play();
                 int delete = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir "
-                        + "o Cliente:\nNome: " + clientDelete.getClientName() + ", CPF: " + clientDelete.getCPF(),
+                        + "o Cliente:\nNome: " + clientDelete.getClientName() + ", CPF: " + clientDelete.getCPF()
+                        + "\nATENÇÃO: ISSO IRÁ EXCLUIR TODOS OS\nPEDIDOS DO CLIENTE!!!",
                         "Confirmar Exclusão", JOptionPane.YES_NO_OPTION);
 
                 if (delete == 0) {
+
+                    ArrayList<Pedido> pedidoList = PedidoDAO.readFromOneClient(clientDelete.getCPF());
+                    for (int i = 0; i < pedidoList.size(); i++) {
+                        Pedido pedidoRemove = pedidoList.get(i);
+                        ArrayList<QueijoPedido> queijoPedidoList = QueijoPedidoDAO.read("" + pedidoRemove.getPedidoID());
+                        for (int j = 0; j < queijoPedidoList.size(); j++) {
+                            QueijoPedidoDAO.delete(queijoPedidoList.get(j));
+                        }
+                        PedidoDAO.delete(pedidoRemove);
+                    }
+
                     String erro = ClientDAO.delete(clientDelete);
                     if (erro == null) {
                         player.sucessSong.play();
@@ -2303,6 +2315,14 @@ public class MainScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "CPF não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
             }
             //ATUALIZAR A TABELA
+            pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
+            if (PedidoDAO.read().isEmpty()) {
+                produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, new ArrayList(), 2);
+                jl_pedidoList_id.setText("");
+            } else {
+                produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read("" + jtb_PedidoList.getValueAt(0, 1)), 2);
+                jl_pedidoList_id.setText("" + jtb_PedidoList.getValueAt(0, 1));
+            }
             clientTableBuilder(jTableClient, ClientDAO.read((clientOrder.isEmpty() ? false : true), clientOrder, (clientOrder.isEmpty() ? false : clientOrderDecreasing)));
             clientComboBoxBuilder();
         }
@@ -2451,6 +2471,15 @@ public class MainScreen extends javax.swing.JFrame {
                 if (erro == null) {
 
                     //ATUALIZAR TABELA E TROCAR AS TELAS
+                    pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
+                    if (PedidoDAO.read().isEmpty()) {
+                        produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, new ArrayList(), 2);
+                        jl_pedidoList_id.setText("");
+                    } else {
+                        produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read("" + jtb_PedidoList.getValueAt(0, 1)), 2);
+                        jl_pedidoList_id.setText("" + jtb_PedidoList.getValueAt(0, 1));
+                    }
+
                     queijoListBuilder();
                     queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder, (queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
                     //TROCAR TELAS
@@ -2531,10 +2560,15 @@ public class MainScreen extends javax.swing.JFrame {
             if (achou == true) {
                 player.alertSong.play();
                 int delete = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir "
-                        + "o Queijo:\nID: " + queijoModify.getQueijoID() + ", Tipo: " + queijoModify.getQueijoType(),
+                        + "o Queijo:\nID: " + queijoModify.getQueijoID() + ", Tipo: " + queijoModify.getQueijoType()
+                        + "\nATENÇÃO: ISSO IRÁ EXCLUIR TODAS AS\nAPARIÇÕES DESTE QUEIJO NOS PEDIDOS !!!",
                         "Confirmar Exclusão", JOptionPane.YES_NO_OPTION);
 
                 if (delete == 0) {
+                    ArrayList<QueijoPedido> queijoPedidoList = QueijoPedidoDAO.readAllPedidosFromOneQueijo(queijoModify.getQueijoID());
+                    for (int i = 0; i < queijoPedidoList.size(); i++) {
+                        QueijoPedidoDAO.delete(queijoPedidoList.get(i));
+                    }
                     String erro = QueijoDAO.delete(queijoModify);
                     queijoListBuilder();
                     queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder, (queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
@@ -2556,6 +2590,15 @@ public class MainScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "ID do Queijo não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
             }
             //ATUALIZAR A TABELA
+            pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read());
+            if (PedidoDAO.read().isEmpty()) {
+                produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, new ArrayList(), 2);
+                jl_pedidoList_id.setText("");
+            } else {
+                produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read("" + jtb_PedidoList.getValueAt(0, 1)), 2);
+                jl_pedidoList_id.setText("" + jtb_PedidoList.getValueAt(0, 1));
+            }
+            queijoListBuilder();
             queijoTableBuilder(jTableQueijo, QueijoDAO.read((queijoOrder.isEmpty() ? false : true), queijoOrder, (queijoOrder.isEmpty() ? false : queijoOrderDecreasing)));
         }
     }//GEN-LAST:event_jButton_removerQueijoActionPerformed
@@ -3092,7 +3135,11 @@ public class MainScreen extends javax.swing.JFrame {
                         produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, QueijoPedidoDAO.read("" + jtb_PedidoList.getValueAt(0, 1)), 2);
                         jl_pedidoList_id.setText("" + jtb_PedidoList.getValueAt(0, 1));
                     }
-
+                    if (erroNoPedido == null) {
+                        player.sucessSong.play();
+                    } else {
+                        player.erroSong.play();
+                    }
                     JOptionPane.showMessageDialog(null, (erroNoPedido == null)
                             ? (erro.isEmpty()) ? "Pedido removido com sucesso!"
                             : "Pedido salvo com observações: \n "

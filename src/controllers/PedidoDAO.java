@@ -52,6 +52,24 @@ public class PedidoDAO {
         }
         return pedidoList;
     }
+    
+        public static ArrayList<Pedido> readFromOneClient(String cpf) {
+        PreparedStatement state;
+        ArrayList<Pedido> pedidoList = new ArrayList();
+        String msgSQL = "select * from pedido where fk_client_cpf = ?";
+        try {
+            state = connection.prepareStatement(msgSQL);
+            ResultSet res;
+            state.setString(1, cpf);
+            res = state.executeQuery();
+            pedidoList = resToArrayList(res);
+            res.close();
+            state.close();
+        } catch (SQLException e) {
+            System.out.println("\n Erro Encontrado: " + e.toString());
+        }
+        return pedidoList;
+    }
 
     private static ArrayList<Pedido> resToArrayList(ResultSet res) {
         ArrayList<Pedido> pedidoList = new ArrayList();

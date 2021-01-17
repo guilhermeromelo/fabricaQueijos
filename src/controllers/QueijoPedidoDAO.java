@@ -50,6 +50,23 @@ public class QueijoPedidoDAO {
         }
         return queijoPedidoList;
     }
+    
+        public static ArrayList<QueijoPedido> readAllPedidosFromOneQueijo(int id) {
+        ArrayList<QueijoPedido> queijoPedidoList = new ArrayList();
+        PreparedStatement state;
+        String msgSQL = "select * from queijo_pedido where fk_id_queijo =?";
+        try {
+            state = connection.prepareStatement(msgSQL);
+            state.setInt(1, (id));
+            ResultSet res = state.executeQuery();
+            queijoPedidoList = resToArrayList(res);
+            res.close();
+            state.close();
+        } catch (SQLException e) {
+            System.out.println("\n Erro Encontrado: " + e.toString());
+        }
+        return queijoPedidoList;
+    }
 
     private static ArrayList<QueijoPedido> resToArrayList(ResultSet res) {
         ArrayList<QueijoPedido> queijoPedidoList = new ArrayList();
