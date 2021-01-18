@@ -22,16 +22,15 @@ public class MainScreen extends javax.swing.JFrame {
     //SET THE CLIENT AND QUEIJO REGISTRATION TO INSERT OR UPDATE
     boolean isClientUpdate = false;
     boolean isQueijoUpdate = false;
+    boolean isPedidoUpdate = false;
+    int idPedidoToUpdate;
     //HELPS THE TABLES ORDENATION
     String clientOrder = "";
     String queijoOrder = "";
     String pedidoOrder = "";
-    String queijoPedidoOrder = "";
     boolean clientOrderDecreasing = false;
     boolean queijoOrderDecreasing = false;
     boolean pedidoOrderDecreasing = false;
-    boolean queijoPedidoOrderDecreasing = false;
-    String idPedidoToShow;
 
     //HELPS THE COMEBACK BUTTON IN ClientRegistration and QueijoRegistration Pages
     boolean fromPedidoToClientRegistration = false;
@@ -275,7 +274,6 @@ public class MainScreen extends javax.swing.JFrame {
         ArrayList<Queijo> queijos = QueijoDAO.read(false, "", false);
 
         if (!produtosPedido.isEmpty()) {
-            idPedidoToShow = "" + produtosPedido.get(0).getFk_id_pedido();
             for (int j = 0; j < produtosPedido.size(); j++) {
                 QueijoPedido p = produtosPedido.get(j);
                 boolean achou = false;
@@ -298,8 +296,6 @@ public class MainScreen extends javax.swing.JFrame {
                     jta_pedidoList_obs.setText(PedidoDAO.search("" + p.getFk_id_pedido()).getNote());
                 }
             }
-        } else {
-            idPedidoToShow = "";
         }
 
         if (registrationPage == 1) {
@@ -2848,7 +2844,13 @@ public class MainScreen extends javax.swing.JFrame {
             PedidoDAO.whoIsLastPedidoID();
             Pedido newPedido = new Pedido();
             newPedido.setFk_client_cpf(jtf_pedido_cpfCliente.getText());
-            newPedido.setDeliveryDeadLine(Integer.parseInt(jtf_pedido_deliveryDeadLine.getText()));
+            try{
+                newPedido.setDeliveryDeadLine(Double.parseDouble(jtf_pedido_deliveryDeadLine.getText()));
+            }catch(NumberFormatException E){
+                player.erroSong.play();
+                JOptionPane.showMessageDialog(null, "Erro Encontado: Prazo de Entrega Inválido",
+                        "Resultado da operação", JOptionPane.ERROR_MESSAGE);
+            }
             newPedido.setNote(jta_pedido_note.getText());
 
             //RECUPERAR DATA E HORA E GRAVAR
@@ -2862,7 +2864,14 @@ public class MainScreen extends javax.swing.JFrame {
             newPedido.setPedidoDate(LocalDateTime.of(ano, mes, dia, hora, min));
 
             //CRIAR PEDIDO
-            String erro = PedidoDAO.create(newPedido);
+            String erro;
+            if(isPedidoUpdate == false){
+                erro = PedidoDAO.create(newPedido);
+            }else{
+                newPedido.setPedidoID(idPedidoToUpdate);
+                erro = PedidoDAO.update(newPedido);
+            }
+            /*
             if (erro != null) {
                 player.erroSong.play();
                 JOptionPane.showMessageDialog(null, "Erro Encontado: \n" + erro,
@@ -2909,7 +2918,7 @@ public class MainScreen extends javax.swing.JFrame {
                     clearPedidoRegistrationPage();
                     jTabbedPane1.setSelectedIndex(2);
                 }
-            }
+            }*/
         }
     }//GEN-LAST:event_jb_pedido_finalizarActionPerformed
 
@@ -3155,7 +3164,50 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_pedidoList_removerActionPerformed
 
     private void jb_pedidoList_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedidoList_modificarActionPerformed
-
+        //PERGUNTAR QUAL OBJETO A MODIFICAR
+        player.alertSong.play();
+        String idUpdate = JOptionPane.showInputDialog("Por favor digite o ID do Pedido para modificar: ");
+        //PROCURAR QUAL OBJETO A SER MODIFICADO
+        if (idUpdate != null) {
+            ArrayList<Pedido> pedidoList = PedidoDAO.read(false, "", false);
+            Pedido pedidoModify = new Pedido();
+            boolean achou = false;
+            
+            for (int i = 0; i < pedidoList.size() && achou == false; i++) {
+                pedidoModify = pedidoList.get(i);
+                if (idUpdate.equals("" + pedidoModify.getPedidoID())) {
+                    achou = true;
+                }
+            }
+            //PASSAR OS DADOS DO OBJETO PARA TELA DE UPDADE OU MOSTRAR ERRO DE NÃO ENCONTRADO
+            if (achou == true) {
+                jtf_pedido_cpfCliente.setText(pedidoModify.getFk_client_cpf());
+                jtf_pedido_deliveryDeadLine.setText("" + pedidoModify.getDeliveryDeadLine());
+                jtf_pedido_id.setText(""+pedidoModify.getPedidoID());
+                jta_pedido_note.setText(pedidoModify.getNote());
+                idPedidoToUpdate = pedidoModify.getPedidoID();
+                //GET DATE
+                jtf_pedido_data.setText(dataBuilder(pedidoModify.getPedidoDate()));
+                jtf_pedido_hora.setText(horaBuilder(pedidoModify.getPedidoDate()));
+                produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, QueijoPedidoDAO.read(""+pedidoModify.getPedidoID()), 1);
+                
+                //TROCAR AS TELAS
+                clientComboBoxBuilder();
+                ArrayList<Client> clientList = ClientDAO.read(true, "clientName", false);
+                for(int i=0;i<clientList.size();i++){
+                    Client c = clientList.get(i);
+                    System.out.println(c.getCPF()+" --- "+pedidoModify.getFk_client_cpf());
+                    if(pedidoModify.getFk_client_cpf().equals(c.getCPF())){
+                        jcb_pedido_client.setSelectedIndex(i+1);
+                    }
+                }
+                isPedidoUpdate = true;
+                jTabbedPane1.setSelectedIndex(1);
+            } else {
+                player.erroSong.play();
+                JOptionPane.showMessageDialog(null, "ID do Pedido não Encontrado", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_jb_pedidoList_modificarActionPerformed
 
     private void jb_pedidoList_inserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pedidoList_inserirActionPerformed
