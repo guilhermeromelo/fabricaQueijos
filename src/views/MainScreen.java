@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import models.*;
 import controllers.*;
+import export_controllers.ExportTXT;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.event.ItemEvent;
@@ -98,6 +99,7 @@ public class MainScreen extends javax.swing.JFrame {
         //Masks Initialization
         try {
             jtf_client_Phone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)########*")));
+            jtf_client_Phone.setFormatterFactory(null);
             jtf_client_CPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
             jtf_pedido_data.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
             jtf_pedido_hora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
@@ -648,9 +650,9 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem_ExportarTXT = new javax.swing.JMenuItem();
-        jMenuItem_ExportarPDF = new javax.swing.JMenuItem();
-        jMenuItem_ExportarXLS = new javax.swing.JMenuItem();
+        jMenuItem_ExportarCliente = new javax.swing.JMenuItem();
+        jMenuItem_ExportarQueijo = new javax.swing.JMenuItem();
+        jMenuItem_ExportarPedidos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem_Sobre = new javax.swing.JMenuItem();
 
@@ -2175,14 +2177,29 @@ public class MainScreen extends javax.swing.JFrame {
 
         jMenu1.setText("Exportar Dados");
 
-        jMenuItem_ExportarTXT.setText("Exportar para Arquivo TXT");
-        jMenu1.add(jMenuItem_ExportarTXT);
+        jMenuItem_ExportarCliente.setText("Exportar Clientes");
+        jMenuItem_ExportarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_ExportarClienteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem_ExportarCliente);
 
-        jMenuItem_ExportarPDF.setText("Exportar para Arquivo PDF");
-        jMenu1.add(jMenuItem_ExportarPDF);
+        jMenuItem_ExportarQueijo.setText("Exportar Queijos");
+        jMenuItem_ExportarQueijo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_ExportarQueijoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem_ExportarQueijo);
 
-        jMenuItem_ExportarXLS.setText("Exportar para Arquivo XLS");
-        jMenu1.add(jMenuItem_ExportarXLS);
+        jMenuItem_ExportarPedidos.setText("Exportar Pedidos");
+        jMenuItem_ExportarPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_ExportarPedidosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem_ExportarPedidos);
 
         jMenuBar1.add(jMenu1);
 
@@ -2897,11 +2914,11 @@ public class MainScreen extends javax.swing.JFrame {
                         }
                     }
                 } else {
-                    queijoPedidoListToRemove.forEach(p ->{
+                    queijoPedidoListToRemove.forEach(p -> {
                         p.setFk_id_pedido(idPedidoToUpdate);
                         QueijoPedidoDAO.delete(p);
                     });
-                    queijoPedidoListToAdd.forEach(pa ->{
+                    queijoPedidoListToAdd.forEach(pa -> {
                         pa.setFk_id_pedido(idPedidoToUpdate);
                         QueijoPedidoDAO.create(pa);
                     });
@@ -2974,7 +2991,7 @@ public class MainScreen extends javax.swing.JFrame {
 
             QueijoPedido newPedido = new QueijoPedido(0, 0, idNovoProduto, quant);
             queijoPedidoList.add(newPedido);
-            if(isPedidoUpdate == true){
+            if (isPedidoUpdate == true) {
                 queijoPedidoListToAdd.add(newPedido);
             }
             produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, 1);
@@ -2998,7 +3015,7 @@ public class MainScreen extends javax.swing.JFrame {
             player.erroSong.play();
             JOptionPane.showMessageDialog(null, "Número do Produto Inválido (contém letras)", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
         } else if (Integer.parseInt(jtf_pedido_n_cancelar.getText()) <= queijoPedidoList.size() && Integer.parseInt(jtf_pedido_n_cancelar.getText()) > 0) {
-            if(isPedidoUpdate == true){
+            if (isPedidoUpdate == true) {
                 queijoPedidoListToRemove.add(queijoPedidoList.get(Integer.parseInt(jtf_pedido_n_cancelar.getText()) - 1));
             }
             queijoPedidoList.remove(Integer.parseInt(jtf_pedido_n_cancelar.getText()) - 1);
@@ -3217,7 +3234,7 @@ public class MainScreen extends javax.swing.JFrame {
                 queijoPedidoList = QueijoPedidoDAO.read("" + jtf_pedido_id.getText());
                 queijoPedidoListToAdd.clear();
                 queijoPedidoListToRemove.clear();
-                jlb_cadastrarNovoPedido.setText("ALTERAR O PEDIDO");               
+                jlb_cadastrarNovoPedido.setText("ALTERAR O PEDIDO");
 
                 //TROCAR AS TELAS
                 clientComboBoxBuilder();
@@ -3307,6 +3324,60 @@ public class MainScreen extends javax.swing.JFrame {
         }
         pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read((pedidoOrder.isEmpty() ? false : true), pedidoOrder, (pedidoOrder.isEmpty() ? false : pedidoOrderDecreasing)));
     }//GEN-LAST:event_jb_ordenar_pedidos_cresActionPerformed
+
+    private void jMenuItem_ExportarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ExportarClienteActionPerformed
+        // TODO add your handling code here:
+        Object[] itens = {"Txt", "Pdf", "Xls"};
+        Object selectedValue = JOptionPane.showInputDialog(null,
+                "Escolha um item", "Opçao",
+                JOptionPane.INFORMATION_MESSAGE, null,
+                itens, itens[0]);
+        if (selectedValue != null) {
+            if (selectedValue.equals("Txt")) {
+                ExportTXT.exportClient();
+            } else if (selectedValue.equals("Pdf")) {
+                //ExportTXT.
+            } else {
+                System.out.println("XLS");
+            }
+        }
+
+
+    }//GEN-LAST:event_jMenuItem_ExportarClienteActionPerformed
+
+    private void jMenuItem_ExportarQueijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ExportarQueijoActionPerformed
+        // TODO add your handling code here:
+        Object[] itens = {"Txt", "Pdf", "Xls"};
+        Object selectedValue = JOptionPane.showInputDialog(null,
+                "Escolha um item", "Opçao",
+                JOptionPane.INFORMATION_MESSAGE, null,
+                itens, itens[0]);
+        if (selectedValue != null) {
+            if (selectedValue.equals("Txt")) {
+                ExportTXT.exportQueijos();
+            } else if (selectedValue.equals("Pdf")) {
+            } else {
+                System.out.println("XLS");
+            }
+        }
+    }//GEN-LAST:event_jMenuItem_ExportarQueijoActionPerformed
+
+    private void jMenuItem_ExportarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ExportarPedidosActionPerformed
+        // TODO add your handling code here:
+        Object[] itens = {"Txt", "Pdf", "Xls"};
+        Object selectedValue = JOptionPane.showInputDialog(null,
+                "Escolha um item", "Opçao",
+                JOptionPane.INFORMATION_MESSAGE, null,
+                itens, itens[0]);
+        if (selectedValue != null) {
+            if (selectedValue.equals("Txt")) {
+                ExportTXT.exportPedidos();
+            } else if (selectedValue.equals("Pdf")) {
+            } else {
+                System.out.println("XLS");
+            }
+        }
+    }//GEN-LAST:event_jMenuItem_ExportarPedidosActionPerformed
 // Pedido Functions End ----------------------------------------------------------------------------------------------
 
     public static void main(String args[]) {
@@ -3426,9 +3497,9 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem_ExportarPDF;
-    private javax.swing.JMenuItem jMenuItem_ExportarTXT;
-    private javax.swing.JMenuItem jMenuItem_ExportarXLS;
+    private javax.swing.JMenuItem jMenuItem_ExportarCliente;
+    private javax.swing.JMenuItem jMenuItem_ExportarPedidos;
+    private javax.swing.JMenuItem jMenuItem_ExportarQueijo;
     private javax.swing.JMenuItem jMenuItem_Sobre;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;

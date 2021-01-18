@@ -9,20 +9,29 @@
             <Property name="text" type="java.lang.String" value="Exportar Dados"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_ExportarTXT">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_ExportarCliente">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Exportar para Arquivo TXT"/>
+                <Property name="text" type="java.lang.String" value="Exportar Clientes"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_ExportarClienteActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_ExportarPDF">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_ExportarQueijo">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Exportar para Arquivo PDF"/>
+                <Property name="text" type="java.lang.String" value="Exportar Queijos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_ExportarQueijoActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_ExportarXLS">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_ExportarPedidos">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Exportar para Arquivo XLS"/>
+                <Property name="text" type="java.lang.String" value="Exportar Pedidos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_ExportarPedidosActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
