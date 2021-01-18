@@ -204,6 +204,7 @@ public class ExportPDF {
             documento.add(header);
             documento.add(new Paragraph(" "));
             documento.add(table);
+            
             documento.close();
             
             Desktop desktop = Desktop.getDesktop();  

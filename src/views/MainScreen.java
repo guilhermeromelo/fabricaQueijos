@@ -7,6 +7,7 @@ import models.*;
 import controllers.*;
 import export_controllers.ExportPDF;
 import export_controllers.ExportTXT;
+import export_controllers.ExportXLS;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.event.ItemEvent;
@@ -3339,7 +3340,7 @@ public class MainScreen extends javax.swing.JFrame {
             } else if (selectedValue.equals("Pdf")) {
                 ExportPDF.exportClient();
             } else {
-                System.out.println("XLS");
+                ExportXLS.exportarCliente();
             }
         }
 
@@ -3359,7 +3360,7 @@ public class MainScreen extends javax.swing.JFrame {
             } else if (selectedValue.equals("Pdf")) {
                 ExportPDF.exportQueijo();
             } else {
-                System.out.println("XLS");
+                ExportXLS.exportarQueijo();
             }
         }
     }//GEN-LAST:event_jMenuItem_ExportarQueijoActionPerformed
