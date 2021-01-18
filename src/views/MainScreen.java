@@ -2208,6 +2208,11 @@ public class MainScreen extends javax.swing.JFrame {
         jMenu2.setText("Ajuda");
 
         jMenuItem_Sobre.setText("Sobre o Programa");
+        jMenuItem_Sobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_SobreActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem_Sobre);
 
         jMenuBar1.add(jMenu2);
@@ -3378,10 +3383,20 @@ public class MainScreen extends javax.swing.JFrame {
             } else if (selectedValue.equals("Pdf")) {
                 ExportPDF.exportPedido();
             } else {
-                System.out.println("XLS");
+                ExportXLS.exportarPedido();
             }
         }
     }//GEN-LAST:event_jMenuItem_ExportarPedidosActionPerformed
+
+    private void jMenuItem_SobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_SobreActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, ""
+                + "\nSistema Desktop Desenvolvido na Disciplina de           "
+                + "\nProgramação Orientada a Objetos e Visual"
+                + "\ncomo Trabalho Avaliativo 5 - 18/01/2021.\n"
+                + "\nAluno: Guilherme Rodrigues de Melo, 4ºPeríodo"
+                + "\nProf.: Jefferson Beethoven Martins");
+    }//GEN-LAST:event_jMenuItem_SobreActionPerformed
 // Pedido Functions End ----------------------------------------------------------------------------------------------
 
     public static void main(String args[]) {
