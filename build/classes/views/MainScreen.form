@@ -133,8 +133,8 @@
                                       <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jButton2" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="jButton1" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
+                                  <Component id="jb_dash_pedido_list" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
+                                  <Component id="jb_dash_add_pedido" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
@@ -147,8 +147,8 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="jButton4" max="32767" attributes="0"/>
-                                                  <Component id="jButton3" min="-2" pref="140" max="-2" attributes="0"/>
+                                                  <Component id="jb_dash_list_clients" max="32767" attributes="0"/>
+                                                  <Component id="jb_dash_add_client" min="-2" pref="140" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -159,13 +159,13 @@
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-                                              <Component id="jButton6" min="-2" pref="140" max="-2" attributes="0"/>
+                                              <Component id="jb_dash_queijo_add" min="-2" pref="140" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="-2" pref="326" max="-2" attributes="0"/>
-                                      <Component id="jButton5" min="-2" pref="140" max="-2" attributes="0"/>
+                                      <Component id="jb_dash_queijo_list" min="-2" pref="140" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -190,8 +190,8 @@
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jb_dash_add_client" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jb_dash_add_pedido" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                                   </Group>
@@ -199,12 +199,12 @@
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jb_dash_list_clients" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jb_dash_queijo_list" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jb_dash_pedido_list" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Component id="jButton6" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jb_dash_queijo_add" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -229,10 +229,13 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="jb_dash_add_pedido">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Realizar Pedido"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_dash_add_pedidoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel43">
               <Properties>
@@ -258,30 +261,45 @@
                 <Property name="text" type="java.lang.String" value="CLIENTES"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton2">
+            <Component class="javax.swing.JButton" name="jb_dash_pedido_list">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Mostrar Pedidos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_dash_pedido_listActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton3">
+            <Component class="javax.swing.JButton" name="jb_dash_add_client">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar Cliente"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_dash_add_clientActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton4">
+            <Component class="javax.swing.JButton" name="jb_dash_list_clients">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Mostrar Clientes"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_dash_list_clientsActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton5">
+            <Component class="javax.swing.JButton" name="jb_dash_queijo_list">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Mostrar Queijos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_dash_queijo_listActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton6">
+            <Component class="javax.swing.JButton" name="jb_dash_queijo_add">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar Queijo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_dash_queijo_addActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

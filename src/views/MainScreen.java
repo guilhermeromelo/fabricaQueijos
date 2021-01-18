@@ -466,15 +466,15 @@ public class MainScreen extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jpanel_Dashboard = new javax.swing.JPanel();
         jLabel44 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jb_dash_add_pedido = new javax.swing.JButton();
         jLabel43 = new javax.swing.JLabel();
         jLabel57 = new javax.swing.JLabel();
         jLabel58 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jb_dash_pedido_list = new javax.swing.JButton();
+        jb_dash_add_client = new javax.swing.JButton();
+        jb_dash_list_clients = new javax.swing.JButton();
+        jb_dash_queijo_list = new javax.swing.JButton();
+        jb_dash_queijo_add = new javax.swing.JButton();
         jPanel_OrderPedido = new javax.swing.JPanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel4 = new javax.swing.JPanel();
@@ -676,7 +676,12 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel44.setMaximumSize(new java.awt.Dimension(1000, 600));
         jLabel44.setPreferredSize(new java.awt.Dimension(800, 445));
 
-        jButton1.setText("Realizar Pedido");
+        jb_dash_add_pedido.setText("Realizar Pedido");
+        jb_dash_add_pedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_dash_add_pedidoActionPerformed(evt);
+            }
+        });
 
         jLabel43.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel43.setText("PEDIDOS");
@@ -687,15 +692,40 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel58.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel58.setText("CLIENTES");
 
-        jButton2.setText("Mostrar Pedidos");
+        jb_dash_pedido_list.setText("Mostrar Pedidos");
+        jb_dash_pedido_list.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_dash_pedido_listActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Cadastrar Cliente");
+        jb_dash_add_client.setText("Cadastrar Cliente");
+        jb_dash_add_client.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_dash_add_clientActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Mostrar Clientes");
+        jb_dash_list_clients.setText("Mostrar Clientes");
+        jb_dash_list_clients.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_dash_list_clientsActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Mostrar Queijos");
+        jb_dash_queijo_list.setText("Mostrar Queijos");
+        jb_dash_queijo_list.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_dash_queijo_listActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("Cadastrar Queijo");
+        jb_dash_queijo_add.setText("Cadastrar Queijo");
+        jb_dash_queijo_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_dash_queijo_addActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpanel_DashboardLayout = new javax.swing.GroupLayout(jpanel_Dashboard);
         jpanel_Dashboard.setLayout(jpanel_DashboardLayout);
@@ -713,8 +743,8 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addGap(32, 32, 32)
                                 .addComponent(jLabel43)
                                 .addGap(27, 27, 27))
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jb_dash_pedido_list, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jb_dash_add_pedido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpanel_DashboardLayout.createSequentialGroup()
                                 .addGap(26, 26, 26)
@@ -725,18 +755,18 @@ public class MainScreen extends javax.swing.JFrame {
                                     .addGroup(jpanel_DashboardLayout.createSequentialGroup()
                                         .addGap(70, 70, 70)
                                         .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(jb_dash_list_clients, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jb_dash_add_client, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jpanel_DashboardLayout.createSequentialGroup()
                                         .addGap(120, 120, 120)
                                         .addComponent(jLabel57))
                                     .addGroup(jpanel_DashboardLayout.createSequentialGroup()
                                         .addGap(90, 90, 90)
-                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jb_dash_queijo_add, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanel_DashboardLayout.createSequentialGroup()
                                 .addGap(326, 326, 326)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jb_dash_queijo_list, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(299, Short.MAX_VALUE))
         );
         jpanel_DashboardLayout.setVerticalGroup(
@@ -754,17 +784,17 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jpanel_DashboardLayout.createSequentialGroup()
                                 .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton3)
-                                    .addComponent(jButton1))
+                                    .addComponent(jb_dash_add_client)
+                                    .addComponent(jb_dash_add_pedido))
                                 .addGap(50, 50, 50))
                             .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jpanel_DashboardLayout.createSequentialGroup()
                                     .addGap(50, 50, 50)
                                     .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton4)
-                                        .addComponent(jButton5)
-                                        .addComponent(jButton2)))
-                                .addComponent(jButton6))))
+                                        .addComponent(jb_dash_list_clients)
+                                        .addComponent(jb_dash_queijo_list)
+                                        .addComponent(jb_dash_pedido_list)))
+                                .addComponent(jb_dash_queijo_add))))
                     .addComponent(jLabel43))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -3493,6 +3523,68 @@ public class MainScreen extends javax.swing.JFrame {
                 + "\nAluno: Guilherme Rodrigues de Melo, 4ºPeríodo"
                 + "\nProf.: Jefferson Beethoven Martins");
     }//GEN-LAST:event_jMenuItem_SobreActionPerformed
+
+    private void jb_dash_add_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_dash_add_pedidoActionPerformed
+        // TODO add your handling code here:
+        clearPedidoRegistrationPage();
+        jTabbedPane1.setSelectedIndex(1);
+    }//GEN-LAST:event_jb_dash_add_pedidoActionPerformed
+
+    private void jb_dash_pedido_listActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_dash_pedido_listActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(2);
+    }//GEN-LAST:event_jb_dash_pedido_listActionPerformed
+
+    private void jb_dash_add_clientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_dash_add_clientActionPerformed
+        // TODO add your handling code here:
+        //PREPARAR OS CAMPOS DA NOVA TELA
+        jtf_client_CPF.setText("");
+        jtf_client_CPF.setEditable(true);
+        jtf_client_Address.setText("");
+        jtf_client_CreditCard.setText("");
+        jtf_client_Face.setText("");
+        jtf_client_Insta.setText("");
+        jtf_client_Name.setText("");
+        jtf_client_Phone.setText("");
+
+        //TROCAR TELAS
+        jL_Cadastrar_cliente.setText("CADASTRAR UM NOVO CLIENTE");
+        jb_finalizarCadastro.setText("Salvar e Finalizar Cadastro");
+        isClientUpdate = false;
+        fromPedidoToClientRegistration = false;
+        jpn_clientsList.setVisible(false);
+        jpn_clientRegistration.setVisible(true);
+        jTabbedPane1.setSelectedIndex(3);
+    }//GEN-LAST:event_jb_dash_add_clientActionPerformed
+
+    private void jb_dash_list_clientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_dash_list_clientsActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(3);
+    }//GEN-LAST:event_jb_dash_list_clientsActionPerformed
+
+    private void jb_dash_queijo_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_dash_queijo_addActionPerformed
+        // TODO add your handling code here:
+        jtf_queijo_id.setEditable(false);
+        //INICIAR TEXTFIELDS
+        jtf_queijo_id.setText("Gerado pelo Sistema");
+        jtf_queijo_Temperatura.setText("");
+        jtf_queijo_peso.setText("");
+        jtf_queijo_tipo.setText("");
+        jtf_queijo_valorKg.setText("");
+        //TROCAR A TELA
+        isQueijoUpdate = false;
+        fromPedidoToQueijoRegistration = false;
+        jL_Cadastrar_queijo.setText("CADASTRAR NOVO QUEIJO");
+        jb_finalizarCadastroQueijo.setText("Finalizar e Salvar Dados");
+        jpn_queijoRegistration.setVisible(true);
+        jpn_queijoList.setVisible(false);
+        jTabbedPane1.setSelectedIndex(4);
+    }//GEN-LAST:event_jb_dash_queijo_addActionPerformed
+
+    private void jb_dash_queijo_listActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_dash_queijo_listActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(4);
+    }//GEN-LAST:event_jb_dash_queijo_listActionPerformed
 // Pedido Functions End ----------------------------------------------------------------------------------------------
 
     public static void main(String args[]) {
@@ -3528,12 +3620,6 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton_busca_queijo_ID;
     private javax.swing.JButton jButton_client_order_cres;
     private javax.swing.JButton jButton_client_order_dec;
@@ -3665,6 +3751,12 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton jb_backQueijoPage;
     private javax.swing.JButton jb_back_firstPedido;
     private javax.swing.JButton jb_back_pedidoRegistration;
+    private javax.swing.JButton jb_dash_add_client;
+    private javax.swing.JButton jb_dash_add_pedido;
+    private javax.swing.JButton jb_dash_list_clients;
+    private javax.swing.JButton jb_dash_pedido_list;
+    private javax.swing.JButton jb_dash_queijo_add;
+    private javax.swing.JButton jb_dash_queijo_list;
     private javax.swing.JButton jb_finalizarCadastro;
     private javax.swing.JButton jb_finalizarCadastroQueijo;
     private javax.swing.JButton jb_ordenar_pedidos_cres;
