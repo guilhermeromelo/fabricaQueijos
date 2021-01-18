@@ -476,7 +476,7 @@ public class MainScreen extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jta_pedido_note = new javax.swing.JTextArea();
         jL_Cadastrar_cliente1 = new javax.swing.JLabel();
-        jL_Cadastrar_cliente2 = new javax.swing.JLabel();
+        jlb_cadastrarNovoPedido = new javax.swing.JLabel();
         jL_Cadastrar_cliente3 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jList_pedido_queijos = new javax.swing.JList<>();
@@ -712,8 +712,8 @@ public class MainScreen extends javax.swing.JFrame {
         jL_Cadastrar_cliente1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jL_Cadastrar_cliente1.setText("Dados Do Pedido:");
 
-        jL_Cadastrar_cliente2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jL_Cadastrar_cliente2.setText("CADASTRAR NOVO PEDIDO");
+        jlb_cadastrarNovoPedido.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlb_cadastrarNovoPedido.setText("CADASTRAR NOVO PEDIDO");
 
         jL_Cadastrar_cliente3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jL_Cadastrar_cliente3.setText("Adicionar Produto:");
@@ -912,7 +912,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(530, 530, 530)
-                .addComponent(jL_Cadastrar_cliente2)
+                .addComponent(jlb_cadastrarNovoPedido)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -961,7 +961,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGap(33, 33, 33))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addComponent(jL_Cadastrar_cliente2)
+                .addComponent(jlb_cadastrarNovoPedido)
                 .addGap(58, 58, 58)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -2922,6 +2922,7 @@ public class MainScreen extends javax.swing.JFrame {
                         (erro == null) ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
 
                 if (erro == null) {
+                    jlb_cadastrarNovoPedido.setText("CADASTRAR NOVO PEDIDO");
                     pedidosTableBuilder(jtb_PedidoList, PedidoDAO.read(false, "", false));
                     if (PedidoDAO.read(false, "", false).isEmpty()) {
                         produtosPedidosTableBuilder(jtb_PedidoList_queijoPedido, new ArrayList(), 2);
@@ -3216,13 +3217,13 @@ public class MainScreen extends javax.swing.JFrame {
                 queijoPedidoList = QueijoPedidoDAO.read("" + jtf_pedido_id.getText());
                 queijoPedidoListToAdd.clear();
                 queijoPedidoListToRemove.clear();
+                jlb_cadastrarNovoPedido.setText("ALTERAR O PEDIDO");               
 
                 //TROCAR AS TELAS
                 clientComboBoxBuilder();
                 ArrayList<Client> clientList = ClientDAO.read(true, "clientName", false);
                 for (int i = 0; i < clientList.size(); i++) {
                     Client c = clientList.get(i);
-                    System.out.println(c.getCPF() + " --- " + pedidoModify.getFk_client_cpf());
                     if (pedidoModify.getFk_client_cpf().equals(c.getCPF())) {
                         jcb_pedido_client.setSelectedIndex(i + 1);
                     }
@@ -3358,7 +3359,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox_ordenar_queijos;
     private javax.swing.JLabel jL_Cadastrar_cliente;
     private javax.swing.JLabel jL_Cadastrar_cliente1;
-    private javax.swing.JLabel jL_Cadastrar_cliente2;
     private javax.swing.JLabel jL_Cadastrar_cliente3;
     private javax.swing.JLabel jL_Cadastrar_cliente4;
     private javax.swing.JLabel jL_Cadastrar_cliente5;
@@ -3487,6 +3487,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcb_ordenar_pedidos;
     private javax.swing.JComboBox<String> jcb_pedido_client;
     private javax.swing.JLabel jl_pedidoList_id;
+    private javax.swing.JLabel jlb_cadastrarNovoPedido;
     private javax.swing.JLabel jlb_firstPedido_total;
     private javax.swing.JLabel jlb_pedidoList_valor_total;
     private javax.swing.JLabel jlb_pedido_valor_total;
