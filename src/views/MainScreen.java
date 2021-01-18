@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import models.*;
 import controllers.*;
+import export_controllers.ExportPDF;
 import export_controllers.ExportTXT;
 import java.applet.Applet;
 import java.applet.AudioClip;
@@ -3336,7 +3337,7 @@ public class MainScreen extends javax.swing.JFrame {
             if (selectedValue.equals("Txt")) {
                 ExportTXT.exportClient();
             } else if (selectedValue.equals("Pdf")) {
-                //ExportTXT.
+                ExportPDF.exportClient();
             } else {
                 System.out.println("XLS");
             }
@@ -3356,6 +3357,7 @@ public class MainScreen extends javax.swing.JFrame {
             if (selectedValue.equals("Txt")) {
                 ExportTXT.exportQueijos();
             } else if (selectedValue.equals("Pdf")) {
+                ExportPDF.exportQueijo();
             } else {
                 System.out.println("XLS");
             }
@@ -3373,6 +3375,7 @@ public class MainScreen extends javax.swing.JFrame {
             if (selectedValue.equals("Txt")) {
                 ExportTXT.exportPedidos();
             } else if (selectedValue.equals("Pdf")) {
+                ExportPDF.exportPedido();
             } else {
                 System.out.println("XLS");
             }
