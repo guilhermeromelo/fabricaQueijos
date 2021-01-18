@@ -465,6 +465,16 @@ public class MainScreen extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jpanel_Dashboard = new javax.swing.JPanel();
+        jLabel44 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel57 = new javax.swing.JLabel();
+        jLabel58 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jPanel_OrderPedido = new javax.swing.JPanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel4 = new javax.swing.JPanel();
@@ -662,15 +672,101 @@ public class MainScreen extends javax.swing.JFrame {
         setTitle("Fábrica de Queijos Uai Sô");
         setResizable(false);
 
+        jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/Icons/conheca-a-historia-dos-4-principais-queijos-italianos.jpg"))); // NOI18N
+        jLabel44.setMaximumSize(new java.awt.Dimension(1000, 600));
+        jLabel44.setPreferredSize(new java.awt.Dimension(800, 445));
+
+        jButton1.setText("Realizar Pedido");
+
+        jLabel43.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel43.setText("PEDIDOS");
+
+        jLabel57.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel57.setText("QUEIJOS");
+
+        jLabel58.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel58.setText("CLIENTES");
+
+        jButton2.setText("Mostrar Pedidos");
+
+        jButton3.setText("Cadastrar Cliente");
+
+        jButton4.setText("Mostrar Clientes");
+
+        jButton5.setText("Mostrar Queijos");
+
+        jButton6.setText("Cadastrar Queijo");
+
         javax.swing.GroupLayout jpanel_DashboardLayout = new javax.swing.GroupLayout(jpanel_Dashboard);
         jpanel_Dashboard.setLayout(jpanel_DashboardLayout);
         jpanel_DashboardLayout.setHorizontalGroup(
             jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1376, Short.MAX_VALUE)
+            .addGroup(jpanel_DashboardLayout.createSequentialGroup()
+                .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpanel_DashboardLayout.createSequentialGroup()
+                        .addGap(277, 277, 277)
+                        .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpanel_DashboardLayout.createSequentialGroup()
+                        .addGap(371, 371, 371)
+                        .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpanel_DashboardLayout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(jLabel43)
+                                .addGap(27, 27, 27))
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpanel_DashboardLayout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jpanel_DashboardLayout.createSequentialGroup()
+                                        .addGap(96, 96, 96)
+                                        .addComponent(jLabel58))
+                                    .addGroup(jpanel_DashboardLayout.createSequentialGroup()
+                                        .addGap(70, 70, 70)
+                                        .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jpanel_DashboardLayout.createSequentialGroup()
+                                        .addGap(120, 120, 120)
+                                        .addComponent(jLabel57))
+                                    .addGroup(jpanel_DashboardLayout.createSequentialGroup()
+                                        .addGap(90, 90, 90)
+                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanel_DashboardLayout.createSequentialGroup()
+                                .addGap(326, 326, 326)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(299, Short.MAX_VALUE))
         );
         jpanel_DashboardLayout.setVerticalGroup(
             jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 675, Short.MAX_VALUE)
+            .addGroup(jpanel_DashboardLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpanel_DashboardLayout.createSequentialGroup()
+                        .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel58)
+                            .addComponent(jLabel57))
+                        .addGap(27, 27, 27)
+                        .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jpanel_DashboardLayout.createSequentialGroup()
+                                .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton3)
+                                    .addComponent(jButton1))
+                                .addGap(50, 50, 50))
+                            .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jpanel_DashboardLayout.createSequentialGroup()
+                                    .addGap(50, 50, 50)
+                                    .addGroup(jpanel_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jButton4)
+                                        .addComponent(jButton5)
+                                        .addComponent(jButton2)))
+                                .addComponent(jButton6))))
+                    .addComponent(jLabel43))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Dashboard", jpanel_Dashboard);
@@ -3432,6 +3528,12 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton_busca_queijo_ID;
     private javax.swing.JButton jButton_client_order_cres;
     private javax.swing.JButton jButton_client_order_dec;
@@ -3491,6 +3593,8 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
@@ -3504,6 +3608,8 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
