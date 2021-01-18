@@ -28,6 +28,9 @@ public class MainScreen extends javax.swing.JFrame {
     String clientOrder = "";
     String queijoOrder = "";
     String pedidoOrder = "";
+    ArrayList<QueijoPedido> queijoPedidoAtual = new ArrayList();
+    ArrayList<QueijoPedido> queijoPedidoListToRemove = new ArrayList();
+    ArrayList<QueijoPedido> queijoPedidoListToAdd = new ArrayList();
     boolean clientOrderDecreasing = false;
     boolean queijoOrderDecreasing = false;
     boolean pedidoOrderDecreasing = false;
@@ -129,7 +132,7 @@ public class MainScreen extends javax.swing.JFrame {
         jcb_ordenar_pedidos.addItem("Cliente");
         jcb_ordenar_pedidos.addItem("CPF");
         jcb_ordenar_pedidos.addItem("Data");
-        
+
         //ClientComboBox Registration Page
         clientComboBoxBuilder();
 
@@ -1221,7 +1224,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jpn_pedidoList.add(jb_pedidoList_consultar);
-        jb_pedidoList_consultar.setBounds(660, 350, 110, 34);
+        jb_pedidoList_consultar.setBounds(660, 360, 110, 34);
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel30.setText("PEDIDOS CADASTRADOS");
@@ -2844,9 +2847,9 @@ public class MainScreen extends javax.swing.JFrame {
             PedidoDAO.whoIsLastPedidoID();
             Pedido newPedido = new Pedido();
             newPedido.setFk_client_cpf(jtf_pedido_cpfCliente.getText());
-            try{
+            try {
                 newPedido.setDeliveryDeadLine(Double.parseDouble(jtf_pedido_deliveryDeadLine.getText()));
-            }catch(NumberFormatException E){
+            } catch (NumberFormatException E) {
                 player.erroSong.play();
                 JOptionPane.showMessageDialog(null, "Erro Encontado: Prazo de Entrega Inválido",
                         "Resultado da operação", JOptionPane.ERROR_MESSAGE);
@@ -2865,33 +2868,46 @@ public class MainScreen extends javax.swing.JFrame {
 
             //CRIAR PEDIDO
             String erro;
-            if(isPedidoUpdate == false){
+            if (isPedidoUpdate == false) {
                 erro = PedidoDAO.create(newPedido);
-            }else{
+            } else {
                 newPedido.setPedidoID(idPedidoToUpdate);
                 erro = PedidoDAO.update(newPedido);
             }
-            /*
+
             if (erro != null) {
                 player.erroSong.play();
                 JOptionPane.showMessageDialog(null, "Erro Encontado: \n" + erro,
                         "Resultado da operação", JOptionPane.ERROR_MESSAGE);
             } else {
-                int idpedido = PedidoDAO.whoIsLastPedidoID();
+                if (isPedidoUpdate == false) {
+                    int idpedido = PedidoDAO.whoIsLastPedidoID();
 
-                for (int i = 0; i < queijoPedidoList.size(); i++) {
-                    QueijoPedido pedido = queijoPedidoList.get(i);
-                    pedido.setFk_id_pedido(idpedido);
-                    String erro1 = QueijoPedidoDAO.create(pedido);
-                    if (erro1 != null) {
-                        erroProdutos = true;
-                        player.erroSong.play();
-                        JOptionPane.showMessageDialog(null, "Erro Encontado: \n" + erro1,
-                                "Resultado da operação", JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        sucessCount++;
+                    for (int i = 0; i < queijoPedidoList.size(); i++) {
+                        QueijoPedido pedido = queijoPedidoList.get(i);
+                        pedido.setFk_id_pedido(idpedido);
+                        String erro1 = QueijoPedidoDAO.create(pedido);
+                        if (erro1 != null) {
+                            erroProdutos = true;
+                            player.erroSong.play();
+                            JOptionPane.showMessageDialog(null, "Erro Encontado: \n" + erro1,
+                                    "Resultado da operação", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            sucessCount++;
+                        }
                     }
+                } else {
+                    queijoPedidoListToRemove.forEach(p ->{
+                        p.setFk_id_pedido(idPedidoToUpdate);
+                        QueijoPedidoDAO.delete(p);
+                    });
+                    queijoPedidoListToAdd.forEach(pa ->{
+                        pa.setFk_id_pedido(idPedidoToUpdate);
+                        QueijoPedidoDAO.create(pa);
+                    });
+                    isPedidoUpdate = false;
                 }
+
                 //MOSTRAR RESULTADO DA OPERAÇÃO
                 if (erro == null) {
                     player.sucessSong.play();
@@ -2918,7 +2934,7 @@ public class MainScreen extends javax.swing.JFrame {
                     clearPedidoRegistrationPage();
                     jTabbedPane1.setSelectedIndex(2);
                 }
-            }*/
+            }
         }
     }//GEN-LAST:event_jb_pedido_finalizarActionPerformed
 
@@ -2957,6 +2973,9 @@ public class MainScreen extends javax.swing.JFrame {
 
             QueijoPedido newPedido = new QueijoPedido(0, 0, idNovoProduto, quant);
             queijoPedidoList.add(newPedido);
+            if(isPedidoUpdate == true){
+                queijoPedidoListToAdd.add(newPedido);
+            }
             produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, 1);
 
             player.sucessSong.play();
@@ -2978,6 +2997,9 @@ public class MainScreen extends javax.swing.JFrame {
             player.erroSong.play();
             JOptionPane.showMessageDialog(null, "Número do Produto Inválido (contém letras)", "Erro ao Realizar Operação", JOptionPane.ERROR_MESSAGE);
         } else if (Integer.parseInt(jtf_pedido_n_cancelar.getText()) <= queijoPedidoList.size() && Integer.parseInt(jtf_pedido_n_cancelar.getText()) > 0) {
+            if(isPedidoUpdate == true){
+                queijoPedidoListToRemove.add(queijoPedidoList.get(Integer.parseInt(jtf_pedido_n_cancelar.getText()) - 1));
+            }
             queijoPedidoList.remove(Integer.parseInt(jtf_pedido_n_cancelar.getText()) - 1);
             produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, queijoPedidoList, 1);
             jtf_pedido_n_cancelar.setText("");
@@ -3172,7 +3194,7 @@ public class MainScreen extends javax.swing.JFrame {
             ArrayList<Pedido> pedidoList = PedidoDAO.read(false, "", false);
             Pedido pedidoModify = new Pedido();
             boolean achou = false;
-            
+
             for (int i = 0; i < pedidoList.size() && achou == false; i++) {
                 pedidoModify = pedidoList.get(i);
                 if (idUpdate.equals("" + pedidoModify.getPedidoID())) {
@@ -3183,22 +3205,26 @@ public class MainScreen extends javax.swing.JFrame {
             if (achou == true) {
                 jtf_pedido_cpfCliente.setText(pedidoModify.getFk_client_cpf());
                 jtf_pedido_deliveryDeadLine.setText("" + pedidoModify.getDeliveryDeadLine());
-                jtf_pedido_id.setText(""+pedidoModify.getPedidoID());
+                jtf_pedido_id.setText("" + pedidoModify.getPedidoID());
                 jta_pedido_note.setText(pedidoModify.getNote());
                 idPedidoToUpdate = pedidoModify.getPedidoID();
                 //GET DATE
                 jtf_pedido_data.setText(dataBuilder(pedidoModify.getPedidoDate()));
                 jtf_pedido_hora.setText(horaBuilder(pedidoModify.getPedidoDate()));
-                produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, QueijoPedidoDAO.read(""+pedidoModify.getPedidoID()), 1);
-                
+                produtosPedidosTableBuilder(jtb_resumo_produtos_pedido, QueijoPedidoDAO.read("" + pedidoModify.getPedidoID()), 1);
+                queijoPedidoAtual = QueijoPedidoDAO.read("" + jtf_pedido_id.getText());
+                queijoPedidoList = QueijoPedidoDAO.read("" + jtf_pedido_id.getText());
+                queijoPedidoListToAdd.clear();
+                queijoPedidoListToRemove.clear();
+
                 //TROCAR AS TELAS
                 clientComboBoxBuilder();
                 ArrayList<Client> clientList = ClientDAO.read(true, "clientName", false);
-                for(int i=0;i<clientList.size();i++){
+                for (int i = 0; i < clientList.size(); i++) {
                     Client c = clientList.get(i);
-                    System.out.println(c.getCPF()+" --- "+pedidoModify.getFk_client_cpf());
-                    if(pedidoModify.getFk_client_cpf().equals(c.getCPF())){
-                        jcb_pedido_client.setSelectedIndex(i+1);
+                    System.out.println(c.getCPF() + " --- " + pedidoModify.getFk_client_cpf());
+                    if (pedidoModify.getFk_client_cpf().equals(c.getCPF())) {
+                        jcb_pedido_client.setSelectedIndex(i + 1);
                     }
                 }
                 isPedidoUpdate = true;
