@@ -1,4 +1,4 @@
-package export_controllers;
+package controllers_export;
 
 import controllers.ClientDAO;
 import controllers.PedidoDAO;

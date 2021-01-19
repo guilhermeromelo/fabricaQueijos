@@ -1,4 +1,4 @@
-package export_controllers;
+package controllers_export;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
